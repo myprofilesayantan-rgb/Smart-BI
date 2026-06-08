@@ -437,7 +437,7 @@
     </section>
 
     <!-- Key Metrics Section -->
-    <section class="max-w-7xl mx-auto mt-6 gsap-fade-in relative z-10">
+    <section class="max-w-7xl mx-auto mt-6 gsap-fade-in relative z-30">
       <div class="flex items-end justify-between mb-4">
         <div>
           <h2 class="text-sm font-semibold tracking-tight text-on-surface">Key Metrics</h2>
@@ -457,14 +457,15 @@
           </button>
           
           <!-- Filter Selector Dropdown -->
-          <div id="filter-selector-menu" class="hidden opacity-0 absolute left-0 mt-2 bg-white border border-outline rounded-xl shadow-xl z-50 p-2 w-44 text-[10.5px] font-body transition-all duration-150">
-            <p class="text-[8px] font-bold text-on-surface-variant uppercase tracking-wider px-2 py-1 border-b border-outline-variant/60 mb-1 leading-none">Filter by Source</p>
-            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Source" data-filter-val="Social">Source: Social</button>
-            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Source" data-filter-val="Email">Source: Email</button>
-            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Source" data-filter-val="Direct">Source: Direct</button>
-            <p class="text-[8px] font-bold text-on-surface-variant uppercase tracking-wider px-2 py-1 border-b border-outline-variant/60 mt-2 mb-1 leading-none">Filter by Region</p>
-            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Region" data-filter-val="US East">Region: US East</button>
-            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Region" data-filter-val="Europe">Region: Europe</button>
+          <div id="filter-selector-menu" class="hidden opacity-0 absolute left-0 mt-2 bg-white border border-outline rounded-xl shadow-xl z-50 p-2 w-48 text-[10.5px] font-body transition-all duration-150">
+            <p class="text-[8px] font-bold text-on-surface-variant uppercase tracking-wider px-2 py-1 border-b border-outline-variant/60 mb-1 leading-none">Customer Segment</p>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Segment" data-filter-val="Enterprise">Segment: Enterprise</button>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Segment" data-filter-val="Mid-Market">Segment: Mid-Market</button>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Segment" data-filter-val="SMB">Segment: SMB</button>
+            <p class="text-[8px] font-bold text-on-surface-variant uppercase tracking-wider px-2 py-1 border-b border-outline-variant/60 mt-2 mb-1 leading-none">Global Market</p>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Market" data-filter-val="North America">Market: North America</button>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Market" data-filter-val="EMEA">Market: EMEA</button>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Market" data-filter-val="APAC">Market: APAC</button>
           </div>
         </div>
         
