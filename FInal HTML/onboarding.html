@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>SMarBI – Workspace Setup</title>
+  <title>SmartBI – Workspace Setup</title>
   <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
     </div>
 
     <!-- Welcoming text -->
-    <h1 id="welcome-title" class="font-display text-2xl font-bold tracking-tight text-on-surface mb-2 opacity-0">Welcome to SMarBI</h1>
+    <h1 id="welcome-title" class="font-display text-2xl font-bold tracking-tight text-on-surface mb-2 opacity-0">Welcome to SmartBI</h1>
     <p id="welcome-sub" class="font-body text-xs text-on-surface-variant leading-relaxed max-w-sm mb-8 opacity-0">
       Let's set up your custom business intelligence workspace. I'll guide you through connecting data, roles, and metric configurations in 5 quick steps.
     </p>
@@ -65,9 +65,9 @@
 <aside id="sidebar" class="sidebar-container flex flex-col py-4 px-3 h-screen w-56 fixed left-0 top-0 border-r border-outline-variant z-50 bg-white sidebar-shadow min-h-screen">
   <div class="px-2.5 mb-6 flex items-center gap-2 logo-container">
     <div class="w-7 h-7 flex items-center justify-center">
-      <img src="images/favicon.svg" alt="SMarBI Logo" class="w-full h-full object-contain">
+      <img src="images/favicon.svg" alt="SmartBI Logo" class="w-full h-full object-contain">
     </div>
-    <span class="font-display text-base font-bold tracking-tight text-on-surface logo-text">SMarBI</span>
+    <span class="font-display text-base font-bold tracking-tight text-on-surface logo-text">SmartBI</span>
   </div>
   
   <nav class="space-y-1 flex-1">
@@ -118,8 +118,8 @@
     <button id="sidebar-toggle" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-md transition-colors mr-1">
       <span class="material-symbols-outlined text-[20px]">menu</span>
     </button>
-    <div class="w-6 h-6"><img src="images/favicon.svg" alt="SMarBI" class="w-full h-full object-contain"></div>
-    <span class="font-display text-sm font-bold tracking-tight text-on-surface">SMarBI</span>
+    <div class="w-6 h-6"><img src="images/favicon.svg" alt="SmartBI" class="w-full h-full object-contain"></div>
+    <span class="font-display text-sm font-bold tracking-tight text-on-surface">SmartBI</span>
     <span class="h-4 w-px bg-outline mx-1"></span>
     <span id="phase-label" class="font-display font-semibold text-on-surface-variant text-[11px]">Workspace Setup</span>
   </div>
@@ -208,7 +208,7 @@
             <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">smart_toy</span>
           </div>
           <div class="bg-white rounded-xl rounded-tl-sm p-4 border border-outline shadow-sm flex-1">
-            <p id="p2-ai-text" class="font-body text-sm text-on-surface leading-relaxed">Now let's connect your data. Choose how you want to bring your business data into SMarBI.</p>
+            <p id="p2-ai-text" class="font-body text-sm text-on-surface leading-relaxed">Now let's connect your data. Choose how you want to bring your business data into SmartBI.</p>
           </div>
         </div>
 
@@ -232,7 +232,7 @@
 
           <!-- DB Panel -->
           <div id="p2-db-panel">
-            <p class="text-[10px] text-on-surface-variant mb-4 font-body">Enter your PostgreSQL credentials. SMarBI connects securely using encrypted credentials.</p>
+            <p class="text-[10px] text-on-surface-variant mb-4 font-body">Enter your PostgreSQL credentials. SmartBI connects securely using encrypted credentials.</p>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex flex-col gap-1.5">
                 <label for="db-host" class="text-[10px] font-bold text-on-surface-variant ml-1">Host / Server</label>
@@ -266,7 +266,7 @@
 
           <!-- File Panel -->
           <div id="p2-file-panel" class="hidden">
-            <p class="text-[10px] text-on-surface-variant mb-4 font-body">Upload a CSV, Excel, or JSON file. SMarBI will auto-detect columns and build your metrics index.</p>
+            <p class="text-[10px] text-on-surface-variant mb-4 font-body">Upload a CSV, Excel, or JSON file. SmartBI will auto-detect columns and build your metrics index.</p>
             <div id="p2-dropzone" class="relative flex flex-col items-center justify-center gap-3 border-2 border-dashed border-outline rounded-xl p-10 text-center bg-surface-variant/20 hover:bg-primary-container/10 hover:border-primary/40 transition-all cursor-pointer group">
               <input id="p2-file-input" type="file" accept=".csv,.xlsx,.xls,.json" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
               <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/15 transition-colors">
@@ -301,7 +301,7 @@
               <span class="material-symbols-outlined text-[22px] text-on-surface-variant">skip_next</span>
             </div>
             <p class="text-xs font-bold text-on-surface mb-1">Continue with demo data</p>
-            <p class="text-[10px] text-on-surface-variant max-w-xs mx-auto leading-relaxed">SMarBI will use sample data so you can explore the platform. Connect your real data source at any time from Settings.</p>
+            <p class="text-[10px] text-on-surface-variant max-w-xs mx-auto leading-relaxed">SmartBI will use sample data so you can explore the platform. Connect your real data source at any time from Settings.</p>
           </div>
 
           <!-- Actions -->
@@ -489,7 +489,7 @@
           <h3 class="font-display text-sm font-semibold text-on-surface mb-1 flex items-center gap-2">
             <span class="material-symbols-outlined text-[18px] text-primary">account_tree</span>Upload Team Structure
           </h3>
-          <p class="text-[10px] text-on-surface-variant mb-4 font-body">Upload your team or division list. SMarBI will confirm detected teams before proceeding.</p>
+          <p class="text-[10px] text-on-surface-variant mb-4 font-body">Upload your team or division list. SmartBI will confirm detected teams before proceeding.</p>
           <div class="flex items-center justify-between bg-surface-variant/30 rounded-xl px-4 py-3 border border-outline/40 mb-4">
             <div class="flex items-center gap-2.5">
               <span class="material-symbols-outlined text-primary text-[18px]">download</span>
@@ -578,7 +578,7 @@
               <p class="text-xs font-bold text-on-surface mb-1">Invitation Link Generated</p>
               <p class="text-[10px] text-on-surface-variant max-w-xs mx-auto mb-4">Share this with your team. Employees sign up with their company email and are auto-assigned to their team.</p>
               <div class="flex items-center gap-2 bg-white border border-outline rounded-lg px-3 py-2.5 text-left mb-4">
-                <span class="text-[10px] font-mono text-on-surface-variant flex-1 truncate">https://app.smarbi.io/invite/workspace-7xk2p</span>
+                <span class="text-[10px] font-mono text-on-surface-variant flex-1 truncate">https://app.SmartBI.io/invite/workspace-7xk2p</span>
                 <button class="text-primary hover:opacity-70 shrink-0"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
               </div>
               <div class="flex gap-3 justify-center">
@@ -708,7 +708,7 @@
           <button class="p5-edit bg-white rounded-xl p-4 border border-outline hover:border-primary/30 hover:bg-primary-container/5 text-left transition-all cursor-pointer group" data-goto="4"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary transition-colors">insights</span><span class="text-xs font-bold text-on-surface">KPI Library</span></div><span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-primary transition-colors">open_in_new</span></div><p id="p5-kpi-label" class="text-[10px] text-on-surface-variant mt-1">847 KPIs confirmed</p></button>
         </div>
         <button id="p5-launch" class="w-full py-4 bg-gradient-to-r from-primary to-purple-500 text-on-primary rounded-xl font-display text-sm font-bold hover:opacity-90 active:scale-[0.99] transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 cursor-pointer">
-          <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">rocket_launch</span>Launch SMarBI Workspace
+          <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">rocket_launch</span>Launch SmartBI Workspace
         </button>
       </div>
       <!-- Right: AI Summary -->
@@ -716,7 +716,7 @@
         <div class="bg-white rounded-2xl p-6 border border-outline shadow-sm sticky top-20">
           <div class="flex items-center gap-3 mb-5">
             <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center text-white shadow-sm shadow-primary/20"><span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">smart_toy</span></div>
-            <div><p class="text-xs font-bold text-on-surface">SMarBI AI</p><p class="text-[9.5px] text-on-surface-variant">Setup complete</p></div>
+            <div><p class="text-xs font-bold text-on-surface">SmartBI AI</p><p class="text-[9.5px] text-on-surface-variant">Setup complete</p></div>
           </div>
           <div class="space-y-3 mb-5">
             <div class="flex items-start gap-2.5"><span class="material-symbols-outlined text-success text-[15px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span><div><p class="text-[10px] font-bold text-on-surface">Business profile configured</p><p id="p5-ai-biz" class="text-[9.5px] text-on-surface-variant">–</p></div></div>
@@ -819,7 +819,7 @@
       <!-- Heading -->
       <h2 class="font-display text-2xl font-bold tracking-tight mb-2">Deploying Your Workspace</h2>
       <p class="font-body text-xs text-slate-300 leading-relaxed max-w-sm mb-10">
-        Please wait while SMarBI structures your databases, builds your KPI pipelines, and spins up your analytical engine.
+        Please wait while SmartBI structures your databases, builds your KPI pipelines, and spins up your analytical engine.
       </p>
 
       <!-- Status indicator list -->
@@ -841,7 +841,7 @@
         </div>
         <div id="lp-status-4" class="flex items-center gap-3 opacity-30 transition-all duration-300">
           <span class="material-symbols-outlined text-[16px] text-primary shrink-0" style="font-variation-settings:'FILL' 1">smart_toy</span>
-          <span class="text-[10px] font-bold tracking-wide flex-1">Initializing SMarBI AI Agent</span>
+          <span class="text-[10px] font-bold tracking-wide flex-1">Initializing SmartBI AI Agent</span>
           <span class="lp-step-icon material-symbols-outlined text-[14px] text-slate-500">pending</span>
         </div>
       </div>
@@ -859,3 +859,4 @@
 <script src="onboarding/onboarding.js"></script>
 </body>
 </html>
+

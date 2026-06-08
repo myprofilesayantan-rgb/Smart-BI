@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const historyCount = document.getElementById("widgets-history-count");
     if (!historyList) return;
 
-    const storedWidgets = localStorage.getItem("smarbi_dashboard_widgets");
+    const storedWidgets = localStorage.getItem("SmartBI_dashboard_widgets");
     const dashboardWidgets = storedWidgets ? JSON.parse(storedWidgets) : {
       "Main Dashboard": [],
       "Operations Overview": [],
@@ -268,12 +268,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const dashboardName = btn.getAttribute("data-dashboard");
 
         // Remove from memory
-        const storedWidgets = localStorage.getItem("smarbi_dashboard_widgets");
+        const storedWidgets = localStorage.getItem("SmartBI_dashboard_widgets");
         if (storedWidgets) {
           const widgetsDb = JSON.parse(storedWidgets);
           if (widgetsDb[dashboardName]) {
             widgetsDb[dashboardName] = widgetsDb[dashboardName].filter(w => w.id !== widgetId);
-            localStorage.setItem("smarbi_dashboard_widgets", JSON.stringify(widgetsDb));
+            localStorage.setItem("SmartBI_dashboard_widgets", JSON.stringify(widgetsDb));
             
             // Re-render
             renderWidgetsHistory();
@@ -470,8 +470,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // --- LocalStorage State Management (Chat History & Favorites) ---
-  let recentQueries = JSON.parse(localStorage.getItem("smarbi_recent_queries"));
-  let favoriteQueries = JSON.parse(localStorage.getItem("smarbi_fav_queries"));
+  let recentQueries = JSON.parse(localStorage.getItem("SmartBI_recent_queries"));
+  let favoriteQueries = JSON.parse(localStorage.getItem("SmartBI_fav_queries"));
 
   if (!recentQueries) {
     recentQueries = [
@@ -480,13 +480,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "Predict next quarter's revenue",
       "Summarize my active data sources"
     ];
-    localStorage.setItem("smarbi_recent_queries", JSON.stringify(recentQueries));
+    localStorage.setItem("SmartBI_recent_queries", JSON.stringify(recentQueries));
   }
   if (!favoriteQueries) {
     favoriteQueries = [
       "How did we do last month?"
     ];
-    localStorage.setItem("smarbi_fav_queries", JSON.stringify(favoriteQueries));
+    localStorage.setItem("SmartBI_fav_queries", JSON.stringify(favoriteQueries));
   }
 
   const favoritesList = document.getElementById("favorites-list");
@@ -555,7 +555,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       favoriteQueries.push(query);
     }
-    localStorage.setItem("smarbi_fav_queries", JSON.stringify(favoriteQueries));
+    localStorage.setItem("SmartBI_fav_queries", JSON.stringify(favoriteQueries));
     renderHistory();
   };
 
@@ -595,7 +595,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (clearHistoryBtn) {
     clearHistoryBtn.addEventListener("click", () => {
       recentQueries = [];
-      localStorage.setItem("smarbi_recent_queries", JSON.stringify(recentQueries));
+      localStorage.setItem("SmartBI_recent_queries", JSON.stringify(recentQueries));
       renderHistory();
     });
   }
@@ -631,7 +631,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     recentQueries.unshift(queryText);
     if (recentQueries.length > 15) recentQueries.pop();
-    localStorage.setItem("smarbi_recent_queries", JSON.stringify(recentQueries));
+    localStorage.setItem("SmartBI_recent_queries", JSON.stringify(recentQueries));
 
     if (historyPanel) historyPanel.classList.add("hidden");
 
@@ -890,7 +890,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const dashboardName = opt.getAttribute("data-dashboard");
           
           // Add widget to localStorage database
-          const storedWidgets = localStorage.getItem("smarbi_dashboard_widgets");
+          const storedWidgets = localStorage.getItem("SmartBI_dashboard_widgets");
           const dashboardWidgets = storedWidgets ? JSON.parse(storedWidgets) : {
             "Main Dashboard": [],
             "Operations Overview": [],
@@ -910,7 +910,7 @@ document.addEventListener("DOMContentLoaded", () => {
             dashboardWidgets[dashboardName] = [];
           }
           dashboardWidgets[dashboardName].push(newWidget);
-          localStorage.setItem("smarbi_dashboard_widgets", JSON.stringify(dashboardWidgets));
+          localStorage.setItem("SmartBI_dashboard_widgets", JSON.stringify(dashboardWidgets));
           renderWidgetsHistory();
 
           // Hide select dropdown
@@ -978,3 +978,4 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 });
+

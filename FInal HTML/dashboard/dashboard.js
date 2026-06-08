@@ -208,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let activeDashboardName = "Main Dashboard";
 
   // Dynamic Widgets State Database (loaded from localStorage or initialized)
-  const storedWidgets = localStorage.getItem("smarbi_dashboard_widgets");
+  const storedWidgets = localStorage.getItem("SmartBI_dashboard_widgets");
   const dashboardWidgets = storedWidgets ? JSON.parse(storedWidgets) : {
     "Main Dashboard": [],
     "Operations Overview": [],
@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "Team Performance": []
   };
 
-  const storedSectionNames = localStorage.getItem("smarbi_dashboard_section_names");
+  const storedSectionNames = localStorage.getItem("SmartBI_dashboard_section_names");
   const dashboardSectionNames = storedSectionNames ? JSON.parse(storedSectionNames) : {
     "Main Dashboard": "Custom Widgets",
     "Operations Overview": "Custom Widgets",
@@ -538,7 +538,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ease: "power2.in",
                     onComplete: () => {
                       dashboardWidgets[activeDashboard] = dashboardWidgets[activeDashboard].filter(w => w.id !== widgetId);
-                      localStorage.setItem("smarbi_dashboard_widgets", JSON.stringify(dashboardWidgets));
+                      localStorage.setItem("SmartBI_dashboard_widgets", JSON.stringify(dashboardWidgets));
                       renderWidgets();
                       showToast("Widget removed from workspace.", "success");
                     }
@@ -657,7 +657,7 @@ document.addEventListener("DOMContentLoaded", () => {
               const temp = list[draggedIdx];
               list.splice(draggedIdx, 1);
               list.splice(targetIdx, 0, temp);
-              localStorage.setItem("smarbi_dashboard_widgets", JSON.stringify(dashboardWidgets));
+              localStorage.setItem("SmartBI_dashboard_widgets", JSON.stringify(dashboardWidgets));
             }
           }
           
@@ -698,7 +698,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (save) {
         const newVal = widgetsTitleInput.value.trim();
         dashboardSectionNames[activeDashboard] = newVal || "Custom Widgets";
-        localStorage.setItem("smarbi_dashboard_section_names", JSON.stringify(dashboardSectionNames));
+        localStorage.setItem("SmartBI_dashboard_section_names", JSON.stringify(dashboardSectionNames));
       }
       
       widgetsTitleInput.classList.add("hidden");
@@ -904,15 +904,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- LocalStorage State Management (Chat History & Favorites) ---
   // Migrate old storage versions to match rebranded zero-tech queries
-  if (localStorage.getItem("smarbi_recent_queries") && localStorage.getItem("smarbi_recent_queries").includes("database connections")) {
-    localStorage.removeItem("smarbi_recent_queries");
+  if (localStorage.getItem("SmartBI_recent_queries") && localStorage.getItem("SmartBI_recent_queries").includes("database connections")) {
+    localStorage.removeItem("SmartBI_recent_queries");
   }
-  if (localStorage.getItem("smarbi_fav_queries") && localStorage.getItem("smarbi_fav_queries").includes("Revenue last month")) {
-    localStorage.removeItem("smarbi_fav_queries");
+  if (localStorage.getItem("SmartBI_fav_queries") && localStorage.getItem("SmartBI_fav_queries").includes("Revenue last month")) {
+    localStorage.removeItem("SmartBI_fav_queries");
   }
 
-  let recentQueries = JSON.parse(localStorage.getItem("smarbi_recent_queries"));
-  let favoriteQueries = JSON.parse(localStorage.getItem("smarbi_fav_queries"));
+  let recentQueries = JSON.parse(localStorage.getItem("SmartBI_recent_queries"));
+  let favoriteQueries = JSON.parse(localStorage.getItem("SmartBI_fav_queries"));
 
   if (!recentQueries) {
     recentQueries = [
@@ -921,13 +921,13 @@ document.addEventListener("DOMContentLoaded", () => {
       "Predict next quarter's revenue",
       "Summarize my active data sources"
     ];
-    localStorage.setItem("smarbi_recent_queries", JSON.stringify(recentQueries));
+    localStorage.setItem("SmartBI_recent_queries", JSON.stringify(recentQueries));
   }
   if (!favoriteQueries) {
     favoriteQueries = [
       "How did we do last month?"
     ];
-    localStorage.setItem("smarbi_fav_queries", JSON.stringify(favoriteQueries));
+    localStorage.setItem("SmartBI_fav_queries", JSON.stringify(favoriteQueries));
   }
 
   const favoritesList = document.getElementById("favorites-list");
@@ -996,7 +996,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       favoriteQueries.push(query);
     }
-    localStorage.setItem("smarbi_fav_queries", JSON.stringify(favoriteQueries));
+    localStorage.setItem("SmartBI_fav_queries", JSON.stringify(favoriteQueries));
     renderHistory();
     updateFavoriteButtonState(query);
   };
@@ -1037,7 +1037,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (clearHistoryBtn) {
     clearHistoryBtn.addEventListener("click", () => {
       recentQueries = [];
-      localStorage.setItem("smarbi_recent_queries", JSON.stringify(recentQueries));
+      localStorage.setItem("SmartBI_recent_queries", JSON.stringify(recentQueries));
       renderHistory();
     });
   }
@@ -1115,7 +1115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       recentQueries.unshift(queryText);
       if (recentQueries.length > 15) recentQueries.pop(); // Cap history list length
-      localStorage.setItem("smarbi_recent_queries", JSON.stringify(recentQueries));
+      localStorage.setItem("SmartBI_recent_queries", JSON.stringify(recentQueries));
 
       aiHero.classList.add("hidden");
       if (historyPanel) historyPanel.classList.add("hidden");
@@ -1167,7 +1167,7 @@ document.addEventListener("DOMContentLoaded", () => {
           type: widgetType
         };
         dashboardWidgets[activeDashboard].push(newWidget);
-        localStorage.setItem("smarbi_dashboard_widgets", JSON.stringify(dashboardWidgets));
+        localStorage.setItem("SmartBI_dashboard_widgets", JSON.stringify(dashboardWidgets));
         renderWidgets();
         showToast("Widget added to dashboard.", "success");
 
@@ -1542,3 +1542,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initial history render
   renderHistory();
 });
+

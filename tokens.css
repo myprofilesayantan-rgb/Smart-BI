@@ -57,7 +57,7 @@
   --sbi-color-orange-100: 44 92% 92%;
   --sbi-color-orange-50:  45 95% 96%;
 
-  /* ── Interactive Blue (Smart BI conversational — aligned with SMarBI Purple) ─── */
+  /* ── Interactive Blue (Smart BI conversational — aligned with SmartBI Purple) ─── */
   --sbi-color-blue-900: 262 70% 20%;
   --sbi-color-blue-800: 262 75% 30%;
   --sbi-color-blue-700: 262 80% 40%;
@@ -804,3 +804,4 @@
   background-color: var(--sbi-surface-section-mesh);
   background-image: var(--sbi-gradient-mesh-playful);
 }
+

@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════
-   SMarBI Onboarding — Complete JS Engine
+   SmartBI Onboarding — Complete JS Engine
    Phases: 1-Business Identity | 2-Data Source |
            3-Team Setup | 4-KPI Discovery | 5-Preview
    ══════════════════════════════════════════════════════ */
@@ -132,7 +132,7 @@ const questions = [
     id: 'description',
     icon: 'description',
     ask: a => `How would you describe what ${a.bizName} does? (2–3 sentences)`,
-    sub: 'This helps SMarBI generate context-aware KPI recommendations.',
+    sub: 'This helps SmartBI generate context-aware KPI recommendations.',
     type: 'textarea',
     placeholder: 'We help companies by...',
     optional: true,
@@ -160,7 +160,7 @@ const questions = [
   {
     id: 'document',
     icon: 'upload_file',
-    ask: () => 'Do you have business documents to upload? Annual reports, org charts, or strategy docs help SMarBI understand your context faster.',
+    ask: () => 'Do you have business documents to upload? Annual reports, org charts, or strategy docs help SmartBI understand your context faster.',
     sub: null,
     type: 'file-or-skip',
     accept: '.pdf,.docx,.xlsx,.csv,.pptx',
@@ -1116,7 +1116,7 @@ function finalisePhase1() {
 function initPhase2() {
   const aiText = document.getElementById('p2-ai-text');
   if (aiText && state.answers.bizName) {
-    aiText.innerHTML = `Perfect, ${state.answers.bizName}! Now let's connect your data. Choose how you want to bring your business data into SMarBI.`;
+    aiText.innerHTML = `Perfect, ${state.answers.bizName}! Now let's connect your data. Choose how you want to bring your business data into SmartBI.`;
   }
   const srcCard = document.getElementById('p2-source-card');
   const succCard = document.getElementById('p2-success-card');
@@ -1245,7 +1245,7 @@ function setupP2ConnectBtn() {
       // Success
       const desc = document.getElementById('p2-success-desc');
       if (state.p2Mode === 'skip') {
-        if (desc) desc.textContent = 'Using SMarBI demo data. You can connect your real data source from Settings at any time.';
+        if (desc) desc.textContent = 'Using SmartBI demo data. You can connect your real data source from Settings at any time.';
         document.getElementById('p2-data-summary') && (document.getElementById('p2-data-summary').innerHTML = `<div class="bg-surface-variant/40 rounded-xl p-3 text-center border border-outline/40 col-span-2"><p class="text-sm font-bold font-display text-primary">Demo</p><p class="text-[9px] text-on-surface-variant">Dataset</p></div><div class="bg-surface-variant/40 rounded-xl p-3 text-center border border-outline/40"><p class="text-sm font-bold font-display text-primary">50K</p><p class="text-[9px] text-on-surface-variant">Rows</p></div><div class="bg-surface-variant/40 rounded-xl p-3 text-center border border-outline/40"><p class="text-sm font-bold font-display text-primary">No</p><p class="text-[9px] text-on-surface-variant">Team Data</p></div>`);
         const teamNotice = succCard.querySelector('.bg-primary-container\\/30');
         if (teamNotice) teamNotice.remove();
@@ -1919,7 +1919,7 @@ function runWelcomeAnimation() {
   // Simulate loading steps
   const statuses = [
     { text: 'Initializing BI Brain...', pct: 20 },
-    { text: 'Connecting to SMarBI Core...', pct: 50 },
+    { text: 'Connecting to SmartBI Core...', pct: 50 },
     { text: 'Loading Workspace Components...', pct: 85 },
     { text: 'BI Brain Activated!', pct: 100 }
   ];
@@ -2189,3 +2189,4 @@ document.addEventListener('DOMContentLoaded', () => {
   // Animate entrance
   gsap.from('#phase-wrapper', { opacity: 0, y: 20, duration: 0.6, ease: 'power3.out', delay: 0.1 });
 });
+

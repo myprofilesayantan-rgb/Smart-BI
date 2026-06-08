@@ -1,6 +1,6 @@
 # Walkthrough: Conversational AI Onboarding Redesign
 
-We have successfully redesigned **Phase 1 (Business Identity)** of the SMarBI Workspace Setup into a fully conversational chat interface. The UI features interactive inline question inputs and a bottom persistent input deck that dynamically locks or unlocks based on input requirements. Hover-to-edit response rollback behaviors have been wired in to handle answers corrections. Additionally, we implemented a premium animated Welcome Splash Overlay and fixed a duplicate layout card in the progress stepper.
+We have successfully redesigned **Phase 1 (Business Identity)** of the SmartBI Workspace Setup into a fully conversational chat interface. The UI features interactive inline question inputs and a bottom persistent input deck that dynamically locks or unlocks based on input requirements. Hover-to-edit response rollback behaviors have been wired in to handle answers corrections. Additionally, we implemented a premium animated Welcome Splash Overlay and fixed a duplicate layout card in the progress stepper.
 
 ## Changes Made
 
@@ -14,7 +14,7 @@ We have successfully redesigned **Phase 1 (Business Identity)** of the SMarBI Wo
 ### 2. Conversational JS Engine Refactoring
 - **File**: [onboarding.js](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/onboarding/onboarding.js)
 - **Modifications**:
-  - **Welcome Splash Sequence**: Implemented `runWelcomeAnimation()` using GSAP timelines to fade and slide in titles, scale progress markers, loop initialization status logs ("Initializing BI Brain...", "Connecting to SMarBI Core...", etc.), and smoothly dissolve out the overlay before launching the main feed.
+  - **Welcome Splash Sequence**: Implemented `runWelcomeAnimation()` using GSAP timelines to fade and slide in titles, scale progress markers, loop initialization status logs ("Initializing BI Brain...", "Connecting to SmartBI Core...", etc.), and smoothly dissolve out the overlay before launching the main feed.
   - **Dynamic Feed Loading**: Refactored `initPhase1()` and `renderQuestion(idx)` to clear the feed and append AI bubbles sequentially once the welcome splash screen completes.
   - **Conditional Cities Question**: Added a follow-up tag question (`cities`) that asks the user for specific cities inside their entered countries. It dynamically adapts its prompt text to list their answered regions, skipping itself if no regions are specified.
   - **Custom Industry Question**: Added a conditional follow-up text question (`customIndustry`) that prompts the user to specify their industry if they selected "Other" in the industry grid selector.
@@ -100,7 +100,7 @@ Manual review of code interactions confirmed the following states:
    - **Case B (Direct Cities list)**: Entering cities directly (e.g. `London, Paris, Tokyo`) in the regions tag input and pressing Confirm triggers the country-detection filter which realizes no countries were listed. The assistant automatically bypasses the cities follow-up step and transitions straight to the industry selection step.
 7. **Complex Inline Layouts**: Tags input (regions/cities), grids (industry), and goals (multi-select) render inline inside the feed. Submitting tags/goals updates `state.answers` and appends a bubble.
 8. **Custom Industry Follow-up**:
-   - If the user selects `'Other'` in the industry selection grid, SMarBI prompts the user with the conditional `'Could you specify your industry?'` text question. Typing and submitting their custom industry details stores the response and correctly prints it in the Phase 5 Workspace Preview summary labels.
+   - If the user selects `'Other'` in the industry selection grid, SmartBI prompts the user with the conditional `'Could you specify your industry?'` text question. Typing and submitting their custom industry details stores the response and correctly prints it in the Phase 5 Workspace Preview summary labels.
    - If any other industry category is chosen, the specifier question is automatically skipped.
 9. **File Dropzone**: The document upload dropzone supports dragging/dropping files, rendering previews, and skip actions inline.
 10. **Rollback Reversion**: Hovering over the "Business Name" bubble shows the edit pencil. Clicking it wipes the feed from that point onwards, clears subsequent answers, and focuses the bottom rail to update the business name.
@@ -153,7 +153,7 @@ Manual review of code interactions confirmed the following states:
  7. **Phases 2, 3, and 5 Double-Binding Fix**:
    - Decoupled event listener registrations from the phase initializers (`initPhase2`, `initPhase3`, `initPhase5`) and consolidated them into `setupPhase2Controls()`, `setupPhase3Controls()`, and `setupPhase5Controls()` called once at DOMContentLoaded startup. This resolves all navigation issues (like `p4-back` Back to Team Setup) and selector freezes (like role selection toggles) during back-and-forth traversal.
  8. **Phase 5 Premium Launch Portal**:
-    - Navigated to the final Phase 5 page and clicked "Launch SMarBI Workspace".
+    - Navigated to the final Phase 5 page and clicked "Launch SmartBI Workspace".
     - Verified that the `#launch-portal` full-screen overlay opens immediately, with beautiful pulsing backdrop glowing circles and spinning gradient launch borders.
     - Verified the step-by-step progress tracking: each of the 4 steps transitions from 30% opacity to 100%, updates the pending icon to an active spinning autorenew loader, increases the percentage indicator incrementally, and completes by displaying a green checkmark icon.
     - Verified that upon hitting 100% completion, the entire portal scales and fades out smoothly with GSAP before executing the final redirect to `dashboard.html`.
@@ -188,6 +188,7 @@ Manual review of code interactions confirmed the following states:
     - Re-aligned HTML body layout of `design_system.html` to separate header from scrollable content, wrapper layout allows sidebar and main panes to scroll independently with the progress bar.
     - Standardized navigation headers across all case study pages (`index.html`, `mindmap.html`, `wireframe.html`, `prototype.html`, `figma-design.html`) to consistently show "Sayantan Ghosh" linking to `uxsayantan.com`.
     - Enforced a standard `line-height: 1.2 !important;` on all key navigation header components to maintain size parity between pages with Tailwind CSS resets and vanilla CSS.
-    - Aligned the "AI Driven Prototype" CTA button to the SMarBI product style guide: solid purple background (`#7c3bed`), 8px `rounded-lg` borders, semibold weight, and `text-xs` font size.
-    - Replaced the generic `design_services` material symbol icon in the design system page sidebar with the official SMarBI product logo (`images/favicon.svg`) and aligned the brand/system text hierarchy.
+    - Aligned the "AI Driven Prototype" CTA button to the SmartBI product style guide: solid purple background (`#7c3bed`), 8px `rounded-lg` borders, semibold weight, and `text-xs` font size.
+    - Replaced the generic `design_services` material symbol icon in the design system page sidebar with the official SmartBI product logo (`images/favicon.svg`) and aligned the brand/system text hierarchy.
     - Added a clean "Back to Case Study" link at the top of the login card in `login.html` to allow users to navigate back to the case study homepage easily.
+

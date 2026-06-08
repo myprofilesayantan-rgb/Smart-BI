@@ -1,6 +1,6 @@
-# SMarBI Application Design System (appdesignsystem.md)
+# SmartBI Application Design System (appdesignsystem.md)
 
-This document defines the component-level design system, typography, colors, and layout guidelines for the **SMarBI** Web App, aligning the design system with the purple-themed visual identity shown in the mockup.
+This document defines the component-level design system, typography, colors, and layout guidelines for the **SmartBI** Web App, aligning the design system with the purple-themed visual identity shown in the mockup.
 
 ---
 
@@ -31,7 +31,7 @@ We use a premium, tech-forward purple/lavender color palette for primary element
 
 ## 2. Reusable UI Components
 
-To ensure high maintainability, SMarBI is constructed from the following decoupled, component-level building blocks:
+To ensure high maintainability, SmartBI is constructed from the following decoupled, component-level building blocks:
 
 ### Component Reusability & Matching Strategy
 - **Storage & Reuse**: All layout sections, page elements, and interactive components (e.g., navigation bars, dashboards, detail views, custom charts) must be built as modular, reusable components to avoid duplicate implementations.
@@ -148,7 +148,7 @@ All animations are implemented using `@gsap/react` for React safety.
 
 ## 5. Rich Dashboard Customization Features
 
-To ensure a premium executive experience, SMarBI supports the following dynamic customization workflows on the dashboard canvas:
+To ensure a premium executive experience, SmartBI supports the following dynamic customization workflows on the dashboard canvas:
 
 ### 5.1 Alternating Widget Visualizations
 On consecutive query submissions, the layout engine cycles widget types sequentially (`index % 3`) to present diverse, high-density graphs:
@@ -185,3 +185,4 @@ On consecutive query submissions, the layout engine cycles widget types sequenti
 - **Visuals**: Premium glassmorphic cards (`bg-white/95 backdrop-blur-md`) that slide down from the top-right corner and auto-dismiss after 3 seconds.
 - **Success Toast (Addition)**: Triggered on widget addition: *"Widget added to dashboard."* (Success green icon).
 - **Success Toast (Removal)**: Deletion is a deliberate, intentional user task for workspace management. Therefore, it is treated as a success state: *"Widget removed from workspace."* (Success green icon). Every intentional user action will have a success notification.
+

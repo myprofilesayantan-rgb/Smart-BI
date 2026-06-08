@@ -1,6 +1,6 @@
-# SMarBI Final HTML Catalog
+# SmartBI Final HTML Catalog
 
-This document serves as the central registry and template catalog for all production-ready, fully responsive, and animated HTML prototype pages created for the **SMarBI** BI Web App workflow.
+This document serves as the central registry and template catalog for all production-ready, fully responsive, and animated HTML prototype pages created for the **SmartBI** BI Web App workflow.
 
 ---
 
@@ -34,7 +34,7 @@ BI Web APP/
 | **Data Sources** | [data_sources.html](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/data_sources.html) | [data_sources.css](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/data_sources/data_sources.css) | [data_sources.js](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/data_sources/data_sources.js) | Connected data source management workspace containing credentials forms, sync logs, CSV file import tracking, and a Connection Assistant chatbot scoped strictly to connection and credentials sync errors. |
 | **Login / Signup** | [login.html](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/login.html) | [login.css](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/login/login.css) | [login.js](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/login/login.js) | Interactive user authentication page featuring clean brand logo components, Google SSO simulated access cards, input validation guards, and smooth GSAP state card toggling. |
 | **Onboarding** | [onboarding.html](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/onboarding.html) | [onboarding.css](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/onboarding/onboarding.css) | [onboarding.js](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/onboarding/onboarding.js) | Dynamic onboarding connection setup wizard featuring AI guide bubbles, secure database validation fields, workspace role cards, email tags chips list, and vertical progress step tracking. |
-| **Style Guide** | [styleguide.html / design_system.html](file:///d:/Projects/BI%20Web%20APP/Reference/Final%20HTML%20MD/styleguide.html) | Relative links to global CSS and dashboard CSS | Live rendering and components showcase | Interactive corporate style guide displaying SMarBI brand tokens, HSL colors, compact typography hierarchy, elevations, and UI components. |
+| **Style Guide** | [styleguide.html / design_system.html](file:///d:/Projects/BI%20Web%20APP/Reference/Final%20HTML%20MD/styleguide.html) | Relative links to global CSS and dashboard CSS | Live rendering and components showcase | Interactive corporate style guide displaying SmartBI brand tokens, HSL colors, compact typography hierarchy, elevations, and UI components. |
 
 ---
 
@@ -71,7 +71,7 @@ BI Web APP/
 - **HTML Template**: [login.html](file:///d:/Projects/BI%20Web%20APP/FInal%20HTML/login.html)
 - **Component Breakdown**:
   - **Ambient blurred circles**: Three soft purple/pink/blue gradient radial glows placed absolute behind the login card to provide deep depth layering.
-  - **SMarBI favicon logo**: Clean SMarBI vector brand mark positioned at the card header.
+  - **SmartBI favicon logo**: Clean SmartBI vector brand mark positioned at the card header.
   - **SSO Containers**: Card components styling the Google Login ("Continue as San" with user avatar and SVG Google mark) and corporate SSO buttons.
   - **Credentials Form**: Input groups styling the Name (faded in Signup state), Email, and Password (incorporating visibility eye toggles) fields.
   - **State togglers**: Dynamic GSAP transitions that switch between login and signup modes without screen refreshes.
@@ -83,7 +83,7 @@ BI Web APP/
     - **Welcome Splash Overlay**: A full-screen welcome overlay featuring pulsing rings, an animating gradient orb wrapper, and an active loading progress bar indicating "BI Brain" assistant initialization steps. The welcome screen dissolves (via GSAP scale/opacity fades) to introduce the chat stream.
     - **AI Guide & User Bubbles**: Prompts are delivered dynamically as AI bubbles in the chat stream, and user answers are appended as User response bubbles.
     - **Conditional Cities Question**: If the user operates globally and specifies countries (detected via a case-insensitive country-name keyword heuristic) in the regions step, the assistant dynamically inserts a follow-up cities prompt. This card houses two tabs: **Manual Entry** (allows typing cities individually) and **Bulk Upload** (enables dropping/browsing a .CSV or .XLSX file). If the user enters cities directly in the regions step, this follow-up cities prompt is automatically bypassed.
-    - **Custom Industry specifier**: If the user selects "Other" in the industry selector grid, SMarBI prompts the user with a specifier text question. Submitting the custom industry details displays them in the final Workspace Preview summary labels. Standard industry choices automatically skip this step.
+    - **Custom Industry specifier**: If the user selects "Other" in the industry selector grid, SmartBI prompts the user with a specifier text question. Submitting the custom industry details displays them in the final Workspace Preview summary labels. Standard industry choices automatically skip this step.
     - **Inline Inputs**: Interactive controls (choice chips, industry grids, tag creators, and document upload dropzones) render inline directly inside the scrollable chat feed under the active question.
     - **Persistent Bottom Input Deck**: A purple-pink-blue gradient border container containing textarea, attachment, history, and voice inputs. While secondary controls are disabled and dimmed when inline inputs are required, the `+` (add) attachment button remains active, styled in primary purple with `pointer-events-auto`. Clicking it triggers a file selector:
       - During the **cities step** (with the Bulk Upload tab active), it forwards the file directly to the inline cities upload dropzone.
@@ -119,3 +119,4 @@ BI Web APP/
   - **Calculated Metrics Sidebar Button**: Sidebar button launching the custom formula modal builder.
   - **Non-Technical Formula Builder Modal (`#calc-modal-overlay`)**: A visual creator modal letting users combine metrics using pre-defined pattern templates (Divide A by B, Growth rate of A MoM, Sum, Product) and simple dropdown selects (e.g. Revenue, Users).
   - **Metric Card Injection**: Form submissions insert new custom key metrics cards at the grid bottom detailing calculating formulas, values ($43.73), and hover-triggered DOM deletion controls.
+

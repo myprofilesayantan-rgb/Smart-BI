@@ -1,6 +1,6 @@
-# SMarBI Development Guide & Technical Stack (skill.md)
+# SmartBI Development Guide & Technical Stack (skill.md)
 
-This document serves as the technical guideline, design spec, and development standard for the **SMarBI** BI Web App.
+This document serves as the technical guideline, design spec, and development standard for the **SmartBI** BI Web App.
 
 ---
 
@@ -61,7 +61,7 @@ This document serves as the technical guideline, design spec, and development st
 
 ## Design System & Themes
 
-SMarBI uses a premium, modern design with glassmorphism, smooth gradients, and cohesive purple/lavender styling.
+SmartBI uses a premium, modern design with glassmorphism, smooth gradients, and cohesive purple/lavender styling.
 
 ### HSL Color Palette
 - **Primary / Brand Accent**: HSL `255, 68%, 60%` (Vibrant Purple `#7c3bed` / `#6366f1`)
@@ -120,7 +120,7 @@ export default function MetricCard({ title, value }) {
 
 ## Responsive & Layout Guidelines
 
-The target minimum viewport resolution is **Tablet** (~768px). SMarBI does not require full mobile support (below 768px), but must adapt seamlessly to desktop and tablet sizes.
+The target minimum viewport resolution is **Tablet** (~768px). SmartBI does not require full mobile support (below 768px), but must adapt seamlessly to desktop and tablet sizes.
 
 ### Responsive Methodology (No Media Queries)
 Avoid using traditional CSS `@media` viewport queries. Use the latest modern CSS technologies to achieve clean, fluid responsiveness:
@@ -157,3 +157,4 @@ The Express backend provides clean REST endpoints for analytics data:
 3. **POST `/api/analysis`**: Creates a new custom query or analysis.
    - Example request: `{"title": "Social Campaigns Conversion", "metric": "Conversion Rate", "dimension": "Campaign Source"}`
    - Response: `{"success": true, "id": "an_01234"}`
+

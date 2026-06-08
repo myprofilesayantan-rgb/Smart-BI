@@ -405,7 +405,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         // Salesforce Connection setup
         else if (lowerQ.includes("salesforce")) {
-          reply = "To connect Salesforce, scroll down to the 'Available Connectors' catalog, locate <strong>Salesforce</strong>, and click it. You will be prompted to log in and authorize SMarBI to read your CRM records.";
+          reply = "To connect Salesforce, scroll down to the 'Available Connectors' catalog, locate <strong>Salesforce</strong>, and click it. You will be prompted to log in and authorize SmartBI to read your CRM records.";
         }
         // Shopify Connection setup
         else if (lowerQ.includes("shopify")) {
@@ -590,3 +590,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+

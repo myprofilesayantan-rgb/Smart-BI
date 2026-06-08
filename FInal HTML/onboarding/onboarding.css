@@ -1,5 +1,5 @@
 /* ══════════════════════════════════════════════════════
-   SMarBI Onboarding — Premium CSS
+   SmartBI Onboarding — Premium CSS
    ══════════════════════════════════════════════════════ */
 
 /* Ambient background blurs */
@@ -324,3 +324,4 @@
 @media (max-width: 640px) {
   .kpi-categories-grid { grid-template-columns: 1fr; }
 }
+

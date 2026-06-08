@@ -54,8 +54,8 @@ window.SmartBI_Goal = {
     const welcomeHtml = `
       <div class="ai-welcome-state" style="text-align:center; padding:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; width:100%; animation: fade-in-up 0.5s ease-out;">
         <div class="ai-sparkle-icon" style="margin-bottom:12px; font-size:24px; color:#7C3BED; display:inline-block; animation: pulse-sparkle 2.2s infinite ease-in-out;">✨</div>
-        <div style="font-weight:600; font-size:13px; color:#232020; margin-bottom:4px;">SMarBI Concept & Goal Demo</div>
-        <div style="font-size:10px; color:#717171; max-width:280px; line-height:1.5; margin-bottom:14px;">Simulating SMarBI's conversational analytics, zero-tech dashboard designs, and no-code calculations.</div>
+        <div style="font-weight:600; font-size:13px; color:#232020; margin-bottom:4px;">SmartBI Concept & Goal Demo</div>
+        <div style="font-size:10px; color:#717171; max-width:280px; line-height:1.5; margin-bottom:14px;">Simulating SmartBI's conversational analytics, zero-tech dashboard designs, and no-code calculations.</div>
       </div>
     `;
 
@@ -81,7 +81,7 @@ window.SmartBI_Goal = {
     const scenarios = [
       // 1. Concept & Goal
       {
-        text: "Explain SMarBI's core concept and goal",
+        text: "Explain SmartBI's core concept and goal",
         run(onComplete) {
           chartSlot.innerHTML = `<div class="ai-chat-thread" id="chat-thread"></div>`;
           const thread = chartSlot.querySelector('#chat-thread');
@@ -92,17 +92,17 @@ window.SmartBI_Goal = {
             loader.style.display = 'none';
             
             // Add User bubble
-            thread.innerHTML += `<div class="ai-msg-bubble user">Explain SMarBI's core concept and goal</div>`;
+            thread.innerHTML += `<div class="ai-msg-bubble user">Explain SmartBI's core concept and goal</div>`;
             thread.scrollTop = thread.scrollHeight;
             
             setTimeout(() => {
               // Add System bubble 1
-              thread.innerHTML += `<div class="ai-msg-bubble system">SMarBI is designed to solve high cognitive load in traditional BI by shifting from SQL database joining to natural language conversation.</div>`;
+              thread.innerHTML += `<div class="ai-msg-bubble system">SmartBI is designed to solve high cognitive load in traditional BI by shifting from SQL database joining to natural language conversation.</div>`;
               thread.scrollTop = thread.scrollHeight;
               
               setTimeout(() => {
                 // Add System bubble 2
-                thread.innerHTML += `<div class="ai-msg-bubble system">SMarBI handles data ingestion, automatic schema parsing, and metric dictionary generation. The goal is to let business operators explore data naturally, design metrics without code, and automatically generate visual widgets.</div>`;
+                thread.innerHTML += `<div class="ai-msg-bubble system">SmartBI handles data ingestion, automatic schema parsing, and metric dictionary generation. The goal is to let business operators explore data naturally, design metrics without code, and automatically generate visual widgets.</div>`;
                 thread.scrollTop = thread.scrollHeight;
                 
                 setTimeout(() => {
@@ -110,14 +110,14 @@ window.SmartBI_Goal = {
                   thread.innerHTML += `
                     <div class="ai-chat-chart-wrapper" style="height: 140px;">
                       <svg class="ai-svg-chart" viewBox="0 0 320 130">
-                        <text x="160" y="15" class="ai-svg-text-title" text-anchor="middle">SMarBI Concept Pipeline</text>
+                        <text x="160" y="15" class="ai-svg-text-title" text-anchor="middle">SmartBI Concept Pipeline</text>
                         
                         <!-- Flow Nodes -->
                         <rect x="15" y="32" width="75" height="20" fill="#1E293B" rx="6" />
                         <text x="52.5" y="44" font-family="var(--font-family)" font-size="7.5px" font-weight="600" fill="#F8FAFC" text-anchor="middle">Raw Data</text>
                         
                         <rect x="120" y="32" width="80" height="20" fill="#7C3BED" rx="6" />
-                        <text x="160" y="44" font-family="var(--font-family)" font-size="7.5px" font-weight="700" fill="#FFFFFF" text-anchor="middle">SMarBI AI Brain</text>
+                        <text x="160" y="44" font-family="var(--font-family)" font-size="7.5px" font-weight="700" fill="#FFFFFF" text-anchor="middle">SmartBI AI Brain</text>
                         
                         <rect x="230" y="32" width="75" height="20" fill="#1E293B" rx="6" />
                         <text x="267.5" y="44" font-family="var(--font-family)" font-size="7.5px" font-weight="600" fill="#F8FAFC" text-anchor="middle">Dashboard</text>
@@ -161,7 +161,7 @@ window.SmartBI_Goal = {
             
             setTimeout(() => {
               // Add System bubble
-              thread.innerHTML += `<div class="ai-msg-bubble system">SMarBI features a Zero-Tech Dashboard with auto-building widgets. Consecutive queries sequentially cycle through three widget designs: <strong>Strategic Progress</strong>, <strong>Segmented Donut</strong>, and <strong>Trend Line</strong>.</div>`;
+              thread.innerHTML += `<div class="ai-msg-bubble system">SmartBI features a Zero-Tech Dashboard with auto-building widgets. Consecutive queries sequentially cycle through three widget designs: <strong>Strategic Progress</strong>, <strong>Segmented Donut</strong>, and <strong>Trend Line</strong>.</div>`;
               thread.scrollTop = thread.scrollHeight;
               
               setTimeout(() => {
@@ -238,7 +238,7 @@ window.SmartBI_Goal = {
             
             setTimeout(() => {
               // Add System bubble 1
-              thread.innerHTML += `<div class="ai-msg-bubble system">Using SMarBI's non-technical Calculated Metrics Builder, users select pre-built math patterns (Divide, Growth MoM, Sum, Product) instead of SQL/DAX formulas.</div>`;
+              thread.innerHTML += `<div class="ai-msg-bubble system">Using SmartBI's non-technical Calculated Metrics Builder, users select pre-built math patterns (Divide, Growth MoM, Sum, Product) instead of SQL/DAX formulas.</div>`;
               thread.scrollTop = thread.scrollHeight;
               
               setTimeout(() => {
@@ -329,3 +329,4 @@ window.SmartBI_Goal = {
     mainLoopTimeout = setTimeout(playScenario, 2500);
   }
 };
+

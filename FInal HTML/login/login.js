@@ -1,4 +1,4 @@
-/* SMarBI Authentication Logic (login/login.js) */
+/* SmartBI Authentication Logic (login/login.js) */
 
 document.addEventListener("DOMContentLoaded", () => {
   const authWrapper = document.getElementById("auth-wrapper");
@@ -300,3 +300,4 @@ document.addEventListener("DOMContentLoaded", () => {
     ease: "power4.out"
   });
 });
+
