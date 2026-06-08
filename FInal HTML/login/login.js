@@ -148,6 +148,79 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Demo Journey Modal Elements & Logic
+  const demoJourneyOverlay = document.getElementById("demo-journey-overlay");
+  const demoJourneyModal = document.getElementById("demo-journey-modal");
+  const closeDemoModalBtn = document.getElementById("close-demo-modal-btn");
+  const demoPathOnboardingBtn = document.getElementById("demo-path-onboarding-btn");
+  const demoPathDashboardBtn = document.getElementById("demo-path-dashboard-btn");
+
+  const openDemoModal = () => {
+    if (!demoJourneyOverlay || !demoJourneyModal) return;
+    
+    // Reset inputs loading state if disabled
+    nameInput.removeAttribute("disabled");
+    emailInput.removeAttribute("disabled");
+    passwordInput.removeAttribute("disabled");
+    submitBtn.removeAttribute("disabled");
+    submitSpinner.classList.add("hidden");
+    submitText.classList.remove("opacity-50");
+    
+    // Reset Google button labels
+    const ssoEmail = ssoGoogleBtn.querySelector(".text-on-surface-variant");
+    const ssoLabel = ssoGoogleBtn.querySelector(".text-on-surface");
+    if (ssoEmail) ssoEmail.innerText = "sangh8@gmail.com";
+    if (ssoLabel) ssoLabel.innerText = "Continue as San";
+
+    // Show overlay
+    demoJourneyOverlay.classList.remove("hidden");
+    gsap.killTweensOf([demoJourneyOverlay, demoJourneyModal]);
+    gsap.to(demoJourneyOverlay, { opacity: 1, duration: 0.3 });
+    gsap.to(demoJourneyModal, { scale: 1, opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.2)" });
+  };
+
+  const closeDemoModal = () => {
+    if (!demoJourneyOverlay || !demoJourneyModal) return;
+    gsap.killTweensOf([demoJourneyOverlay, demoJourneyModal]);
+    gsap.to(demoJourneyModal, { scale: 0.95, opacity: 0, y: 10, duration: 0.25, ease: "power2.in" });
+    gsap.to(demoJourneyOverlay, {
+      opacity: 0,
+      duration: 0.25,
+      onComplete: () => {
+        demoJourneyOverlay.classList.add("hidden");
+      }
+    });
+  };
+
+  if (closeDemoModalBtn) {
+    closeDemoModalBtn.addEventListener("click", closeDemoModal);
+  }
+  if (demoJourneyOverlay) {
+    demoJourneyOverlay.addEventListener("click", (e) => {
+      if (e.target === demoJourneyOverlay) closeDemoModal();
+    });
+  }
+
+  if (demoPathOnboardingBtn) {
+    demoPathOnboardingBtn.addEventListener("click", () => {
+      showToast("Entering Onboarding Setup...", "success");
+      closeDemoModal();
+      setTimeout(() => {
+        window.location.href = "onboarding.html";
+      }, 1000);
+    });
+  }
+
+  if (demoPathDashboardBtn) {
+    demoPathDashboardBtn.addEventListener("click", () => {
+      showToast("Entering Active BI Dashboard...", "success");
+      closeDemoModal();
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 1000);
+    });
+  }
+
   // Simulated Email & Password Auth Submission
   if (authForm) {
     authForm.addEventListener("submit", (e) => {
@@ -162,24 +235,13 @@ document.addEventListener("DOMContentLoaded", () => {
       // Show loading spinner
       submitSpinner.classList.remove("hidden");
       submitText.classList.add("opacity-50");
-
+ 
       setTimeout(() => {
-        // Show success notification
-        if (isSignupState) {
-          showToast("Account created successfully! Setting up your workspace...", "success");
-        } else {
-          showToast("Welcome back! Redirecting to dashboard...", "success");
-        }
-
-        // Redirect based on state
+        showToast("Authentication successful!", "success");
         setTimeout(() => {
-          if (isSignupState) {
-            window.location.href = "onboarding.html";
-          } else {
-            window.location.href = "dashboard.html";
-          }
-        }, 1200);
-      }, 1500);
+          openDemoModal();
+        }, 600);
+      }, 1200);
     });
   }
 
@@ -198,19 +260,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (ssoLabel) ssoLabel.innerText = isSignupState ? "Signing up with Google" : "Connecting Google account";
 
       setTimeout(() => {
-        if (isSignupState) {
-          showToast("Account created with Google! Welcome to SMarBI.", "success");
-        } else {
-          showToast("Logged in with Google as San.", "success");
-        }
-        
+        showToast("Google SSO Authorized!", "success");
         setTimeout(() => {
-          if (isSignupState) {
-            window.location.href = "onboarding.html";
-          } else {
-            window.location.href = "dashboard.html";
-          }
-        }, 1000);
+          openDemoModal();
+        }, 600);
       }, 1200);
     });
   }
@@ -224,19 +277,11 @@ document.addEventListener("DOMContentLoaded", () => {
       showToast("Redirecting to corporate SSO gate...", "info");
       
       setTimeout(() => {
-        if (isSignupState) {
-          showToast("Corporate account created via SSO.", "success");
-        } else {
-          showToast("SSO Authorized.", "success");
-        }
+        showToast("SSO Authorization Successful!", "success");
         setTimeout(() => {
-          if (isSignupState) {
-            window.location.href = "onboarding.html";
-          } else {
-            window.location.href = "dashboard.html";
-          }
-        }, 800);
-      }, 1500);
+          openDemoModal();
+        }, 600);
+      }, 1200);
     });
   }
 
