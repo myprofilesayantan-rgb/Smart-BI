@@ -183,6 +183,85 @@
     <p>© 2026 SMarBI Technologies. All rights reserved.</p>
   </footer>
 
+  <!-- Floating Info Guide Banner (top-right of screen) -->
+  <div class="fixed top-4 right-4 z-50 max-w-[280px] bg-white/95 backdrop-blur-md border border-outline rounded-xl p-3.5 shadow-lg hidden sm:flex items-start gap-2.5 hover:border-primary/20 transition-all">
+    <span class="material-symbols-outlined text-primary text-[18px] mt-0.5" style="font-variation-settings: 'FILL' 1;">info</span>
+    <div>
+      <span class="text-[10px] font-bold text-on-surface block">Demo Mode Guide</span>
+      <span class="text-[9px] text-on-surface-variant leading-relaxed block mt-0.5">
+        Click the <strong>"Continue as San"</strong> Google login to choose between the <strong>Onboarding Setup</strong> or <strong>Main Dashboard</strong>.
+      </span>
+    </div>
+  </div>
+
+  <!-- Demo Journey Selector Modal Overlay -->
+  <div id="demo-journey-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[9999] flex items-center justify-center hidden opacity-0">
+    <div id="demo-journey-modal" class="bg-white border border-outline rounded-2xl w-full max-w-[440px] p-6 shadow-2xl relative mx-4 transform scale-95 opacity-0">
+      
+      <!-- Close button -->
+      <button id="close-demo-modal-btn" class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer flex items-center justify-center w-6 h-6 rounded-full hover:bg-surface-variant">
+        <span class="material-symbols-outlined text-[16px]">close</span>
+      </button>
+
+      <!-- Branding / Header -->
+      <div class="text-center mb-6">
+        <div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+          <span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">explore</span>
+        </div>
+        <h3 class="font-display text-base font-bold text-on-surface tracking-tight mb-1">Select Demo Experience</h3>
+        <p class="text-[10.5px] text-on-surface-variant/85 leading-normal max-w-xs mx-auto">
+          Choose a workspace path to explore the design features implemented in this BI prototype.
+        </p>
+      </div>
+
+      <!-- Option Cards -->
+      <div class="space-y-3">
+        <!-- Path 1: Conversational Onboarding -->
+        <button id="demo-path-onboarding-btn" class="w-full text-left p-3.5 rounded-xl border border-outline hover:border-primary/40 hover:bg-primary-container/10 transition-all duration-200 cursor-pointer flex gap-3.5 group">
+          <div class="w-9 h-9 rounded-lg bg-primary-container text-primary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">chat</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="text-xs font-bold text-on-surface">Conversational Setup</span>
+              <span class="text-[8px] font-bold uppercase tracking-wider bg-primary/10 text-primary px-1.5 py-0.5 rounded">Setup Setup</span>
+            </div>
+            <p class="text-[9.5px] text-on-surface-variant leading-relaxed mb-2">
+              Setup a workspace from scratch using the new interactive AI conversational setup sequence, tags and onboarding feed.
+            </p>
+            <div class="flex gap-1.5 flex-wrap">
+              <span class="text-[8px] font-semibold text-on-surface-variant/65 bg-slate-100 px-1.5 py-0.5 rounded">AI Chat Feed</span>
+              <span class="text-[8px] font-semibold text-on-surface-variant/65 bg-slate-100 px-1.5 py-0.5 rounded">Interactive Chips</span>
+              <span class="text-[8px] font-semibold text-on-surface-variant/65 bg-slate-100 px-1.5 py-0.5 rounded">Deploy Animation</span>
+            </div>
+          </div>
+        </button>
+
+        <!-- Path 2: Active Dashboard -->
+        <button id="demo-path-dashboard-btn" class="w-full text-left p-3.5 rounded-xl border border-outline hover:border-primary/40 hover:bg-primary-container/10 transition-all duration-200 cursor-pointer flex gap-3.5 group">
+          <div class="w-9 h-9 rounded-lg bg-primary-container text-primary flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5 mb-0.5">
+              <span class="text-xs font-bold text-on-surface">Active BI Dashboard</span>
+              <span class="text-[8px] font-bold uppercase tracking-wider bg-success-container/70 text-success px-1.5 py-0.5 rounded">Full Analytics</span>
+            </div>
+            <p class="text-[9.5px] text-on-surface-variant leading-relaxed mb-2">
+              Explore pre-configured dashboard metrics, create custom formulas, apply visual filters, and check connected data source updates.
+            </p>
+            <div class="flex gap-1.5 flex-wrap">
+              <span class="text-[8px] font-semibold text-on-surface-variant/65 bg-slate-100 px-1.5 py-0.5 rounded">Calculated Fields</span>
+              <span class="text-[8px] font-semibold text-on-surface-variant/65 bg-slate-100 px-1.5 py-0.5 rounded">Chart Filters</span>
+              <span class="text-[8px] font-semibold text-on-surface-variant/65 bg-slate-100 px-1.5 py-0.5 rounded">Connection Syncs</span>
+            </div>
+          </div>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+
   <!-- Toast Container for Notifications -->
   <div id="toast-container" class="fixed top-6 right-6 flex flex-col gap-2 pointer-events-none z-[9999]"></div>
 
