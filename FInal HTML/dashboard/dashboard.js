@@ -1238,13 +1238,14 @@ document.addEventListener("DOMContentLoaded", () => {
     orders: "2,847"
   };
 
-  // Preset filter subsets
+  // Preset filter subsets (Relevant for CEO decision-making)
   const filterSubsets = {
-    Social: { revenue: "$31,130", users: "2,058", conversion: "1.92%", orders: "712" },
-    Email: { revenue: "$49,810", users: "3,293", conversion: "4.15%", orders: "1,139" },
-    Direct: { revenue: "$56,035", users: "3,705", conversion: "4.50%", orders: "1,281" },
-    "US East": { revenue: "$78,450", users: "5,187", conversion: "3.40%", orders: "1,793" },
-    Europe: { revenue: "$46,073", users: "3,047", conversion: "2.98%", orders: "1,054" }
+    Enterprise: { revenue: "$82,450", users: "1,820", conversion: "4.85%", orders: "950" },
+    "Mid-Market": { revenue: "$30,950", users: "2,940", conversion: "3.10%", orders: "1,120" },
+    SMB: { revenue: "$11,123", users: "3,474", conversion: "1.82%", orders: "777" },
+    "North America": { revenue: "$76,523", users: "4,980", conversion: "3.45%", orders: "1,640" },
+    EMEA: { revenue: "$34,200", users: "2,214", conversion: "3.02%", orders: "820" },
+    APAC: { revenue: "$13,800", users: "1,040", conversion: "2.45%", orders: "387" }
   };
 
   if (filterBtn && filterMenu) {
