@@ -1,0 +1,122 @@
+/* SMarBI Global Stylesheet (global.css) */
+
+/* Fonts & Icons Import */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+:root {
+  /* HSL Palette */
+  --primary-hsl: 262, 70%, 50%;
+  --primary-light-hsl: 262, 80%, 96%;
+  --success-hsl: 142, 70%, 45%;
+  --danger-hsl: 0, 72%, 50%;
+  --background-hsl: 240, 15%, 98%;
+
+  /* Hex Colors */
+  --primary: #7c3bed;
+  --primary-hover: #6d28d9;
+  --primary-container: #f3e8ff;
+  --on-primary: #ffffff;
+  
+  --success: #10b981;
+  --success-container: #d1fae5;
+  --danger: #ef4444;
+  --danger-container: #fee2e2;
+
+  --background: #f8f9ff;
+  --surface: #ffffff;
+  --surface-dim: #f1f5f9;
+  --outline: #e2e8f0;
+  --outline-variant: #f1f5f9;
+
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+}
+
+/* Base resets & layout rules */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Display Headings */
+h1, h2, h3, h4, .font-display {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Material Symbols Adjustments */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+/* Custom Shadows */
+.soft-shadow {
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.sidebar-shadow {
+  box-shadow: 4px 0 24px rgba(15, 23, 42, 0.02);
+}
+
+.floating-shadow {
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+/* Interactive affortances */
+.interactive-item {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--outline);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Spacing overrides for 13 spacing index (3.25rem = 52px) */
+.h-13 {
+  height: 3.25rem !important;
+}
+
+.mt-13 {
+  margin-top: 3.25rem !important;
+}
+
+.pt-13 {
+  padding-top: 3.25rem !important;
+}

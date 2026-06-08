@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>SMarBI - AI Insights Exploration</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Global CSS -->
+  <link href="global.css" rel="stylesheet">
+  
+  <!-- Page Specific CSS -->
+  <link href="insights/insights.css" rel="stylesheet">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: '#7c3bed',            /* Vibrant Purple */
+            'primary-container': '#f3e8ff',  /* Light Lavender */
+            'on-primary': '#ffffff',
+            secondary: '#7c3bed',
+            'secondary-container': '#f3e8ff',
+            'on-secondary': '#ffffff',
+            background: '#f8f9ff',
+            surface: '#ffffff',
+            'surface-variant': '#f1f5f9',
+            'on-surface': '#0f172a',
+            'on-surface-variant': '#64748b',
+            outline: '#e2e8f0',
+            'outline-variant': '#f1f5f9',
+            error: '#ef4444',
+            success: '#10b981',
+            'success-container': '#d1fae5',
+            'danger-container': '#fee2e2',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-[#fafbfc] text-on-surface antialiased">
+
+  <!-- SideNavBar -->
+  <aside id="sidebar" class="sidebar-container flex flex-col py-4 px-3 h-screen w-56 fixed left-0 top-0 border-r border-outline-variant z-50 bg-white sidebar-shadow min-h-screen">
+    <div class="px-2.5 mb-6 flex items-center gap-2 logo-container">
+      <div class="w-7 h-7 flex items-center justify-center">
+        <img src="images/favicon.svg" alt="SMarBI Logo" class="w-full h-full object-contain">
+      </div>
+      <span class="font-display text-base font-bold tracking-tight text-on-surface logo-text">SMarBI</span>
+    </div>
+    
+    <nav class="space-y-1 flex-1">
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="dashboard.html">
+        <span class="material-symbols-outlined text-[16px]">dashboard</span>
+        <span class="nav-text font-body">Dashboard</span>
+      </a>
+      <!-- Active Tab: Insights -->
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg bg-primary-container text-primary font-medium text-xs transition-colors" href="insights.html">
+        <span class="material-symbols-outlined text-[16px]">lightbulb</span>
+        <span class="nav-text font-body">Insights</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="data_sources.html">
+        <span class="material-symbols-outlined text-[16px]">database</span>
+        <span class="nav-text font-body">Data Sources</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">card_membership</span>
+        <span class="nav-text font-body">Subscription</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">menu_book</span>
+        <span class="nav-text font-body">Guide Manuals</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">support_agent</span>
+        <span class="nav-text font-body">Contact Support Team</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">download</span>
+        <span class="nav-text font-body">Downloads</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">settings</span>
+        <span class="nav-text font-body">Settings</span>
+      </a>
+    </nav>
+    
+    <div class="mt-auto pt-3 border-t border-outline-variant flex flex-col gap-3">
+      <!-- SaaS Account Token Status -->
+      <div class="px-2.5 py-2 bg-background rounded-lg border border-outline/30 flex flex-col gap-1 help-logout-text">
+        <div class="flex items-center justify-between text-[9px] font-semibold text-on-surface-variant">
+          <span class="flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
+            <span>AI Queries Used</span>
+          </span>
+          <span class="text-on-surface">25 / 100</span>
+        </div>
+        <div class="w-full bg-outline-variant h-1 rounded-full overflow-hidden">
+          <div class="bg-primary h-full" style="width: 25%"></div>
+        </div>
+        <div class="flex items-center justify-between text-[8px] text-on-surface-variant">
+          <span>Credits remaining</span>
+          <span class="font-bold">1.5k</span>
+        </div>
+      </div>
+
+      <button class="bottom-btn w-full flex items-center justify-center gap-1.5 py-1.5 px-3 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-primary-hover active:scale-[0.98] transition-all soft-shadow">
+        <span class="material-symbols-outlined text-[16px]">add</span>
+        <span class="font-body">New Analysis</span>
+      </button>
+      
+      <div class="space-y-1">
+        <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 text-on-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+          <span class="material-symbols-outlined text-[16px]">help</span>
+          <span class="help-logout-text font-body font-medium">Help Center</span>
+        </a>
+        <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 text-on-surface-variant hover:text-error text-xs transition-colors" href="login.html?logout=true">
+          <span class="material-symbols-outlined text-[16px]">logout</span>
+          <span class="help-logout-text font-body font-medium">Logout</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TopAppBar -->
+  <header id="main-header" class="main-content-shifted fixed top-0 right-0 left-56 h-13 flex items-center justify-between px-8 bg-white/70 backdrop-blur-md z-40 border-b border-outline-variant/80">
+    <div class="flex items-center gap-3">
+      <button id="sidebar-toggle" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-md transition-colors">
+        <span class="material-symbols-outlined text-[20px]">menu</span>
+      </button>
+      <span class="font-display font-semibold text-on-surface text-xs">BI Brain Explore</span>
+    </div>
+    
+    <div class="flex items-center gap-3">
+      <div class="flex items-center bg-surface-variant/80 px-2.5 py-1 rounded-md w-56 border border-outline/30 focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+        <span class="material-symbols-outlined text-on-surface-variant text-[16px]">search</span>
+        <input class="bg-transparent border-none focus:ring-0 text-[11px] w-full ml-1 placeholder:text-on-surface-variant/60 p-0" placeholder="Search..." type="text">
+      </div>
+      
+      <!-- Notifications Toggler & Menu -->
+      <div class="relative">
+        <button id="notifications-toggle" class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-md transition-all relative">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full ring-2 ring-white"></span>
+        </button>
+        
+        <!-- Notifications Popover -->
+        <div id="notifications-menu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-outline z-50 py-2 text-left">
+          <div class="px-3.5 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/60 pb-1.5 mb-1.5">Notifications</div>
+          <div class="px-3.5 py-1.5 hover:bg-surface-variant/40 transition-colors cursor-pointer border-b border-outline-variant/30 pb-2 mb-1.5">
+            <span class="text-[10px] font-bold text-on-surface block">Revenue Milestone</span>
+            <span class="text-[9.5px] text-on-surface-variant block mt-0.5 leading-tight">Revenue passed Q2 forecast target by 8% today.</span>
+          </div>
+          <div class="px-3.5 py-1.5 hover:bg-surface-variant/40 transition-colors cursor-pointer">
+            <span class="text-[10px] font-bold text-on-surface block">Data Sync Complete</span>
+            <span class="text-[9.5px] text-on-surface-variant block mt-0.5 leading-tight">Shopify Store successfully synced 1,420 new orders.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-5 w-px bg-outline mx-0.5"></div>
+      
+      <!-- User Profile Toggler & Menu -->
+      <div class="relative">
+        <div id="profile-toggle" class="flex items-center gap-1.5 cursor-pointer group">
+          <div class="w-7 h-7 rounded-md overflow-hidden border border-outline group-hover:border-primary transition-colors">
+            <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrV2uuXVfrfG8zmwRQLReo3dmLsCwzQirSxa1dvyB1mCOceZVJEBtWGd3HNJ_zvKiqT2iHBjEjJjv4Y_42JYRkJme-aByzDa2iuDD1fhzLNSoNerZg64hR-9rmeR_w8zaxBuEFYZqe3gJY9ChJhcRULMfFKZ2mVOS7ZELOYQ1ikzCLE5hIz3IcZ4oGswTzljbafhwDSJjJaIUm2kRCe8cJY-tm0QZS0j4sFuUfXU0f9tYs586ImtR0pP2OLSK2d9aN4SNc_UWT8hvR">
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[16px] group-hover:text-on-surface transition-colors">keyboard_arrow_down</span>
+        </div>
+        
+        <!-- Profile Popover -->
+        <div id="profile-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-outline z-50 py-1.5 text-left">
+          <div class="px-3.5 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider">Account</div>
+          <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+            <span class="material-symbols-outlined text-[16px]">person</span>
+            <span>My Profile</span>
+          </a>
+          <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+            <span class="material-symbols-outlined text-[16px]">settings</span>
+            <span>Account Settings</span>
+          </a>
+          <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+            <span class="material-symbols-outlined text-[16px]">credit_card</span>
+            <span>Billing & Usage</span>
+          </a>
+          <div class="mt-1.5 pt-1.5 border-t border-outline-variant">
+            <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-error/5 text-xs text-on-surface-variant hover:text-error transition-colors" href="login.html?logout=true">
+              <span class="material-symbols-outlined text-[16px]">logout</span>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Canvas -->
+  <main id="main-content" class="main-content-shifted ml-56 mt-13 p-0 h-[calc(100vh-3.25rem)] relative overflow-hidden bg-[#fafbfc] flex flex-col">
+    
+    <!-- Premium Aura Gradient Blur at the top of the canvas -->
+    <div class="absolute top-0 left-0 right-0 h-[240px] pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-32 left-[10%] w-[80%] h-[260px] bg-gradient-to-r from-orange-200/25 via-pink-200/20 via-purple-100/10 to-blue-200/30 blur-[90px] rounded-full"></div>
+    </div>
+
+    <!-- Split Layout Container -->
+    <div class="flex-1 flex w-full h-full overflow-hidden relative z-10" id="insights-split-layout">
+      
+      <!-- Left Panel: Interactive Chat Session -->
+      <div id="chat-workspace-panel" class="flex-1 flex flex-col h-full overflow-hidden relative">
+        
+        <!-- Scrollable Chat Area -->
+        <div id="chat-scroll-area" class="flex-1 overflow-y-auto pb-4 px-8 pt-8 scrollbar-thin">
+          
+          <!-- Welcome Screen Container (Greeting + Suggestions - Centered) -->
+          <div id="welcome-container" class="my-auto py-6 w-full flex flex-col items-center justify-center max-w-3xl mx-auto">
+            <!-- Welcome Title -->
+            <div id="insights-welcome" class="text-center mb-8 max-w-xl">
+              <div class="inline-flex items-center gap-2.5 justify-center mb-3">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" class="animate-spin-slow">
+                  <circle cx="12" cy="7" r="3.5" fill="#7c3bed" opacity="0.85" />
+                  <circle cx="7.5" cy="12" r="3.5" fill="#a855f7" opacity="0.85" />
+                  <circle cx="16.5" cy="12" r="3.5" fill="#3b82f6" opacity="0.85" />
+                  <circle cx="12" cy="17" r="3.5" fill="#ec4899" opacity="0.85" />
+                </svg>
+                <h1 class="font-display text-2xl text-on-surface font-extrabold tracking-tight">BI Brain Explore</h1>
+              </div>
+              <p class="text-xs text-on-surface-variant leading-relaxed">
+                Your personal data workspace. Ask questions, construct models, and selectively pin what matters directly to your dashboard targets.
+              </p>
+            </div>
+
+            <!-- Quick Action Inspiration Cards -->
+            <div id="insights-suggestions" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 w-full max-w-xl">
+              <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="How did we do last month?">
+                <div class="w-6 h-6 rounded-md bg-purple-50 flex items-center justify-center text-purple-600 flex-shrink-0">
+                  <span class="material-symbols-outlined text-[14px]">query_stats</span>
+                </div>
+                <span class="text-[10px] font-semibold text-on-surface leading-tight">"How did we do last month?"</span>
+              </div>
+              
+              <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="Which product is underperforming?">
+                <div class="w-6 h-6 rounded-md bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0">
+                  <span class="material-symbols-outlined text-[14px]">trending_down</span>
+                </div>
+                <span class="text-[10px] font-semibold text-on-surface leading-tight">"Which product is underperforming?"</span>
+              </div>
+
+              <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="Predict next quarter's revenue">
+                <div class="w-6 h-6 rounded-md bg-pink-50 flex items-center justify-center text-pink-600 flex-shrink-0">
+                  <span class="material-symbols-outlined text-[14px]">online_prediction</span>
+                </div>
+                <span class="text-[10px] font-semibold text-on-surface leading-tight">"Predict next quarter's revenue"</span>
+              </div>
+
+              <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="Summarize my active data sources">
+                <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-orange-600 flex-shrink-0">
+                  <span class="material-symbols-outlined text-[14px]">database</span>
+                </div>
+                <span class="text-[10px] font-semibold text-on-surface leading-tight">"Summarize my active data sources"</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Feed Stream (Centered) -->
+          <section class="max-w-3xl w-full mx-auto pb-4 flex-1 hidden flex-col chat-container" id="chat-stream-section">
+            <div id="chat-stream" class="flex flex-col gap-6">
+              <!-- Chat bubbles appended here dynamically -->
+            </div>
+            
+            <!-- Inline loading spinner inside stream -->
+            <div id="ai-loading" class="hidden py-6 text-center">
+              <div class="flex flex-col items-center justify-center gap-2">
+                <div class="loading-avatar w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-purple-400 flex items-center justify-center shadow-md shadow-primary/10">
+                  <span class="material-symbols-outlined text-white text-[16px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                </div>
+                <p class="text-[10px] font-semibold text-primary animate-pulse tracking-wide">SMarBI is exploring insights...</p>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- Bottom Input Container (Full-width bar with centered input deck) -->
+        <section class="w-full pt-3 pb-6 px-8 relative z-20 transition-all duration-300 flex flex-col items-center border-t border-outline/30 bg-[#fafbfc]/85 backdrop-blur-sm" id="input-container-parent">
+          
+          <!-- Centered Input Deck -->
+          <div class="relative w-full max-w-xl z-30 mb-1" id="insights-input-deck">
+            
+            <!-- Premium ClickUp-like Input Box with Animating Gradient Outline -->
+            <div class="p-[1.5px] rounded-xl bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 ai-input-wrapper shadow-sm transition-all focus-within:shadow-md">
+              <div class="bg-white rounded-[10px] w-full h-full relative ai-input-card transition-all">
+                <!-- Input text area -->
+                <div class="px-3.5 py-2.5">
+                  <textarea id="ask-ai-input" class="w-full bg-transparent border-none focus:ring-0 text-[13px] placeholder:text-on-surface-variant/40 resize-none h-14 p-0 text-on-surface leading-normal" placeholder="Ask anything about your business..."></textarea>
+                </div>
+
+                <!-- Input Footer Actions -->
+                <div class="flex items-center justify-between px-3.5 py-1.5 border-t border-outline-variant/30 bg-surface-variant/5 rounded-b-xl">
+                  <div class="flex items-center gap-2 relative">
+                    <!-- Context Toggle (+) -->
+                    <button id="chat-context-toggle" class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:text-on-surface" title="Add Context">
+                      <span class="material-symbols-outlined text-[14px]">add</span>
+                    </button>
+                    
+                    <!-- History Toggle (clock) -->
+                    <button id="history-toggle" class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:text-on-surface" title="Chat History">
+                      <span class="material-symbols-outlined text-[14px]">history</span>
+                    </button>
+
+                    <!-- Context Selector Dropdown -->
+                    <div id="chat-context-menu" class="hidden absolute left-0 bottom-7 mb-1 w-48 bg-white rounded-xl shadow-xl border border-outline z-50 py-1.5 text-left">
+                      <div class="px-3 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/50 pb-1 mb-1">Add Context</div>
+                      <button class="w-full flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface text-left transition-colors">
+                        <span class="material-symbols-outlined text-[16px] text-primary">database</span>
+                        <span>Attach Data Source</span>
+                      </button>
+                      <button class="w-full flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface text-left transition-colors">
+                        <span class="material-symbols-outlined text-[16px] text-success">table_view</span>
+                        <span>Upload CSV / Excel</span>
+                      </button>
+                      <button class="w-full flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface text-left transition-colors">
+                        <span class="material-symbols-outlined text-[16px] text-purple-500">terminal</span>
+                        <span>Add Instructions</span>
+                      </button>
+                    </div>
+                  </div>
+                
+                  <div class="flex items-center gap-2">
+                    <!-- Voice Input Button (mic) -->
+                    <button id="voice-input-btn" class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:text-on-surface" title="Voice Input">
+                      <span class="material-symbols-outlined text-[14px]">mic</span>
+                    </button>
+                    
+                    <button id="ask-ai-btn" class="w-6 h-6 rounded-full bg-primary text-on-primary hover:bg-primary-hover transition-colors flex items-center justify-center disabled:opacity-50 active:scale-95">
+                      <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- History & Favorites Popover -->
+            <div id="history-panel" class="hidden absolute bottom-full left-0 right-0 w-full bg-white rounded-xl border border-outline shadow-xl mb-2 p-3 text-left transition-all z-40">
+              <div class="flex items-center justify-between border-b border-outline-variant/60 pb-1.5 mb-2">
+                <h4 class="text-[9.5px] font-bold uppercase tracking-wider text-primary">BI Brain History</h4>
+                <div class="flex items-center gap-2">
+                  <button id="clear-history" class="text-[9px] font-semibold text-on-surface-variant/70 hover:text-error transition-colors">Clear All</button>
+                  <button id="history-close-btn" class="text-on-surface-variant hover:text-on-surface flex items-center justify-center"><span class="material-symbols-outlined text-[13px]">close</span></button>
+                </div>
+              </div>
+              
+              <div class="space-y-2.5 max-h-44 overflow-y-auto pr-1">
+                <!-- Favorites Section -->
+                <div>
+                  <span class="text-[8.5px] font-bold uppercase text-on-surface-variant/50 tracking-wider block mb-1 flex items-center gap-0.5">
+                    <span class="material-symbols-outlined text-[9px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span>Favorites</span>
+                  </span>
+                  <div id="favorites-list" class="space-y-1">
+                    <p class="text-[9.5px] text-on-surface-variant/60 italic px-1">No favorites saved yet.</p>
+                  </div>
+                </div>
+                
+                <!-- Recent Queries Section -->
+                <div>
+                  <span class="text-[8.5px] font-bold uppercase text-on-surface-variant/50 tracking-wider block mb-1">Recent Queries</span>
+                  <div id="recent-queries-list" class="space-y-1">
+                    <p class="text-[9.5px] text-on-surface-variant/60 italic px-1">No recent searches.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="text-center mt-1.5">
+            <p class="text-[8.5px] text-on-surface-variant/40">BI Brain can make mistakes. Verify important financial details.</p>
+          </div>
+          
+        </section>
+
+      </div>
+
+
+      
+    </div>
+
+    <!-- Footer -->
+    <footer class="py-2.5 px-6 border-t border-outline-variant/60 flex items-center justify-between text-[9px] text-on-surface-variant/60 bg-white relative z-20 shrink-0">
+      <p>© 2026 SMarBI Technologies. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-primary transition-colors">System Status</a>
+        <a href="#" class="hover:text-primary transition-colors font-semibold">Contact Support</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-6 right-6 flex flex-col gap-2.5 z-[100] pointer-events-none"></div>
+
+  <!-- Page Specific Logic -->
+  <script src="insights/insights.js"></script>
+
+</body>
+</html>

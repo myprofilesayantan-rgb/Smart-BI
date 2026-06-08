@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart BI Mind Map | Sayantan Ghosh UX Portfolio</title>
+  <meta name="description" content="Product architecture mind map for the Smart BI conversational analytics case study." />
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!-- Global Base Stylesheet & Nav/Footer styles -->
+  <link rel="stylesheet" href="tokens.css?v=2.0" />
+  <link rel="stylesheet" href="smart-bi.css?v=2.0" />
+  <link rel="stylesheet" href="components/nav/nav.css?v=2.0" />
+  <link rel="stylesheet" href="components/footer/footer.css?v=2.0" />
+  <!-- Mind Map Interactive component -->
+  <link rel="stylesheet" href="components/mindmap/mindmap.css?v=2.0" />
+</head>
+<body class="token-preview-page">
+
+  <div class="page-wrapper">
+
+    <!-- ─── NAVIGATION HEADER ───────────────────────────────── -->
+    <header class="smartbi-nav">
+      <div class="nav-container">
+        <!-- Logo Group (Brand + Pipe + Sub-brand) to keep logo items inline on all viewports -->
+        <div class="nav-logo-group">
+          <a href="https://uxsayantan.com" target="_blank" rel="noopener noreferrer" class="nav-author-link">
+            <span class="nav-author-name">Sayantan Ghosh</span>
+          </a>
+          <img class="nav-project-logo-img" src="images/favicon.svg" alt="SMarBI Logo" style="width:22px;height:22px;object-fit:contain;" />
+        </div>
+        
+        <!-- Navigation Links -->
+        <nav class="nav-links-nav">
+          <ul class="nav-links-list">
+            <li class="nav-link-item"><a href="index.html">Home</a></li>
+            <li class="nav-link-item active"><a href="mindmap.html">Mind Map</a></li>
+            <li class="nav-link-item"><a href="wireframe.html">Low Fidelity Wireframe</a></li>
+            <li class="nav-link-item"><a href="FInal HTML/design_system.html">Design System</a></li>
+            <li class="nav-link-item nav-cta"><a href="FInal HTML/login.html">AI Driven Prototype</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Gray Separator Line -->
+      <div class="nav-divider"></div>
+    </header>
+
+    <!-- ─── SPLIT MENU & PREVIEW WORKSPACE ────────────────────────── -->
+    <div class="token-preview-layout">
+
+      <!-- Sidebar -->
+      <aside class="token-sidebar">
+        <!-- Logo block -->
+        <div class="token-sidebar-logo">
+          <div class="token-sidebar-logo-icon">
+            <img src="images/favicon.svg" alt="SMarBI" style="width:28px;height:28px;object-fit:contain;" />
+          </div>
+          <div class="token-sidebar-logo-text">
+            <span class="token-sidebar-title">Mind Map</span>
+            <span class="token-sidebar-sub">Product Architecture</span>
+          </div>
+        </div>
+
+        <!-- Nav -->
+        <div class="token-sidebar-nav-wrapper">
+          <span class="token-sidebar-nav-label">Sections</span>
+          <ul class="token-sidebar-nav">
+            <li><a href="#onboarding" class="active"><span class="nav-dot"></span>Onboarding</a></li>
+            <li><a href="#conversation"><span class="nav-dot"></span>Daily Conversation</a></li>
+            <li><a href="#role-access"><span class="nav-dot"></span>Role Access</a></li>
+            <li><a href="#target-layer"><span class="nav-dot"></span>Target Layer</a></li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="token-main">
+
+        <!-- 1. Onboarding -->
+        <section id="onboarding" class="token-section">
+          <div class="token-section-header">
+            <div class="token-section-header-icon">
+              <span class="material-icons">cloud_upload</span>
+            </div>
+            <div class="token-section-header-text">
+              <h2>Onboarding</h2>
+              <p>Data ingestion, automatic schema parsing, and metric dictionary generation.</p>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="mindmap-legend">
+            <div class="mindmap-legend-item"><span class="mindmap-legend-dot" style="background:#10b981"></span>Onboarding flow</div>
+          </div>
+
+          <div class="mindmap-tree-container">
+            <div class="mindmap-tree">
+
+              <!-- Root: Onboarding -->
+              <div class="mindmap-node-group">
+                <div class="mindmap-node-item">
+                  <div class="mindmap-node node-root" data-node-id="onb-root">
+                    <span class="material-icons node-sparkle">rocket_launch</span>
+                    Onboarding
+                  </div>
+                  <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                </div>
+
+                <div class="mindmap-children">
+
+                  <!-- 1. Data Upload (has children) -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-onboarding" data-node-id="onb-upload">
+                        <span class="material-icons" style="font-size:18px;">cloud_upload</span>
+                        Data Upload
+                      </div>
+                      <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                    </div>
+
+                    <div class="mindmap-children">
+                      <!-- CSV -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-onboarding" data-node-id="onb-csv">
+                            <span class="material-icons" style="font-size:18px;">description</span>
+                            CSV
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Excel -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-onboarding" data-node-id="onb-excel">
+                            <span class="material-icons" style="font-size:18px;">grid_on</span>
+                            Excel
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Database -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-onboarding" data-node-id="onb-database">
+                            <span class="material-icons" style="font-size:18px;">storage</span>
+                            Database
+                          </div>
+                        </div>
+                      </div>
+                      <!-- API -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-onboarding" data-node-id="onb-api">
+                            <span class="material-icons" style="font-size:18px;">api</span>
+                            API
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2. Schema Detection -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-onboarding" data-node-id="onb-schema">
+                        <span class="material-icons" style="font-size:18px;">schema</span>
+                        Schema Detection
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 3. KPI Inference -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-onboarding" data-node-id="onb-kpi">
+                        <span class="material-icons" style="font-size:18px;">insights</span>
+                        KPI Inference
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 4. Passive Verification -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-onboarding" data-node-id="onb-verify">
+                        <span class="material-icons" style="font-size:18px;">verified</span>
+                        Passive Verification
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 5. Dashboard Creation -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-onboarding" data-node-id="onb-dashboard">
+                        <span class="material-icons" style="font-size:18px;">dashboard</span>
+                        Dashboard Creation
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Daily Conversation -->
+        <section id="conversation" class="token-section">
+          <div class="token-section-header">
+            <div class="token-section-header-icon" style="background:#ede9fe">
+              <span class="material-icons" style="color:#7c3bed">forum</span>
+            </div>
+            <div class="token-section-header-text">
+              <h2>Daily Conversation</h2>
+              <p>Natural language queries, decision trees, and response flows.</p>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="mindmap-legend">
+            <div class="mindmap-legend-item"><span class="mindmap-legend-dot" style="background:#7c3bed"></span>Conversation</div>
+            <div class="mindmap-legend-item"><span class="mindmap-legend-dot" style="background:#3b82f6"></span>Flow A (Clear query)</div>
+            <div class="mindmap-legend-item"><span class="mindmap-legend-dot" style="background:#f97316"></span>Flow B (Ambiguous)</div>
+          </div>
+          <div class="mindmap-tree-container">
+            <div class="mindmap-tree">
+
+              <!-- Root: Daily Conversation -->
+              <div class="mindmap-node-group">
+                <div class="mindmap-node-item">
+                  <div class="mindmap-node node-root" data-node-id="conv-root">
+                    <span class="material-icons node-sparkle">forum</span>
+                    Daily Conversation
+                  </div>
+                  <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                </div>
+
+                <div class="mindmap-children">
+
+                  <!-- User Question -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-conversation" data-node-id="conv-question">
+                        <span class="material-icons" style="font-size:18px;">help_outline</span>
+                        User Question
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Subject Clear? -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-conversation" data-node-id="conv-clear">
+                        <span class="material-icons" style="font-size:18px;">help</span>
+                        Subject Clear?
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Yes -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-flow-a" data-node-id="conv-yes">
+                        <span class="material-icons" style="font-size:18px;">check_circle</span>
+                        Yes
+                      </div>
+                      <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                    </div>
+
+                    <div class="mindmap-children">
+                      <!-- Flow A (has children) -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-flow-a" data-node-id="conv-flow-a">
+                            <span class="material-icons" style="font-size:18px;">directions_run</span>
+                            Flow A
+                          </div>
+                          <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                        </div>
+
+                        <div class="mindmap-children">
+                          <!-- Retrieval -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-a" data-node-id="conv-retrieval">
+                                <span class="material-icons" style="font-size:18px;">search</span>
+                                Retrieval
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Comparison -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-a" data-node-id="conv-comparison">
+                                <span class="material-icons" style="font-size:18px;">difference</span>
+                                Comparison
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Prediction -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-a" data-node-id="conv-prediction">
+                                <span class="material-icons" style="font-size:18px;">online_prediction</span>
+                                Prediction
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Answer -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-a" data-node-id="conv-answer-a">
+                                <span class="material-icons" style="font-size:18px;">done</span>
+                                Answer
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- No -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-flow-b" data-node-id="conv-no">
+                        <span class="material-icons" style="font-size:18px;">cancel</span>
+                        No
+                      </div>
+                      <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                    </div>
+
+                    <div class="mindmap-children">
+                      <!-- Flow B (has children) -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-flow-b" data-node-id="conv-flow-b">
+                            <span class="material-icons" style="font-size:18px;">alt_route</span>
+                            Flow B
+                          </div>
+                          <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                        </div>
+
+                        <div class="mindmap-children">
+                          <!-- Detect Ambiguity -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-b" data-node-id="conv-ambiguity">
+                                <span class="material-icons" style="font-size:18px;">warning_amber</span>
+                                Detect Ambiguity
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Ask One Question -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-b" data-node-id="conv-ask">
+                                <span class="material-icons" style="font-size:18px;">contact_support</span>
+                                Ask One Question
+                              </div>
+                            </div>
+                          </div>
+                          <!-- KPI Mapping -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-b" data-node-id="conv-kpi-map">
+                                <span class="material-icons" style="font-size:18px;">hub</span>
+                                KPI Mapping
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Answer -->
+                          <div class="mindmap-node-group">
+                            <div class="mindmap-node-item">
+                              <div class="mindmap-node node-flow-b" data-node-id="conv-answer-b">
+                                <span class="material-icons" style="font-size:18px;">done</span>
+                                Answer
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. Role Access -->
+        <section id="role-access" class="token-section">
+          <div class="token-section-header">
+            <div class="token-section-header-icon" style="background:#cffafe">
+              <span class="material-icons" style="color:#06b6d4">security</span>
+            </div>
+            <div class="token-section-header-text">
+              <h2>Role Access</h2>
+              <p>Customizable metric workspaces and column-level permission gates.</p>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="mindmap-legend">
+            <div class="mindmap-legend-item"><span class="mindmap-legend-dot" style="background:#06b6d4"></span>Role nodes</div>
+          </div>
+          <div class="mindmap-tree-container">
+            <div class="mindmap-tree">
+
+              <!-- Root: Role Access -->
+              <div class="mindmap-node-group">
+                <div class="mindmap-node-item">
+                  <div class="mindmap-node node-root" data-node-id="role-root">
+                    <span class="material-icons node-sparkle">security</span>
+                    Role Access
+                  </div>
+                  <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                </div>
+
+                <div class="mindmap-children">
+
+                  <!-- Admin Setup -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-role" data-node-id="role-admin">
+                        <span class="material-icons" style="font-size:18px;">admin_panel_settings</span>
+                        Admin Setup
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Role Creation -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-role" data-node-id="role-create">
+                        <span class="material-icons" style="font-size:18px;">group_add</span>
+                        Role Creation
+                      </div>
+                      <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                    </div>
+
+                    <div class="mindmap-children">
+                      <!-- CEO -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-role" data-node-id="role-ceo">
+                            <span class="material-icons" style="font-size:18px;">person</span>
+                            CEO
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Sales -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-role" data-node-id="role-sales">
+                            <span class="material-icons" style="font-size:18px;">trending_up</span>
+                            Sales
+                          </div>
+                        </div>
+                      </div>
+                      <!-- HR -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-role" data-node-id="role-hr">
+                            <span class="material-icons" style="font-size:18px;">badge</span>
+                            HR
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Custom -->
+                      <div class="mindmap-node-group">
+                        <div class="mindmap-node-item">
+                          <div class="mindmap-node node-role" data-node-id="role-custom">
+                            <span class="material-icons" style="font-size:18px;">settings</span>
+                            Custom
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Data Visibility -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-role" data-node-id="role-visibility">
+                        <span class="material-icons" style="font-size:18px;">visibility</span>
+                        Data Visibility
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- User Onboarding -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-role" data-node-id="role-onboard">
+                        <span class="material-icons" style="font-size:18px;">person_add</span>
+                        User Onboarding
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. Target Layer -->
+        <section id="target-layer" class="token-section">
+          <div class="token-section-header">
+            <div class="token-section-header-icon" style="background:#fef3c7">
+              <span class="material-icons" style="color:#f59e0b">track_changes</span>
+            </div>
+            <div class="token-section-header-text">
+              <h2>Target Layer</h2>
+              <p>Dynamic seasonal thresholds, goal tracking, and carry-forward logic.</p>
+            </div>
+          </div>
+
+          <!-- Legend -->
+          <div class="mindmap-legend">
+            <div class="mindmap-legend-item"><span class="mindmap-legend-dot" style="background:#f59e0b"></span>Target nodes</div>
+          </div>
+          <div class="mindmap-tree-container">
+            <div class="mindmap-tree">
+
+              <!-- Root: Target Layer -->
+              <div class="mindmap-node-group">
+                <div class="mindmap-node-item">
+                  <div class="mindmap-node node-root" data-node-id="target-root">
+                    <span class="material-icons node-sparkle">track_changes</span>
+                    Target Layer
+                  </div>
+                  <button class="mindmap-toggle-btn" aria-label="Toggle children">−</button>
+                </div>
+
+                <div class="mindmap-children">
+
+                  <!-- Create Target -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-target" data-node-id="target-create">
+                        <span class="material-icons" style="font-size:18px;">add_circle</span>
+                        Create Target
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Store Target -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-target" data-node-id="target-store">
+                        <span class="material-icons" style="font-size:18px;">dns</span>
+                        Store Target
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Period Confirmation -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-target" data-node-id="target-confirm">
+                        <span class="material-icons" style="font-size:18px;">event_available</span>
+                        Period Confirmation
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Carry Forward -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-target" data-node-id="target-carry">
+                        <span class="material-icons" style="font-size:18px;">forward</span>
+                        Carry Forward
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Update Anytime -->
+                  <div class="mindmap-node-group">
+                    <div class="mindmap-node-item">
+                      <div class="mindmap-node node-target" data-node-id="target-update">
+                        <span class="material-icons" style="font-size:18px;">edit</span>
+                        Update Anytime
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+
+    <!-- ─── FOOTER ──────────────────────────────────────────── -->
+    <footer id="section-footer" class="smartbi-footer">
+      <div class="footer-divider"></div>
+      <div class="footer-container">
+        <p class="footer-copyright">© 2026 Sayantan Ghosh. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="components/nav/nav.js?v=2.0"></script>
+  <script src="components/mindmap/mindmap.js?v=2.2"></script>
+  <script>
+    // Measure nav header height for sticky sidebar offset
+    document.addEventListener("DOMContentLoaded", function() {
+      const nav = document.querySelector('.smartbi-nav');
+      if (nav) {
+        const updateHeight = () => {
+          const height = nav.offsetHeight;
+          document.documentElement.style.setProperty('--sbi-nav-height', `${height}px`);
+        };
+        window.addEventListener('resize', updateHeight);
+        updateHeight();
+        window.addEventListener('load', updateHeight);
+      }
+    });
+
+    // Sidebar Active State / Scroll Spy
+    document.addEventListener("DOMContentLoaded", function() {
+      const navLinks = document.querySelectorAll(".token-sidebar-nav a");
+      const sections = document.querySelectorAll(".token-section");
+
+      // Click handler
+      navLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+          navLinks.forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
+        });
+      });
+
+      // Scroll Spy handler using IntersectionObserver
+      const observerOptions = {
+        root: null,
+        rootMargin: "-20% 0px -60% 0px", // focus on middle portion
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            navLinks.forEach(link => {
+              if (link.getAttribute("href") === `#${id}`) {
+                link.classList.add("active");
+              } else {
+                link.classList.remove("active");
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(section => observer.observe(section));
+    });
+
+    (function() {
+      function startComponents() {
+        console.log('Initializing page components...');
+        try {
+          if (window.SmartBI_Nav && typeof window.SmartBI_Nav.init === 'function') {
+            window.SmartBI_Nav.init();
+            console.log('SmartBI_Nav initialized');
+          }
+          if (window.SmartBI_MindMap && typeof window.SmartBI_MindMap.init === 'function') {
+            window.SmartBI_MindMap.init();
+            console.log('SmartBI_MindMap initialized');
+          }
+        } catch (e) {
+          console.error('Failed to initialize page components:', e);
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', startComponents);
+      } else {
+        startComponents();
+      }
+    })();
+  </script>
+
+</body>
+</html>

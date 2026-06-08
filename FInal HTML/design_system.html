@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>SMarBI Design System — Corporate Style Guide</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Global CSS -->
+  <link href="global.css" rel="stylesheet">
+
+  <!-- Case Study Navigation Styles -->
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="../components/nav/nav.css" />
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: '#7c3bed',
+            'primary-container': '#f3e8ff',
+            'on-primary': '#ffffff',
+            secondary: '#7c3bed',
+            'secondary-container': '#f3e8ff',
+            'on-secondary': '#ffffff',
+            background: '#f8f9ff',
+            surface: '#ffffff',
+            'surface-variant': '#f1f5f9',
+            'on-surface': '#0f172a',
+            'on-surface-variant': '#64748b',
+            outline: '#e2e8f0',
+            'outline-variant': '#f1f5f9',
+            error: '#ef4444',
+            success: '#10b981',
+            'success-container': '#d1fae5',
+            'danger-container': '#fee2e2',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* ── Sidebar Active States ── */
+    .ds-nav-link.active {
+      background: #f3e8ff;
+      color: #7c3bed;
+      font-weight: 600;
+    }
+
+    /* ── Section entrance animation ── */
+    .ds-section {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    /* ── Color Swatch Cards ── */
+    .swatch-card {
+      transition: transform 0.2s cubic-bezier(0.16,1,0.3,1), box-shadow 0.2s;
+    }
+    .swatch-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(124,59,237,0.12);
+    }
+
+    /* ── Token Rows ── */
+    .token-row:hover {
+      background: #f8f9ff;
+    }
+
+    /* ── Gradient input border animation ── */
+    .ai-input-wrapper {
+      background: linear-gradient(90deg, #a855f7, #ec4899, #3b82f6);
+      background-size: 200% 200%;
+      animation: gradientShift 3s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* ── Spinning AI icon ── */
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
+    .animate-spin-slow { animation: spin-slow 8s linear infinite; }
+
+    /* ── Component Demo preview boxes ── */
+    .demo-box {
+      background: #fafbfc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    /* ── Page hero gradient ── */
+    .hero-gradient {
+      background: linear-gradient(135deg,
+        rgba(124,59,237,0.06) 0%,
+        rgba(168,85,247,0.04) 30%,
+        rgba(236,72,153,0.03) 60%,
+        rgba(59,130,246,0.04) 100%);
+    }
+
+    /* ── Sidebar ── */
+    .ds-sidebar {
+      width: 220px;
+      min-width: 220px;
+    }
+
+    /* ── Section heading pill ── */
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f3e8ff;
+      color: #7c3bed;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 8px;
+    }
+
+    /* ── Status Badge pulse ── */
+    .status-dot-live {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    /* ── Highlight copy code badge ── */
+    .code-badge {
+      background: #f1f5f9;
+      color: #7c3bed;
+      font-family: 'Courier New', monospace;
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 5px;
+      font-weight: 600;
+    }
+
+    /* ── Smooth scrollbar ── */
+    html { scroll-behavior: smooth; }
+
+    /* ── Chart bars ── */
+    .chart-bar-ds {
+      transition: height 0.6s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    /* ── Navigation progress indicator ── */
+    #ds-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #7c3bed, #ec4899);
+      width: 0%;
+      z-index: 999;
+      transition: width 0.1s;
+    }
+
+    /* ── Print / export hide ── */
+    @media print { .ds-sidebar { display: none; } }
+  </style>
+</head>
+<body class="bg-[#fafbfc] text-on-surface flex flex-col h-screen overflow-hidden font-body antialiased">
+
+  <!-- Reading Progress Bar -->
+  <div id="ds-progress"></div>
+
+  <!-- ─── NAVIGATION HEADER ───────────────────────────────── -->
+  <header class="smartbi-nav">
+    <div class="nav-container">
+      <div class="nav-logo-group">
+        <a href="https://uxsayantan.com" target="_blank" rel="noopener noreferrer" class="nav-author-link">
+          <span class="nav-author-name">Sayantan Ghosh</span>
+        </a>
+        <img class="nav-project-logo-img" src="../images/Smart-BI.png" alt="Smart BI Logo" />
+      </div>
+      
+      <nav class="nav-links-nav">
+        <ul class="nav-links-list">
+          <li class="nav-link-item"><a href="../index.html">Home</a></li>
+          <li class="nav-link-item"><a href="../mindmap.html">Mind Map</a></li>
+          <li class="nav-link-item"><a href="../wireframe.html">Low Fidelity Wireframe</a></li>
+          <li class="nav-link-item active"><a href="design_system.html">Design System</a></li>
+          <li class="nav-link-item nav-cta"><a href="login.html">AI Driven Prototype</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="nav-divider"></div>
+  </header>
+
+  <div class="flex flex-1 min-h-0 w-full overflow-hidden">
+    <!-- ╔══ SIDEBAR ══╗ -->
+    <aside class="ds-sidebar border-r border-outline bg-white h-full flex flex-col overflow-y-auto shrink-0">
+
+    <!-- Logo -->
+    <div class="px-5 pt-5 pb-4 border-b border-outline/60">
+      <div class="flex items-center gap-2.5 mb-0.5">
+        <div class="w-7 h-7 flex items-center justify-center">
+          <img src="images/favicon.svg" alt="SMarBI Logo" class="w-full h-full object-contain">
+        </div>
+        <div>
+          <span class="font-display text-[13px] font-bold text-on-surface block leading-tight">SMarBI</span>
+          <span class="text-[9px] text-on-surface-variant/60 font-medium">Design System v1.0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="flex-1 p-3 space-y-0.5">
+      <p class="text-[8.5px] font-bold text-on-surface-variant/40 uppercase tracking-widest px-3 pt-2 pb-1.5">Foundations</p>
+      <a href="#overview" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">info</span>
+        <span>Overview</span>
+      </a>
+      <a href="#colors" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">palette</span>
+        <span>Color Tokens</span>
+      </a>
+      <a href="#typography" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">format_size</span>
+        <span>Typography</span>
+      </a>
+      <a href="#spacing" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">space_bar</span>
+        <span>Spacing & Radius</span>
+      </a>
+      <a href="#elevation" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">layers</span>
+        <span>Elevation</span>
+      </a>
+
+      <p class="text-[8.5px] font-bold text-on-surface-variant/40 uppercase tracking-widest px-3 pt-3 pb-1.5">Components</p>
+      <a href="#buttons" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">smart_button</span>
+        <span>Buttons & Chips</span>
+      </a>
+      <a href="#cards" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">dashboard</span>
+        <span>Cards & Metrics</span>
+      </a>
+      <a href="#navigation" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">menu</span>
+        <span>Navigation</span>
+      </a>
+      <a href="#forms" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">text_fields</span>
+        <span>Forms & Inputs</span>
+      </a>
+      <a href="#ai-input" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">auto_awesome</span>
+        <span>AI Input</span>
+      </a>
+      <a href="#charts" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">bar_chart</span>
+        <span>Charts</span>
+      </a>
+      <a href="#feedback" class="ds-nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface transition-colors text-xs font-medium">
+        <span class="material-symbols-outlined text-[15px]">notifications</span>
+        <span>Toasts & Badges</span>
+      </a>
+    </nav>
+
+    <!-- Footer Links -->
+    <div class="p-3 pt-0 border-t border-outline/60 space-y-1.5">
+      <p class="text-[8.5px] font-bold text-on-surface-variant/40 uppercase tracking-widest px-3 pt-3 pb-1">Live Pages</p>
+      <a href="login.html" class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant text-xs transition-colors">
+        <span class="material-symbols-outlined text-[14px]">login</span>
+        <span>Login</span>
+      </a>
+      <a href="dashboard.html" class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-primary text-on-primary text-xs font-semibold transition-all hover:opacity-90 active:scale-[0.98]">
+        <span class="material-symbols-outlined text-[14px]">dashboard</span>
+        <span>Dashboard</span>
+      </a>
+      <a href="insights.html" class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant text-xs transition-colors">
+        <span class="material-symbols-outlined text-[14px]">lightbulb</span>
+        <span>Insights</span>
+      </a>
+      <a href="data_sources.html" class="flex items-center gap-2 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant text-xs transition-colors">
+        <span class="material-symbols-outlined text-[14px]">database</span>
+        <span>Data Sources</span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ╔══ MAIN CONTENT ══╗ -->
+  <main class="flex-1 overflow-y-auto relative" id="ds-main">
+
+    <!-- ── HERO HEADER ── -->
+    <div class="hero-gradient border-b border-outline/60 px-10 py-10 relative overflow-hidden">
+      <!-- Aura blobs -->
+      <div class="absolute -top-20 -left-10 w-80 h-80 bg-gradient-to-br from-purple-200/30 to-transparent rounded-full blur-[80px] pointer-events-none"></div>
+      <div class="absolute -top-10 right-0 w-64 h-64 bg-gradient-to-bl from-pink-200/20 to-transparent rounded-full blur-[70px] pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-3xl">
+        <div class="flex items-center gap-3 mb-4">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" class="animate-spin-slow">
+            <circle cx="12" cy="7" r="3.5" fill="#7c3bed" opacity="0.85"/>
+            <circle cx="7.5" cy="12" r="3.5" fill="#a855f7" opacity="0.85"/>
+            <circle cx="16.5" cy="12" r="3.5" fill="#3b82f6" opacity="0.85"/>
+            <circle cx="12" cy="17" r="3.5" fill="#ec4899" opacity="0.85"/>
+          </svg>
+          <div>
+            <h1 class="font-display text-3xl font-extrabold text-on-surface tracking-tight leading-none">SMarBI Design System</h1>
+            <p class="text-on-surface-variant text-xs mt-0.5">Corporate Style Guide & Component Library — v1.0</p>
+          </div>
+        </div>
+
+        <p class="text-sm text-on-surface-variant leading-relaxed max-w-xl mb-5">
+          The complete reference for SMarBI's design tokens, visual language, and reusable component patterns. Built for business-user-facing BI — prioritising <strong class="text-on-surface">clarity over complexity</strong>, and <strong class="text-on-surface">AI-first interaction</strong> over manual configuration.
+        </p>
+
+        <div class="flex flex-wrap gap-2.5">
+          <div class="flex items-center gap-1.5 bg-white/80 border border-outline/80 px-3 py-1.5 rounded-full text-[10px] font-semibold text-on-surface">
+            <span class="status-dot-live"></span>
+            Tailwind CSS v3
+          </div>
+          <div class="flex items-center gap-1.5 bg-white/80 border border-outline/80 px-3 py-1.5 rounded-full text-[10px] font-semibold text-on-surface">
+            <span class="material-symbols-outlined text-primary text-[12px]">animation</span>
+            GSAP 3.12
+          </div>
+          <div class="flex items-center gap-1.5 bg-white/80 border border-outline/80 px-3 py-1.5 rounded-full text-[10px] font-semibold text-on-surface">
+            <span class="material-symbols-outlined text-primary text-[12px]">font_download</span>
+            Outfit + Inter
+          </div>
+          <div class="flex items-center gap-1.5 bg-white/80 border border-outline/80 px-3 py-1.5 rounded-full text-[10px] font-semibold text-on-surface">
+            <span class="material-symbols-outlined text-primary text-[12px]">widgets</span>
+            Material Symbols
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-10 py-10 space-y-20">
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 1. OVERVIEW -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="overview" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">info</span>Overview</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Design Philosophy</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">The principles that drive every decision in this system.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white rounded-xl border border-outline p-5 shadow-sm">
+            <div class="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1">auto_awesome</span>
+            </div>
+            <h3 class="font-display font-bold text-[13px] text-on-surface mb-1">AI-First Interaction</h3>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">Natural language replaces complex UI. Business users ask questions — the system responds with visual answers.</p>
+          </div>
+          <div class="bg-white rounded-xl border border-outline p-5 shadow-sm">
+            <div class="w-9 h-9 rounded-lg bg-success/10 flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-success text-[18px]" style="font-variation-settings:'FILL' 1">visibility</span>
+            </div>
+            <h3 class="font-display font-bold text-[13px] text-on-surface mb-1">Clarity Over Complexity</h3>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">No raw SQL. No join syntax. Technical concepts are hidden; BI Brain translates intent into data visualisations.</p>
+          </div>
+          <div class="bg-white rounded-xl border border-outline p-5 shadow-sm">
+            <div class="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center mb-3">
+              <span class="material-symbols-outlined text-blue-500 text-[18px]" style="font-variation-settings:'FILL' 1">compress</span>
+            </div>
+            <h3 class="font-display font-bold text-[13px] text-on-surface mb-1">High-Density Precision</h3>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">Compact type scales, tight spacing, and crisp borders that pack maximum information into a premium, uncluttered layout.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 2. COLORS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="colors" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">palette</span>Color Tokens</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Color System</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">All colors are registered as Tailwind theme tokens. Use them via class names like <span class="code-badge">text-primary</span> or <span class="code-badge">bg-success-container</span>.</p>
+
+        <!-- Primary Palette -->
+        <h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">Brand & Semantic</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 mb-6">
+          <!-- Primary -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-primary relative">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-white/70 font-mono font-bold">#7C3BED</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Primary</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5 font-mono">primary</p>
+            </div>
+          </div>
+          <!-- Primary Container -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-primary-container relative border-b border-outline/30">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-primary/70 font-mono font-bold">#F3E8FF</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Primary Container</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5 font-mono">primary-container</p>
+            </div>
+          </div>
+          <!-- Success -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-success relative">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-white/70 font-mono font-bold">#10B981</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Success</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5 font-mono">success</p>
+            </div>
+          </div>
+          <!-- Error -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-error relative">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-white/70 font-mono font-bold">#EF4444</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Error / Danger</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5 font-mono">error</p>
+            </div>
+          </div>
+          <!-- Surface -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-white border-b border-outline/30 relative">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-on-surface-variant/60 font-mono font-bold">#FFFFFF</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Surface</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5 font-mono">surface</p>
+            </div>
+          </div>
+          <!-- Background -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-[#fafbfc] border-b border-outline/30 relative">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-on-surface-variant/60 font-mono font-bold">#FAFBFC</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Background</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5 font-mono">bg-[#fafbfc]</p>
+            </div>
+          </div>
+          <!-- On Surface -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-on-surface relative">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-white/60 font-mono font-bold">#0F172A</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Text Primary</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5 font-mono">on-surface</p>
+            </div>
+          </div>
+          <!-- Aura -->
+          <div class="swatch-card bg-white rounded-xl border border-outline overflow-hidden shadow-sm cursor-default">
+            <div class="h-14 bg-gradient-to-r from-orange-200/70 via-pink-200/60 to-blue-200/70 relative">
+              <span class="absolute bottom-1.5 right-2 text-[9px] text-on-surface/50 font-bold">Gradient</span>
+            </div>
+            <div class="p-2.5">
+              <p class="font-display font-bold text-[11px] text-on-surface">Aura Glow</p>
+              <p class="text-[9.5px] text-on-surface-variant mt-0.5">Page top blur effect</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CSS Variables Table -->
+        <h3 class="text-xs font-bold text-on-surface-variant uppercase tracking-wider mb-3">CSS Custom Properties</h3>
+        <div class="bg-white rounded-xl border border-outline shadow-sm overflow-hidden">
+          <table class="w-full text-[11px]">
+            <thead class="bg-slate-50 border-b border-outline">
+              <tr>
+                <th class="px-4 py-2.5 text-left text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider">Variable</th>
+                <th class="px-4 py-2.5 text-left text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider">Value</th>
+                <th class="px-4 py-2.5 text-left text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider">Usage</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-outline/50">
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-primary font-semibold">--primary</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#7c3bed</td><td class="px-4 py-2.5 text-on-surface-variant">Buttons, active states, focus rings</td></tr>
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-primary font-semibold">--primary-hover</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#6d28d9</td><td class="px-4 py-2.5 text-on-surface-variant">Button hover darkening</td></tr>
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-primary font-semibold">--primary-container</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#f3e8ff</td><td class="px-4 py-2.5 text-on-surface-variant">Active nav, chip backgrounds</td></tr>
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-success font-semibold">--success</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#10b981</td><td class="px-4 py-2.5 text-on-surface-variant">Positive trends, live badges</td></tr>
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-error font-semibold">--danger</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#ef4444</td><td class="px-4 py-2.5 text-on-surface-variant">Error states, negative trends</td></tr>
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-on-surface-variant font-semibold">--outline</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#e2e8f0</td><td class="px-4 py-2.5 text-on-surface-variant">Card borders, dividers</td></tr>
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-on-surface-variant font-semibold">--text-primary</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#0f172a</td><td class="px-4 py-2.5 text-on-surface-variant">Body copy, headings</td></tr>
+              <tr class="token-row transition-colors"><td class="px-4 py-2.5 font-mono text-on-surface-variant font-semibold">--text-secondary</td><td class="px-4 py-2.5 font-mono text-on-surface-variant">#64748b</td><td class="px-4 py-2.5 text-on-surface-variant">Labels, metadata, descriptions</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 3. TYPOGRAPHY -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="typography" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">format_size</span>Typography</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Type Scale</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">
+          Two font families: <span class="code-badge">Outfit</span> for display/headings, <span class="code-badge">Inter</span> for body copy. Both sourced from Google Fonts via <span class="code-badge">global.css</span>.
+        </p>
+
+        <div class="bg-white rounded-xl border border-outline shadow-sm divide-y divide-outline/50">
+          <!-- Display -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Display / H1</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Outfit · 24px · 800</p>
+            </div>
+            <h1 class="font-display text-2xl font-extrabold text-on-surface tracking-tight">BI Brain</h1>
+          </div>
+          <!-- Headline -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Headline / H2</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Outfit · 18px · 700</p>
+            </div>
+            <h2 class="font-display text-lg font-bold text-on-surface tracking-tight">Key Metrics</h2>
+          </div>
+          <!-- Section Title -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Section Title / H3</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Outfit · 14px · 600</p>
+            </div>
+            <h3 class="font-display text-sm font-semibold text-on-surface">Quarterly Revenue Trajectory</h3>
+          </div>
+          <!-- Card Label -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Card Label</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Inter · 9.5px · 700 · ALL CAPS</p>
+            </div>
+            <p class="text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider">Revenue</p>
+          </div>
+          <!-- Body Large -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Body Large</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Inter · 13px · 400</p>
+            </div>
+            <p class="text-[13px] text-on-surface-variant leading-relaxed">Type your request: I'll search, answer, or build it for you.</p>
+          </div>
+          <!-- Body Medium -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Body Medium</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Inter · 11px · 400</p>
+            </div>
+            <p class="text-[11px] text-on-surface-variant leading-relaxed">AI-curated business insights for your role and workspace.</p>
+          </div>
+          <!-- Caption -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Caption / Meta</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Inter · 9px–9.5px · 400</p>
+            </div>
+            <p class="text-[9.5px] text-on-surface-variant/70 leading-tight">BI Brain can make mistakes. Verify important financial details.</p>
+          </div>
+          <!-- Metric Value -->
+          <div class="px-5 py-4 flex items-center gap-6">
+            <div class="w-40 shrink-0">
+              <p class="text-[9.5px] font-bold text-primary uppercase tracking-wider">Metric Value</p>
+              <p class="text-[9px] text-on-surface-variant mt-0.5">Outfit · 18px · 700</p>
+            </div>
+            <h3 class="font-display font-bold text-lg text-on-surface">$124,523</h3>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 4. SPACING & RADIUS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="spacing" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">space_bar</span>Spacing & Radius</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Spacing & Border Radius</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">All spacing follows Tailwind's 4px base unit. Border radii are consistent across component hierarchy levels.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Border Radius -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-xs font-bold text-on-surface mb-4">Border Radius</h3>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-7 bg-primary/15 border border-primary/30 rounded-md shrink-0"></div>
+                <div>
+                  <p class="text-[10px] font-bold text-on-surface">rounded-md <span class="code-badge">6px</span></p>
+                  <p class="text-[9.5px] text-on-surface-variant">Search bar, small filter chips</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-7 bg-primary/15 border border-primary/30 rounded-lg shrink-0"></div>
+                <div>
+                  <p class="text-[10px] font-bold text-on-surface">rounded-lg <span class="code-badge">8px</span></p>
+                  <p class="text-[9.5px] text-on-surface-variant">Nav items, buttons, icon containers</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-7 bg-primary/15 border border-primary/30 rounded-xl shrink-0"></div>
+                <div>
+                  <p class="text-[10px] font-bold text-on-surface">rounded-xl <span class="code-badge">12px</span></p>
+                  <p class="text-[9.5px] text-on-surface-variant">Cards, metric panels, popover menus</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-14 h-7 bg-primary/15 border border-primary/30 rounded-2xl shrink-0"></div>
+                <div>
+                  <p class="text-[10px] font-bold text-on-surface">rounded-2xl <span class="code-badge">16px</span></p>
+                  <p class="text-[9.5px] text-on-surface-variant">Login card, modal dialogs</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-7 h-7 bg-primary/15 border border-primary/30 rounded-full shrink-0"></div>
+                <div>
+                  <p class="text-[10px] font-bold text-on-surface">rounded-full <span class="code-badge">9999px</span></p>
+                  <p class="text-[9.5px] text-on-surface-variant">Status dots, avatar circles, pill badges</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Spacing Scale -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-xs font-bold text-on-surface mb-4">Key Spacing Values</h3>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-[11px] py-1.5 border-b border-outline/40">
+                <span class="text-on-surface-variant">Component padding (cards)</span>
+                <span class="code-badge">p-4 · 16px</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-1.5 border-b border-outline/40">
+                <span class="text-on-surface-variant">Nav item padding</span>
+                <span class="code-badge">py-1.5 px-3</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-1.5 border-b border-outline/40">
+                <span class="text-on-surface-variant">Grid gap (metrics)</span>
+                <span class="code-badge">gap-4 · 16px</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-1.5 border-b border-outline/40">
+                <span class="text-on-surface-variant">Section spacing</span>
+                <span class="code-badge">mt-6 · 24px</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-1.5 border-b border-outline/40">
+                <span class="text-on-surface-variant">Page horizontal padding</span>
+                <span class="code-badge">px-8 · 32px</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-1.5 border-b border-outline/40">
+                <span class="text-on-surface-variant">Sidebar width</span>
+                <span class="code-badge">w-56 · 224px</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-1.5">
+                <span class="text-on-surface-variant">Top bar height</span>
+                <span class="code-badge">h-13 · 52px</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 5. ELEVATION -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="elevation" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">layers</span>Elevation</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Elevation & Depth</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">Three elevation tiers, plus glassmorphism for floating surfaces like the top bar.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div class="bg-white rounded-xl border border-outline p-5 text-center flex flex-col items-center justify-center min-h-[110px]">
+            <p class="text-[10px] font-bold text-on-surface mb-1">Level 0</p>
+            <span class="code-badge mb-1.5">border only</span>
+            <p class="text-[9.5px] text-on-surface-variant">Page background cards</p>
+          </div>
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5 text-center flex flex-col items-center justify-center min-h-[110px]">
+            <p class="text-[10px] font-bold text-on-surface mb-1">Level 1</p>
+            <span class="code-badge mb-1.5">shadow-sm</span>
+            <p class="text-[9.5px] text-on-surface-variant">Standard metric & content cards</p>
+          </div>
+          <div class="bg-white rounded-xl border border-outline shadow-md p-5 text-center flex flex-col items-center justify-center min-h-[110px]">
+            <p class="text-[10px] font-bold text-on-surface mb-1">Level 2</p>
+            <span class="code-badge mb-1.5">shadow-md</span>
+            <p class="text-[9.5px] text-on-surface-variant">Popovers, dropdowns, modals</p>
+          </div>
+          <div class="bg-white/80 backdrop-blur-md rounded-xl border border-outline/80 p-5 text-center flex flex-col items-center justify-center min-h-[110px]" style="background:rgba(255,255,255,0.75);">
+            <p class="text-[10px] font-bold text-on-surface mb-1">Glassmorphism</p>
+            <span class="code-badge mb-1.5">.glass-panel</span>
+            <p class="text-[9.5px] text-on-surface-variant">Sticky top bar, floating headers</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 6. BUTTONS & CHIPS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="buttons" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">smart_button</span>Buttons & Chips</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Interactive Controls</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">All interactive controls use <span class="code-badge">active:scale-[0.98]</span> for tactile press feedback.</p>
+
+        <div class="demo-box space-y-6">
+          <!-- Primary -->
+          <div>
+            <p class="text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider mb-3">Primary Buttons</p>
+            <div class="flex flex-wrap gap-3 items-center">
+              <button class="bg-primary text-on-primary py-2 px-4 rounded-lg font-semibold text-xs hover:opacity-90 active:scale-[0.98] transition-all flex items-center gap-1.5 shadow-sm shadow-primary/15">
+                <span class="material-symbols-outlined text-[14px]">add</span> Add New Connection
+              </button>
+              <button class="bg-primary text-on-primary py-1.5 px-4 rounded-lg font-semibold text-xs hover:opacity-90 active:scale-[0.98] transition-all">
+                Save Changes
+              </button>
+              <button class="bg-primary text-on-primary py-1.5 px-3 rounded-lg font-semibold text-xs hover:opacity-90 active:scale-[0.98] transition-all flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Secondary -->
+          <div>
+            <p class="text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider mb-3">Secondary / Ghost Buttons</p>
+            <div class="flex flex-wrap gap-3 items-center">
+              <button class="border border-outline hover:border-primary hover:bg-primary-container/20 text-on-surface-variant hover:text-primary py-2 px-4 rounded-lg font-semibold text-xs transition-all flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[14px]">calculate</span> Calculated Metric
+              </button>
+              <button class="border border-outline hover:border-primary text-on-surface-variant hover:text-primary py-1.5 px-4 rounded-lg font-semibold text-xs transition-all">
+                Cancel
+              </button>
+              <button class="border border-outline hover:bg-red-50 hover:text-error text-on-surface-variant py-1.5 px-3 rounded-lg font-semibold text-xs transition-all">
+                Clear Data
+              </button>
+            </div>
+          </div>
+
+          <!-- Chips & Badges -->
+          <div>
+            <p class="text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider mb-3">Chips, Pills & Status Badges</p>
+            <div class="flex flex-wrap gap-2 items-center">
+              <span class="bg-primary-container text-primary px-2.5 py-0.5 rounded-full text-[10px] font-semibold">Active Chip</span>
+              <span class="bg-success/15 text-success px-2 py-0.5 rounded-full text-[9px] font-bold flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[10px]">trending_up</span> +12.5%
+              </span>
+              <span class="bg-error/15 text-error px-2 py-0.5 rounded-full text-[9px] font-bold flex items-center gap-0.5">
+                <span class="material-symbols-outlined text-[10px]">trending_down</span> -0.4%
+              </span>
+              <span class="px-2.5 py-0.5 bg-success-container/70 text-success rounded-full text-[9.5px] font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></span>Connected
+              </span>
+              <span class="px-2.5 py-0.5 bg-danger-container text-error rounded-full text-[9.5px] font-bold">Auth Timeout</span>
+              <span class="px-2.5 py-0.5 bg-slate-100 text-on-surface-variant rounded-full text-[9.5px] font-bold">Static Source</span>
+              <span class="text-[8px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-bold uppercase">Admin Only</span>
+            </div>
+          </div>
+
+          <!-- Filter Chips -->
+          <div>
+            <p class="text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider mb-3">Filter Chips (Active)</p>
+            <div class="flex flex-wrap gap-2 items-center">
+              <div class="flex items-center gap-1 bg-primary-container text-primary rounded-full px-2.5 py-0.5 text-[10px] font-semibold border border-primary/20">
+                Source: Social
+                <button class="ml-1 hover:text-primary/60 flex items-center"><span class="material-symbols-outlined text-[11px]">close</span></button>
+              </div>
+              <div class="flex items-center gap-1 bg-primary-container text-primary rounded-full px-2.5 py-0.5 text-[10px] font-semibold border border-primary/20">
+                Region: Europe
+                <button class="ml-1 hover:text-primary/60 flex items-center"><span class="material-symbols-outlined text-[11px]">close</span></button>
+              </div>
+              <button class="px-2.5 py-0.5 border border-outline hover:border-primary text-on-surface-variant hover:text-primary rounded-full text-[10px] font-bold transition-all flex items-center gap-1">
+                <span class="material-symbols-outlined text-[11px]">filter_list</span> Add Filter
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 7. CARDS & METRICS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="cards" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">dashboard</span>Cards & Metrics</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Card Components</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">The core visual unit of the dashboard. All cards use <span class="code-badge">bg-white · rounded-xl · border border-outline · shadow-sm</span>.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- KPI Metric Card -->
+          <div class="bg-white p-4 rounded-xl border border-outline shadow-sm flex flex-col justify-between hover:-translate-y-0.5 hover:shadow-md hover:border-primary/20 transition-all duration-200">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary text-[16px]">payments</span>
+                </div>
+                <span class="flex items-center gap-0.5 bg-success/15 text-success px-1.5 py-0.5 rounded-full text-[9px] font-bold">
+                  <span class="material-symbols-outlined text-[10px]">trending_up</span> +12.5%
+                </span>
+              </div>
+              <p class="text-on-surface-variant font-medium text-[9.5px] uppercase tracking-wider mb-0.5">Revenue</p>
+              <h3 class="font-display font-bold text-lg text-on-surface">$124,523</h3>
+            </div>
+            <div class="mt-3.5 pt-2.5 border-t border-outline/50 flex items-start gap-1">
+              <span class="material-symbols-outlined text-primary text-[12px] mt-0.5">info</span>
+              <p class="text-[10px] text-on-surface-variant/80 leading-tight">On track to beat Q2 target by 8%</p>
+            </div>
+          </div>
+
+          <!-- Summary Quick Card -->
+          <div class="bg-white border border-outline rounded-xl p-4 shadow-sm flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-success/10 text-success flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[22px]">history</span>
+            </div>
+            <div>
+              <p class="text-lg font-bold font-display text-on-surface leading-tight">15 mins ago</p>
+              <p class="text-[10px] font-bold text-on-surface-variant/75 uppercase tracking-wide mt-0.5">Last Sync Completed</p>
+            </div>
+          </div>
+
+          <!-- Connection Status Card -->
+          <div class="bg-white border border-outline rounded-xl p-4 shadow-sm flex flex-col justify-between group hover:border-primary/20 transition-all">
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex items-center gap-2.5">
+                <div class="w-9 h-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                  <span class="material-symbols-outlined text-[18px]">database</span>
+                </div>
+                <div>
+                  <p class="text-[12px] font-bold text-on-surface">production_db</p>
+                  <p class="text-[9.5px] text-on-surface-variant/70">PostgreSQL Database</p>
+                </div>
+              </div>
+              <span class="px-2 py-0.5 bg-success-container/70 text-success rounded-full text-[9px] font-bold flex items-center gap-1">
+                <span class="w-1.5 h-1.5 bg-success rounded-full animate-pulse"></span>Connected
+              </span>
+            </div>
+            <div class="text-[10.5px] text-on-surface-variant border-t border-outline/40 pt-2.5">
+              Syncs every 1 hour · 42 tables indexed
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 8. NAVIGATION -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="navigation" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">menu</span>Navigation</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Sidebar & Top Bar</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">Fixed sidebar (224px) + fixed top bar (52px). Sidebar collapses on toggle — main content shifts via CSS class swap.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Nav States -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-xs font-bold text-on-surface mb-4">Nav Item States</h3>
+            <div class="space-y-1">
+              <div class="flex items-center gap-2.5 py-1.5 px-3 rounded-lg bg-primary-container text-primary font-semibold text-xs">
+                <span class="material-symbols-outlined text-[15px]">dashboard</span>
+                <span>Dashboard <span class="text-[9px] font-normal ml-1 opacity-60">(Active)</span></span>
+              </div>
+              <div class="flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs cursor-pointer transition-colors">
+                <span class="material-symbols-outlined text-[15px]">lightbulb</span>
+                <span>Insights <span class="text-[9px] ml-1 opacity-50">(Default)</span></span>
+              </div>
+              <div class="flex items-center gap-2.5 py-1.5 px-3 rounded-lg bg-surface-variant text-on-surface text-xs">
+                <span class="material-symbols-outlined text-[15px]">database</span>
+                <span>Data Sources <span class="text-[9px] ml-1 opacity-50">(Hover)</span></span>
+              </div>
+              <div class="flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant/40 text-xs cursor-not-allowed">
+                <span class="material-symbols-outlined text-[15px]">lock</span>
+                <span>Settings <span class="text-[9px] ml-1 opacity-60">(Disabled)</span></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dropdown Menu -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-xs font-bold text-on-surface mb-4">Popover / Dropdown Menu</h3>
+            <div class="w-48 bg-white rounded-xl shadow-xl border border-outline py-1.5 text-left">
+              <div class="px-3.5 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/60 pb-1.5 mb-1.5">Account</div>
+              <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-[15px]">person</span><span>My Profile</span>
+              </a>
+              <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer">
+                <span class="material-symbols-outlined text-[15px]">settings</span><span>Account Settings</span>
+              </a>
+              <div class="mt-1.5 pt-1.5 border-t border-outline-variant">
+                <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-error/5 text-xs text-on-surface-variant hover:text-error transition-colors cursor-pointer">
+                  <span class="material-symbols-outlined text-[15px]">logout</span><span>Sign Out</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 9. FORMS & INPUTS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="forms" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">text_fields</span>Forms & Inputs</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Form Controls</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">All inputs use <span class="code-badge">focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary</span> for consistent focus styling.</p>
+
+        <div class="demo-box grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Text Input -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-on-surface-variant ml-1">Host / Server</label>
+            <div class="flex items-center bg-white px-3 h-10 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+              <span class="material-symbols-outlined text-on-surface-variant/60 text-[16px]">dns</span>
+              <input class="bg-transparent border-none focus:ring-0 text-xs w-full ml-2 placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="db.example.com" type="text">
+            </div>
+          </div>
+          <!-- Password Input -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-on-surface-variant ml-1">Password</label>
+            <div class="flex items-center bg-white px-3 h-10 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+              <span class="material-symbols-outlined text-on-surface-variant/60 text-[16px]">lock</span>
+              <input class="bg-transparent border-none focus:ring-0 text-xs w-full ml-2 p-0 text-on-surface" value="••••••••" type="password">
+              <button class="text-on-surface-variant/50 hover:text-on-surface flex items-center">
+                <span class="material-symbols-outlined text-[16px]">visibility</span>
+              </button>
+            </div>
+          </div>
+          <!-- Select -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-on-surface-variant ml-1">Sync Frequency</label>
+            <select class="bg-white px-3 h-10 rounded-lg border border-outline focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-xs text-on-surface">
+              <option>Every 1 hour</option>
+              <option>Every 6 hours</option>
+              <option>Daily</option>
+              <option>Manual only</option>
+            </select>
+          </div>
+          <!-- Search Input -->
+          <div class="flex flex-col gap-1.5">
+            <label class="text-[10px] font-bold text-on-surface-variant ml-1">Global Search</label>
+            <div class="flex items-center bg-surface-variant/80 px-2.5 py-1 rounded-md border border-outline/30 focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all h-10">
+              <span class="material-symbols-outlined text-on-surface-variant text-[16px]">search</span>
+              <input class="bg-transparent border-none focus:ring-0 text-[11px] w-full ml-1 placeholder:text-on-surface-variant/60 p-0" placeholder="Search..." type="text">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 10. AI INPUT -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="ai-input" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">auto_awesome</span>AI Input</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">BI Brain Input Component</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">The signature component. An animated gradient border wraps a white card. Used on Dashboard (collapsed) and Insights (full-page).</p>
+
+        <div class="demo-box space-y-6">
+          <!-- Full AI Input -->
+          <div class="max-w-xl">
+            <p class="text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider mb-3">Full AI Brain Input</p>
+            <div class="p-[1.5px] rounded-xl ai-input-wrapper shadow-sm">
+              <div class="bg-white rounded-[10px] w-full h-full">
+                <div class="px-3.5 py-2.5">
+                  <textarea class="w-full bg-transparent border-none focus:ring-0 text-[13px] placeholder:text-on-surface-variant/40 resize-none h-14 p-0 text-on-surface leading-normal" placeholder="Type your request: I'll search, answer, or build it for you."></textarea>
+                </div>
+                <div class="flex items-center justify-between px-3.5 py-1.5 border-t border-outline-variant/30 bg-surface-variant/5 rounded-b-[10px]">
+                  <div class="flex items-center gap-2">
+                    <button class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+                      <span class="material-symbols-outlined text-[13px]">add</span>
+                    </button>
+                    <button class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+                      <span class="material-symbols-outlined text-[13px]">history</span>
+                    </button>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors">
+                      <span class="material-symbols-outlined text-[13px]">mic</span>
+                    </button>
+                    <button class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center hover:opacity-90 active:scale-95">
+                      <span class="material-symbols-outlined text-[13px]">arrow_upward</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Suggestion Cards -->
+          <div class="max-w-xl">
+            <p class="text-[9.5px] font-bold text-on-surface-variant uppercase tracking-wider mb-3">Suggestion / Inspiration Cards</p>
+            <div class="grid grid-cols-2 gap-2">
+              <div class="cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5">
+                <div class="w-6 h-6 rounded-md bg-purple-50 flex items-center justify-center text-purple-600 shrink-0">
+                  <span class="material-symbols-outlined text-[13px]">query_stats</span>
+                </div>
+                <span class="text-[10px] font-semibold text-on-surface">"How did we do last month?"</span>
+              </div>
+              <div class="cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5">
+                <div class="w-6 h-6 rounded-md bg-pink-50 flex items-center justify-center text-pink-600 shrink-0">
+                  <span class="material-symbols-outlined text-[13px]">online_prediction</span>
+                </div>
+                <span class="text-[10px] font-semibold text-on-surface">"Predict next quarter's revenue"</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 11. CHARTS -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="charts" class="ds-section scroll-mt-6">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">bar_chart</span>Charts</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Chart Patterns</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">CSS + GSAP animated charts. No chart library dependency. Bars animate on scroll via <span class="code-badge">ScrollTrigger</span>.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <!-- Bar Chart -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/80 mb-1">Bar Chart Pattern</h3>
+            <p class="text-[10px] text-on-surface-variant mb-4">Used for Quarterly Revenue Trajectory on Dashboard.</p>
+            <div class="h-32 flex items-end gap-2 px-1 pb-1 border-b border-outline">
+              <div class="flex-1 bg-primary/20 rounded-t-md chart-bar-ds" style="height:40%"></div>
+              <div class="flex-1 bg-primary/20 rounded-t-md chart-bar-ds" style="height:65%"></div>
+              <div class="flex-1 bg-primary/20 rounded-t-md chart-bar-ds" style="height:55%"></div>
+              <div class="flex-1 bg-primary/20 rounded-t-md chart-bar-ds" style="height:85%"></div>
+              <div class="flex-1 bg-primary/20 rounded-t-md chart-bar-ds" style="height:70%"></div>
+              <div class="flex-1 bg-gradient-to-t from-primary to-purple-400 rounded-t-md chart-bar-ds relative group" style="height:95%">
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[8px] bg-primary text-white px-1.5 py-0.5 rounded whitespace-nowrap font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">Peak</div>
+              </div>
+            </div>
+            <div class="flex justify-between text-[8.5px] text-on-surface-variant font-bold px-1 pt-1.5">
+              <span class="flex-1 text-center">Q1</span>
+              <span class="flex-1 text-center">Q2</span>
+              <span class="flex-1 text-center">Q3</span>
+              <span class="flex-1 text-center">Q4</span>
+              <span class="flex-1 text-center">Q1P</span>
+              <span class="flex-1 text-center text-primary">Q2P</span>
+            </div>
+          </div>
+
+          <!-- Progress Bars -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant/80 mb-4">Progress & Usage Bars</h3>
+            <div class="space-y-4">
+              <div>
+                <div class="flex justify-between text-[10px] mb-1.5">
+                  <span class="font-semibold text-on-surface">AI Queries Used</span>
+                  <span class="text-on-surface-variant">25 / 100</span>
+                </div>
+                <div class="w-full bg-outline-variant h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-primary h-full rounded-full" style="width:25%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-[10px] mb-1.5">
+                  <span class="font-semibold text-on-surface">Active Query Cost</span>
+                  <span class="text-on-surface-variant">$14.20 / $50.00</span>
+                </div>
+                <div class="w-full bg-outline-variant h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-amber-500 h-full rounded-full" style="width:28%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-[10px] mb-1.5">
+                  <span class="font-semibold text-on-surface">Sync Health</span>
+                  <span class="text-success">Healthy</span>
+                </div>
+                <div class="w-full bg-outline-variant h-1.5 rounded-full overflow-hidden">
+                  <div class="bg-success h-full rounded-full" style="width:92%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════════ -->
+      <!-- 12. TOASTS & BADGES -->
+      <!-- ═══════════════════════════════════════════════ -->
+      <section id="feedback" class="ds-section scroll-mt-6 pb-20">
+        <div class="section-pill"><span class="material-symbols-outlined text-[10px]">notifications</span>Toasts & Badges</div>
+        <h2 class="font-display text-xl font-bold text-on-surface mb-1">Feedback & Notifications</h2>
+        <p class="text-on-surface-variant text-xs mb-6 leading-relaxed">Toast notifications appear top-right, fade in/out with GSAP. Status badges appear inline on sync history rows.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Toasts -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-xs font-bold text-on-surface mb-4">Toast Notifications</h3>
+            <div class="space-y-2.5">
+              <div class="flex items-center gap-2.5 py-2 px-3.5 bg-white border border-outline rounded-xl shadow-md max-w-xs">
+                <span class="material-symbols-outlined text-success text-[18px]" style="font-variation-settings:'FILL' 1">check_circle</span>
+                <span class="text-[10px] font-semibold text-on-surface">Widget pinned to Financials.</span>
+              </div>
+              <div class="flex items-center gap-2.5 py-2 px-3.5 bg-white border border-outline rounded-xl shadow-md max-w-xs">
+                <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1">sync</span>
+                <span class="text-[10px] font-semibold text-on-surface">Sync triggered successfully.</span>
+              </div>
+              <div class="flex items-center gap-2.5 py-2 px-3.5 bg-white border border-error/20 rounded-xl shadow-md max-w-xs">
+                <span class="material-symbols-outlined text-error text-[18px]" style="font-variation-settings:'FILL' 1">error</span>
+                <span class="text-[10px] font-semibold text-on-surface">Connection test failed.</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Status Badges in Table -->
+          <div class="bg-white rounded-xl border border-outline shadow-sm p-5">
+            <h3 class="text-xs font-bold text-on-surface mb-4">Sync History Status Badges</h3>
+            <div class="space-y-2">
+              <div class="flex items-center justify-between text-[11px] py-2 border-b border-outline/40">
+                <span class="text-on-surface-variant">Today, 05:40 AM</span>
+                <span class="px-2.5 py-0.5 bg-success-container/70 text-success rounded-full text-[9.5px] font-bold">Success</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-2 border-b border-outline/40">
+                <span class="text-on-surface-variant">June 7, 01:10 PM</span>
+                <span class="px-2.5 py-0.5 bg-danger-container text-error rounded-full text-[9.5px] font-bold">Auth Timeout</span>
+              </div>
+              <div class="flex items-center justify-between text-[11px] py-2">
+                <span class="text-on-surface-variant">June 6, 04:12 PM</span>
+                <span class="px-2.5 py-0.5 bg-slate-100 text-on-surface-variant rounded-full text-[9.5px] font-bold">Skipped</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-16 pt-6 border-t border-outline/60 flex items-center justify-between">
+          <p class="text-[10px] text-on-surface-variant/50">© 2026 SMarBI Technologies. Design System v1.0</p>
+          <div class="flex items-center gap-3">
+            <a href="dashboard.html" class="text-[10px] text-primary font-semibold hover:underline">View Dashboard →</a>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /max-w-4xl -->
+  </main>
+  </div>
+
+  <script>
+    // ── Declare main scroll container first ──
+    const mainEl = document.getElementById('ds-main');
+
+    // ── GSAP Section Entrances ──
+    // IMPORTANT: scroller must be set to mainEl (not window) because the
+    // page uses overflow-y:auto on #ds-main, not the document body.
+    gsap.registerPlugin(ScrollTrigger);
+
+    document.querySelectorAll('.ds-section').forEach(section => {
+      gsap.to(section, {
+        opacity: 1,
+        y: 0,
+        duration: 0.55,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: section,
+          scroller: mainEl,
+          start: 'top 95%',
+          toggleActions: 'play none none none'
+        }
+      });
+    });
+
+    // ── Reading Progress Bar ──
+    const progress = document.getElementById('ds-progress');
+    mainEl.addEventListener('scroll', () => {
+      const scrollTop = mainEl.scrollTop;
+      const scrollHeight = mainEl.scrollHeight - mainEl.clientHeight;
+      const pct = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+      progress.style.width = pct + '%';
+    });
+
+    // ── Sidebar Active State ──
+    const navLinks = document.querySelectorAll('.ds-nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    mainEl.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (mainEl.scrollTop >= s.offsetTop - 80) current = s.id;
+      });
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + current) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

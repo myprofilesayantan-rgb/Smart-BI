@@ -1,0 +1,806 @@
+/**
+ * Smart BI Design Tokens
+ * ─────────────────────────────────────────────────────────────────────────────
+ * Personality : Playful Precision
+ *               Enterprise-serious (Analyttica LEAPS navy, structured hierarchy)
+ *               Conversational-friendly (warm accents, soft radii, spring motion)
+ *
+ * Reference   : https://analyttica.com/  (LEAPS by Analyttica)
+ *               Primary navy · Accent orange · Teal · Mesh gradients · Inter + Space Grotesk
+ *
+ * Architecture: Primitive → Semantic → Component
+ * Format      : HSL triplets for themeable channels + resolved hex/rgba aliases
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
+:root {
+  /* Spacing Primitives (originally from parent tokens) */
+  --gap-section: 60px;
+  --gap-component: 60px;
+  --gap-element: 36px;
+  --gap-micro: 24px;
+  --side-padding-fluid: clamp(1rem, 7.8vw, 100px);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 0 — BRAND DNA (non-token narrative constants)
+     ═══════════════════════════════════════════════════════════════════════════ */
+  --sbi-brand-name: "Smart BI";
+  --sbi-brand-tagline: "Conversational BI";
+  --sbi-brand-personality: "playful-precision";
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: COLOR SCALES
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Navy (Analyttica LEAPS primary — serious / enterprise) ─────────────── */
+  --sbi-color-navy-950: 215 55% 12%;   /* #0E1A2B */
+  --sbi-color-navy-900: 215 50% 18%;   /* #172945 */
+  --sbi-color-navy-800: 215 48% 23%;   /* #1D3658 — Analyttica foreground */
+  --sbi-color-navy-700: 215 45% 28%;   /* #243F66 */
+  --sbi-color-navy-600: 215 42% 33%;   /* #314A6E — Analyttica primary */
+  --sbi-color-navy-500: 215 38% 42%;   /* #456089 */
+  --sbi-color-navy-400: 215 30% 55%;   /* #6B849F */
+  --sbi-color-navy-300: 215 22% 70%;   /* #9AADBE */
+  --sbi-color-navy-200: 215 18% 85%;   /* #CED8E2 */
+  --sbi-color-navy-100: 215 15% 93%;   /* #E8EDF2 */
+  --sbi-color-navy-50:  210 20% 98%;   /* #F9FAFB — Analyttica background */
+
+  /* ── Orange (Analyttica accent — playful / action energy) ───────────────── */
+  --sbi-color-orange-900: 25 90% 30%;
+  --sbi-color-orange-800: 28 88% 38%;
+  --sbi-color-orange-700: 30 85% 44%;
+  --sbi-color-orange-600: 32 82% 50%;  /* #E07B1A */
+  --sbi-color-orange-500: 35 80% 55%;  /* #E89C30 — Analyttica accent */
+  --sbi-color-orange-400: 38 85% 62%;  /* #F0AD4A */
+  --sbi-color-orange-300: 40 88% 72%;
+  --sbi-color-orange-200: 42 90% 84%;
+  --sbi-color-orange-100: 44 92% 92%;
+  --sbi-color-orange-50:  45 95% 96%;
+
+  /* ── Interactive Blue (Smart BI conversational — aligned with SMarBI Purple) ─── */
+  --sbi-color-blue-900: 262 70% 20%;
+  --sbi-color-blue-800: 262 75% 30%;
+  --sbi-color-blue-700: 262 80% 40%;
+  --sbi-color-blue-600: 262 83% 50%;
+  --sbi-color-blue-500: 262 83% 58%;   /* #7c3bed — Smart BI primary purple */
+  --sbi-color-blue-400: 262 85% 68%;
+  --sbi-color-blue-300: 262 90% 78%;
+  --sbi-color-blue-200: 262 90% 88%;
+  --sbi-color-blue-100: 262 90% 94%;
+  --sbi-color-blue-50:  262 90% 97%;
+
+  /* ── Teal (Analyttica secondary — insight / data flow) ──────────────────── */
+  --sbi-color-teal-700: 174 55% 30%;
+  --sbi-color-teal-600: 174 58% 38%;
+  --sbi-color-teal-500: 174 60% 45%;   /* #2DB893 — Analyttica teal */
+  --sbi-color-teal-400: 174 55% 55%;
+  --sbi-color-teal-300: 174 50% 68%;
+  --sbi-color-teal-200: 174 45% 82%;
+  --sbi-color-teal-100: 174 40% 92%;
+  --sbi-color-teal-50:  174 35% 96%;
+
+  /* ── Purple (Analyttica tertiary — AI / premium accent) ─────────────────── */
+  --sbi-color-purple-600: 250 55% 52%;
+  --sbi-color-purple-500: 250 60% 60%; /* #9470DB — Analyttica purple */
+  --sbi-color-purple-400: 250 65% 68%;
+  --sbi-color-purple-300: 250 70% 78%;
+  --sbi-color-purple-100: 250 75% 94%;
+  --sbi-color-purple-clickup: 250 84% 61%; /* #6647F0 — ClickUp default brand color */
+
+  /* ── Green (success / send / on-track KPI) ──────────────────────────────── */
+  --sbi-color-green-900: 152 60% 18%;
+  --sbi-color-green-800: 152 58% 24%;
+  --sbi-color-green-700: 152 55% 32%;
+  --sbi-color-green-600: 152 55% 38%;  /* #2A9D5C */
+  --sbi-color-green-500: 152 55% 45%;  /* #33A066 — Analyttica success */
+  --sbi-color-green-400: 148 50% 50%;
+  --sbi-color-green-300: 145 45% 62%;
+  --sbi-color-green-200: 142 40% 80%;
+  --sbi-color-green-100: 140 35% 92%;
+  --sbi-color-green-50:  138 30% 96%;
+  --sbi-color-green-brand: 152 78% 28%; /* #107C41 — Smart BI send button */
+
+  /* ── Charcoal (Smart BI editorial text — warm serious) ──────────────────── */
+  --sbi-color-charcoal-900: 0 5% 12%;  /* #232020 */
+  --sbi-color-charcoal-800: 0 3% 18%;
+  --sbi-color-charcoal-700: 0 2% 24%;
+  --sbi-color-charcoal-600: 200 3% 36%; /* #5A5D5E */
+  --sbi-color-charcoal-500: 200 2% 44%; /* #717171 */
+  --sbi-color-charcoal-400: 200 2% 54%; /* #888888 */
+  --sbi-color-charcoal-300: 200 2% 72%;
+  --sbi-color-charcoal-200: 200 3% 86%; /* #D8D3D3 */
+  --sbi-color-charcoal-100: 30 8% 94%;  /* #F1EAEA — warm on-dark text */
+  --sbi-color-charcoal-50:  30 6% 97%;
+
+  /* ── Warm Neutrals (canvas / chart viewport — human, not clinical) ──────── */
+  --sbi-color-warm-100: 40 33% 97%;    /* #FAF8F5 */
+  --sbi-color-warm-200: 210 33% 95%;   /* #ECF2F7 — goal section bg */
+  --sbi-color-warm-300: 210 20% 93%;
+  --sbi-color-warm-400: 214 15% 91%;   /* #ECEEEF — dividers */
+
+  /* ── Slate (UI chrome — legacy BI, inputs, system bubbles) ──────────────── */
+  --sbi-color-slate-950: 222 47% 7%;   /* #0B0F19 — console bg */
+  --sbi-color-slate-900: 222 47% 11%;  /* #0F172A */
+  --sbi-color-slate-800: 215 28% 17%;  /* #1E293B */
+  --sbi-color-slate-700: 215 25% 27%;  /* #334155 */
+  --sbi-color-slate-600: 215 20% 35%;  /* #475569 */
+  --sbi-color-slate-500: 215 16% 47%;  /* #64748B */
+  --sbi-color-slate-400: 215 14% 57%;  /* #94A3B8 */
+  --sbi-color-slate-300: 214 20% 75%;  /* #CBD5E1 */
+  --sbi-color-slate-200: 214 25% 88%;  /* #E2E8F0 */
+  --sbi-color-slate-100: 210 25% 96%;  /* #F1F5F9 */
+  --sbi-color-slate-50:  210 25% 98%;  /* #F8FAFC */
+
+  /* ── Status ─────────────────────────────────────────────────────────────── */
+  --sbi-color-red-600: 0 72% 51%;      /* #EF4444 */
+  --sbi-color-red-500: 0 84% 60%;
+  --sbi-color-red-100: 0 93% 94%;      /* #FEF2F2 */
+  --sbi-color-amber-500: 38 92% 50%;   /* #F59E0B */
+  --sbi-color-cyan-400: 199 89% 58%;   /* #38BDF8 — console progress */
+  --sbi-color-yellow-500: 45 93% 47%;  /* #EAB308 — chart series */
+
+  /* ── Absolute ───────────────────────────────────────────────────────────── */
+  --sbi-color-white: 0 0% 100%;
+  --sbi-color-black: 0 0% 0%;
+  --sbi-color-transparent: transparent;
+
+  /* ── Chart Data Series (categorical — playful but distinguishable) ──────── */
+  --sbi-chart-series-1: 222 98% 66%;   /* blue */
+  --sbi-chart-series-2: 35 80% 55%;    /* orange */
+  --sbi-chart-series-3: 174 60% 45%;   /* teal */
+  --sbi-chart-series-4: 152 55% 45%;   /* green */
+  --sbi-chart-series-5: 0 72% 51%;     /* red */
+  --sbi-chart-series-6: 250 60% 60%;   /* purple */
+  --sbi-chart-series-7: 45 93% 47%;   /* yellow */
+  --sbi-chart-series-8: 199 89% 48%;   /* cyan */
+
+  /* ── Alpha overlays (navy-tinted shadows like Analyttica) ───────────────── */
+  --sbi-alpha-navy-04: 215 42% 33% / 0.04;
+  --sbi-alpha-navy-06: 215 42% 33% / 0.06;
+  --sbi-alpha-navy-08: 215 42% 33% / 0.08;
+  --sbi-alpha-navy-10: 215 42% 33% / 0.10;
+  --sbi-alpha-navy-12: 215 42% 33% / 0.12;
+  --sbi-alpha-navy-15: 215 42% 33% / 0.15;
+  --sbi-alpha-blue-10: 222 98% 66% / 0.10;
+  --sbi-alpha-blue-20: 222 98% 66% / 0.20;
+  --sbi-alpha-blue-40: 222 98% 66% / 0.40;
+  --sbi-alpha-orange-15: 35 80% 55% / 0.15;
+  --sbi-alpha-orange-30: 35 80% 55% / 0.30;
+  --sbi-alpha-white-80: 0 0% 100% / 0.80;
+  --sbi-alpha-white-90: 0 0% 100% / 0.90;
+  --sbi-alpha-black-03: 0 0% 0% / 0.03;
+  --sbi-alpha-black-05: 0 0% 0% / 0.05;
+  --sbi-alpha-black-08: 0 0% 0% / 0.08;
+  --sbi-alpha-black-12: 0 0% 0% / 0.12;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: TYPOGRAPHY
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-font-family-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --sbi-font-family-display: 'Outfit', var(--sbi-font-family-sans);
+  --sbi-font-family-mono: 'Consolas', 'Monaco', 'Andale Mono', 'Ubuntu Mono', monospace;
+
+  /* Size scale (rem-based, 16px root) */
+  --sbi-font-size-2xs: 0.5625rem;   /*  9px — micro labels, chart axis */
+  --sbi-font-size-xs:  0.6875rem;   /* 11px — eyebrow, footer, captions */
+  --sbi-font-size-sm:  0.8125rem;   /* 13px — nav, hero tag, chat bubbles */
+  --sbi-font-size-md:  0.875rem;   /* 14px — body compact, inputs */
+  --sbi-font-size-base: 0.9375rem; /* 15px — body default */
+  --sbi-font-size-lg:  1rem;        /* 16px — card titles */
+  --sbi-font-size-xl:  1.625rem;   /* 26px — process statement */
+  --sbi-font-size-2xl: 1.75rem;     /* 28px — goal title */
+  --sbi-font-size-3xl: 2rem;        /* 32px — section title */
+  --sbi-font-size-4xl: 2.375rem;    /* 38px — hero heading */
+  --sbi-font-size-5xl: clamp(1.5rem, 5vw, 2.375rem);
+  --sbi-font-size-hero: clamp(1.5rem, 6vw, 2.375rem);
+
+  /* Weight */
+  --sbi-font-weight-regular: 400;
+  --sbi-font-weight-medium: 500;
+  --sbi-font-weight-semibold: 600;
+  --sbi-font-weight-bold: 700;
+
+  /* Line height */
+  --sbi-line-height-tight: 1.25;
+  --sbi-line-height-snug: 1.3;
+  --sbi-line-height-normal: 1.4;
+  --sbi-line-height-relaxed: 1.5;
+  --sbi-line-height-loose: 1.6;
+
+  /* Letter spacing */
+  --sbi-letter-spacing-tighter: -0.02em;
+  --sbi-letter-spacing-tight: -0.01em;
+  --sbi-letter-spacing-normal: 0;
+  --sbi-letter-spacing-wide: 0.05em;
+  --sbi-letter-spacing-wider: 0.10em;
+  --sbi-letter-spacing-widest: 0.12em;
+
+  /* Composite text styles */
+  --sbi-text-eyebrow-size: var(--sbi-font-size-xs);
+  --sbi-text-eyebrow-weight: var(--sbi-font-weight-semibold);
+  --sbi-text-eyebrow-spacing: var(--sbi-letter-spacing-widest);
+  --sbi-text-eyebrow-transform: uppercase;
+
+  --sbi-text-display-size: var(--sbi-font-size-4xl);
+  --sbi-text-display-weight: var(--sbi-font-weight-regular);
+  --sbi-text-display-height: var(--sbi-line-height-snug);
+  --sbi-text-display-spacing: var(--sbi-letter-spacing-tighter);
+
+  --sbi-text-heading-size: var(--sbi-font-size-3xl);
+  --sbi-text-heading-weight: var(--sbi-font-weight-regular);
+  --sbi-text-heading-height: var(--sbi-line-height-snug);
+
+  --sbi-text-body-size: var(--sbi-font-size-base);
+  --sbi-text-body-weight: var(--sbi-font-weight-regular);
+  --sbi-text-body-height: var(--sbi-line-height-loose);
+
+  --sbi-text-caption-size: var(--sbi-font-size-sm);
+  --sbi-text-caption-weight: var(--sbi-font-weight-regular);
+  --sbi-text-caption-height: var(--sbi-line-height-relaxed);
+
+  --sbi-text-label-size: var(--sbi-font-size-xs);
+  --sbi-text-label-weight: var(--sbi-font-weight-semibold);
+  --sbi-text-label-spacing: var(--sbi-letter-spacing-wider);
+  --sbi-text-label-transform: uppercase;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: SPACING (4px base grid)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-space-0: 0;
+  --sbi-space-px: 1px;
+  --sbi-space-0-5: 0.125rem;  /*  2px */
+  --sbi-space-1: 0.25rem;     /*  4px */
+  --sbi-space-1-5: 0.375rem;  /*  6px */
+  --sbi-space-2: 0.5rem;      /*  8px */
+  --sbi-space-2-5: 0.625rem;  /* 10px */
+  --sbi-space-3: 0.75rem;     /* 12px */
+  --sbi-space-3-5: 0.875rem;  /* 14px */
+  --sbi-space-4: 1rem;        /* 16px */
+  --sbi-space-5: 1.25rem;     /* 20px */
+  --sbi-space-6: 1.5rem;      /* 24px = gap-micro */
+  --sbi-space-7: 1.75rem;     /* 28px */
+  --sbi-space-8: 2rem;        /* 32px */
+  --sbi-space-9: 2.25rem;     /* 36px = gap-element */
+  --sbi-space-10: 2.5rem;     /* 40px */
+  --sbi-space-12: 3rem;       /* 48px */
+  --sbi-space-14: 3.5rem;     /* 56px */
+  --sbi-space-15: 3.75rem;    /* 60px = gap-section / gap-component */
+  --sbi-space-16: 4rem;       /* 64px */
+  --sbi-space-18: 4.5rem;     /* 72px */
+  --sbi-space-20: 5rem;       /* 80px */
+  --sbi-space-24: 6rem;       /* 96px */
+
+  /* Layout aliases (inherit portfolio rhythm) */
+  --sbi-layout-section-gap: var(--gap-section);
+  --sbi-layout-component-gap: var(--gap-component);
+  --sbi-layout-element-gap: var(--gap-element);
+  --sbi-layout-micro-gap: var(--gap-micro);
+  --sbi-layout-container-max: 1280px;
+  --sbi-layout-content-max: 1080px;
+  --sbi-layout-goal-max: 1200px;
+  --sbi-layout-side-padding: var(--side-padding-fluid);
+  --sbi-layout-nav-height: 60px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: BORDER RADIUS (Analyttica soft-rect → pill spectrum)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-radius-none: 0;
+  --sbi-radius-xs: 0.1875rem;   /*  3px — legacy BI micro controls */
+  --sbi-radius-sm: 0.25rem;     /*  4px — legacy BI buttons */
+  --sbi-radius-md: 0.375rem;    /*  6px — dropdowns, small cards */
+  --sbi-radius-lg: 0.5rem;      /*  8px — chart wrappers, mockup window */
+  --sbi-radius-xl: 0.75rem;     /* 12px — Analyttica base (--radius) */
+  --sbi-radius-2xl: 1rem;       /* 16px — goal/AI cards */
+  --sbi-radius-3xl: 1.5rem;     /* 24px — section panels */
+  --sbi-radius-full: 9999px;    /* pill — hero tag, input bar, send btn */
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: BORDER WIDTH
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-border-width-hairline: 1px;
+  --sbi-border-width-medium: 2px;
+  --sbi-border-width-thick: 3px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: SHADOW (navy-tinted, Analyttica-style)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-shadow-xs: 0 1px 2px 0 hsl(var(--sbi-alpha-navy-04));
+  --sbi-shadow-sm: 0 1px 2px 0 hsl(var(--sbi-alpha-navy-04));
+  --sbi-shadow-md: 0 4px 6px -1px hsl(var(--sbi-alpha-navy-08)),
+                   0 2px 4px -2px hsl(var(--sbi-alpha-navy-04));
+  --sbi-shadow-lg: 0 10px 15px -3px hsl(var(--sbi-alpha-navy-10)),
+                   0 4px 6px -4px hsl(var(--sbi-alpha-navy-04));
+  --sbi-shadow-xl: 0 20px 25px -5px hsl(var(--sbi-alpha-navy-10)),
+                   0 8px 10px -6px hsl(var(--sbi-alpha-navy-04));
+  --sbi-shadow-2xl: 0 20px 40px hsl(var(--sbi-alpha-navy-06));
+  --sbi-shadow-card: 0 4px 24px -4px hsl(var(--sbi-alpha-navy-12));
+  --sbi-shadow-card-hover: 0 12px 38px hsl(var(--sbi-alpha-navy-08)),
+                           0 6px 16px hsl(var(--sbi-alpha-blue-10));
+  --sbi-shadow-goal-dark: 0 10px 30px hsl(var(--sbi-alpha-black-04));
+  --sbi-shadow-ai-card: 0 20px 40px hsl(var(--sbi-alpha-black-06));
+  --sbi-shadow-mockup: 0 20px 45px hsl(var(--sbi-alpha-black-08));
+  --sbi-shadow-glow-blue: 0 0 0 3px hsl(var(--sbi-alpha-blue-10));
+  --sbi-shadow-glow-orange: 0 0 40px hsl(var(--sbi-alpha-orange-30));
+  --sbi-shadow-glow-error: 0 0 12px hsl(0 72% 51% / 0.15);
+  --sbi-shadow-emoji: 0 12px 24px hsl(var(--sbi-alpha-black-08)),
+                      0 4px 8px hsl(var(--sbi-alpha-black-04));
+  --sbi-shadow-nav: 0 8px 24px hsl(var(--sbi-alpha-black-08)),
+                    0 1px 3px hsl(var(--sbi-alpha-black-04));
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: GRADIENTS (Analyttica mesh + Smart BI sections)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-gradient-hero-navy: linear-gradient(
+    135deg,
+    hsl(var(--sbi-color-navy-600)) 0%,
+    hsl(var(--sbi-color-navy-900)) 100%
+  );
+  --sbi-gradient-accent-orange: linear-gradient(
+    135deg,
+    hsl(var(--sbi-color-orange-500)) 0%,
+    hsl(25 90% 50%) 100%
+  );
+  --sbi-gradient-teal: linear-gradient(
+    135deg,
+    hsl(var(--sbi-color-teal-500)) 0%,
+    hsl(180 50% 35%) 100%
+  );
+  --sbi-gradient-purple: linear-gradient(
+    135deg,
+    hsl(var(--sbi-color-purple-500)) 0%,
+    hsl(260 50% 50%) 100%
+  );
+  --sbi-gradient-card: linear-gradient(
+    180deg,
+    hsl(var(--sbi-color-white)) 0%,
+    hsl(var(--sbi-color-navy-50)) 100%
+  );
+  --sbi-gradient-mesh-playful: radial-gradient(
+      at 40% 20%,
+      hsl(var(--sbi-alpha-orange-15)) 0px,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 80% 0%,
+      hsl(174 60% 45% / 0.10) 0px,
+      transparent 50%
+    ),
+    radial-gradient(
+      at 0% 50%,
+      hsl(250 60% 60% / 0.08) 0px,
+      transparent 50%
+    );
+  --sbi-gradient-goal-section: linear-gradient(
+    180deg,
+    hsl(var(--sbi-color-warm-200)) 0%,
+    hsl(210 30% 93%) 100%
+  );
+  --sbi-gradient-dark-card: linear-gradient(
+    145deg,
+    hsl(var(--sbi-color-charcoal-900)) 0%,
+    hsl(var(--sbi-color-navy-900)) 100%
+  );
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: MOTION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Duration */
+  --sbi-duration-instant: 0ms;
+  --sbi-duration-fastest: 100ms;
+  --sbi-duration-fast: 150ms;
+  --sbi-duration-normal: 200ms;
+  --sbi-duration-moderate: 300ms;
+  --sbi-duration-slow: 400ms;
+  --sbi-duration-slower: 600ms;
+  --sbi-duration-slowest: 800ms;
+  --sbi-duration-chart: 1000ms;
+  --sbi-duration-typewriter-char: 70ms;
+  --sbi-duration-ai-think: 1200ms;
+  --sbi-duration-scenario-hold: 6000ms;
+
+  /* Easing — playful spring + serious smooth */
+  --sbi-ease-linear: linear;
+  --sbi-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --sbi-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --sbi-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --sbi-ease-smooth: cubic-bezier(0.25, 0.8, 0.25, 1);
+  --sbi-ease-spring-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --sbi-ease-spring-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --sbi-ease-chart-draw: cubic-bezier(0.16, 1, 0.3, 1);
+  --sbi-ease-nav-underline: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Composite transitions */
+  --sbi-transition-color: color var(--sbi-duration-normal) var(--sbi-ease-out),
+                          background-color var(--sbi-duration-normal) var(--sbi-ease-out),
+                          border-color var(--sbi-duration-normal) var(--sbi-ease-out);
+  --sbi-transition-transform: transform var(--sbi-duration-normal) var(--sbi-ease-spring-bounce);
+  --sbi-transition-shadow: box-shadow var(--sbi-duration-moderate) var(--sbi-ease-smooth);
+  --sbi-transition-fade: opacity var(--sbi-duration-moderate) var(--sbi-ease-out);
+  --sbi-transition-pop: transform var(--sbi-duration-slower) var(--sbi-ease-spring-soft),
+                        opacity var(--sbi-duration-slower) var(--sbi-ease-spring-soft);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: Z-INDEX
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-z-base: 0;
+  --sbi-z-chart: 2;
+  --sbi-z-dropdown: 20;
+  --sbi-z-overlay: 4;
+  --sbi-z-formula: 5;
+  --sbi-z-cursor: 100;
+  --sbi-z-loader: 10;
+  --sbi-z-nav: 1000;
+  --sbi-z-nav-dropdown: 1010;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 1 — PRIMITIVE: BLUR / BACKDROP (Analyttica frosted nav)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-blur-nav: 12px;
+  --sbi-blur-dropdown: 16px;
+  --sbi-backdrop-saturate: 190%;
+  --sbi-backdrop-saturate-dropdown: 180%;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 2 — SEMANTIC: SURFACE
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-surface-page: hsl(var(--sbi-color-white));
+  --sbi-surface-section-alt: hsl(var(--sbi-color-warm-200));
+  --sbi-surface-section-mesh: hsl(var(--sbi-color-navy-50));
+  --sbi-surface-card: hsl(var(--sbi-color-white));
+  --sbi-surface-card-elevated: hsl(var(--sbi-color-white));
+  --sbi-surface-card-dark: hsl(var(--sbi-color-charcoal-900));
+  --sbi-surface-canvas: hsl(var(--sbi-color-warm-100));
+  --sbi-surface-canvas-dashed: hsl(var(--sbi-color-warm-100));
+  --sbi-surface-input: hsl(var(--sbi-color-slate-100));
+  --sbi-surface-input-focus: hsl(var(--sbi-color-white));
+  --sbi-surface-nav: hsl(var(--sbi-alpha-white-80));
+  --sbi-surface-dropdown: hsl(var(--sbi-alpha-white-90));
+  --sbi-surface-console: hsl(var(--sbi-color-slate-950));
+  --sbi-surface-legacy-mockup: hsl(var(--sbi-color-slate-100));
+  --sbi-surface-inset: hsl(var(--sbi-color-slate-50));
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 2 — SEMANTIC: TEXT
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-text-primary: hsl(var(--sbi-color-charcoal-900));
+  --sbi-text-secondary: hsl(var(--sbi-color-charcoal-600));
+  --sbi-text-tertiary: hsl(var(--sbi-color-charcoal-500));
+  --sbi-text-muted: hsl(var(--sbi-color-charcoal-400));
+  --sbi-text-inverse: hsl(var(--sbi-color-charcoal-100));
+  --sbi-text-on-dark: hsl(var(--sbi-color-charcoal-100));
+  --sbi-text-on-accent: hsl(var(--sbi-color-white));
+  --sbi-text-brand: hsl(var(--sbi-color-blue-500));
+  --sbi-text-brand-navy: hsl(var(--sbi-color-navy-800));
+  --sbi-text-accent: hsl(var(--sbi-color-orange-500));
+  --sbi-text-link: hsl(var(--sbi-color-navy-600));
+  --sbi-text-link-hover: hsl(var(--sbi-color-blue-500));
+  --sbi-text-success: hsl(var(--sbi-color-green-brand));
+  --sbi-text-danger: hsl(var(--sbi-color-red-600));
+  --sbi-text-console: hsl(var(--sbi-color-slate-200));
+  --sbi-text-console-dim: hsl(var(--sbi-color-slate-400));
+  --sbi-text-console-active: hsl(var(--sbi-color-cyan-400));
+  --sbi-text-console-error: hsl(0 91% 71%);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 2 — SEMANTIC: BORDER
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-border-default: hsl(var(--sbi-color-charcoal-200));
+  --sbi-border-subtle: hsl(var(--sbi-color-warm-400));
+  --sbi-border-muted: hsl(var(--sbi-color-slate-200));
+  --sbi-border-strong: hsl(var(--sbi-color-slate-300));
+  --sbi-border-focus: hsl(var(--sbi-alpha-blue-40));
+  --sbi-border-card: hsl(var(--sbi-alpha-black-05));
+  --sbi-border-dashed: hsl(var(--sbi-alpha-black-08));
+  --sbi-border-error: hsl(var(--sbi-color-red-600));
+  --sbi-border-console: hsl(var(--sbi-color-slate-800));
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 2 — SEMANTIC: ACTION / INTERACTIVE
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* Primary CTA — Analyttica orange (playful energy) */
+  --sbi-action-primary-bg: hsl(var(--sbi-color-orange-500));
+  --sbi-action-primary-bg-hover: hsl(var(--sbi-color-orange-600));
+  --sbi-action-primary-bg-active: hsl(var(--sbi-color-orange-700));
+  --sbi-action-primary-text: hsl(var(--sbi-color-white));
+  --sbi-action-primary-shadow: var(--sbi-shadow-glow-orange);
+
+  /* Secondary — navy outline (serious enterprise) */
+  --sbi-action-secondary-bg: transparent;
+  --sbi-action-secondary-bg-hover: hsl(var(--sbi-color-navy-50));
+  --sbi-action-secondary-text: hsl(var(--sbi-color-navy-800));
+  --sbi-action-secondary-border: hsl(var(--sbi-color-slate-300));
+
+  /* Conversational send — Smart BI green (go / submit) */
+  --sbi-action-send-bg: hsl(var(--sbi-color-green-brand));
+  --sbi-action-send-bg-hover: hsl(var(--sbi-color-green-800));
+  --sbi-action-send-text: hsl(var(--sbi-color-white));
+
+  /* Ghost / nav */
+  --sbi-action-ghost-bg-hover: hsl(222 98% 66% / 0.08);
+  --sbi-action-ghost-text: hsl(var(--sbi-color-charcoal-500));
+  --sbi-action-ghost-text-hover: hsl(var(--sbi-color-blue-500));
+
+  /* Focus ring */
+  --sbi-focus-ring-color: hsl(var(--sbi-color-orange-500));
+  --sbi-focus-ring-width: 3px;
+  --sbi-focus-ring-offset: 2px;
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 2 — SEMANTIC: AI / CONVERSATIONAL
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-ai-user-bubble-bg: hsl(var(--sbi-color-blue-500));
+  --sbi-ai-user-bubble-text: hsl(var(--sbi-color-white));
+  --sbi-ai-system-bubble-bg: hsl(var(--sbi-color-slate-200));
+  --sbi-ai-system-bubble-text: hsl(var(--sbi-color-slate-800));
+  --sbi-ai-system-bubble-emphasis: hsl(var(--sbi-color-slate-950));
+  --sbi-ai-loader-color: hsl(var(--sbi-color-blue-500));
+  --sbi-ai-loader-track: hsl(var(--sbi-alpha-blue-10));
+  --sbi-ai-cursor-color: hsl(var(--sbi-color-blue-500));
+  --sbi-ai-sparkle-color: hsl(var(--sbi-color-blue-500));
+  --sbi-ai-input-bg: hsl(var(--sbi-color-slate-100));
+  --sbi-ai-input-bg-focus: hsl(var(--sbi-color-white));
+  --sbi-ai-input-placeholder: hsl(var(--sbi-color-slate-400));
+  --sbi-ai-chart-wrapper-bg: hsl(var(--sbi-color-white));
+  --sbi-ai-chart-wrapper-border: hsl(var(--sbi-color-slate-200));
+  --sbi-ai-thinking-text: "AI is thinking...";
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 2 — SEMANTIC: DATA VISUALIZATION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-chart-axis: hsl(var(--sbi-color-slate-300));
+  --sbi-chart-gridline: hsl(var(--sbi-color-slate-100));
+  --sbi-chart-label: hsl(var(--sbi-color-slate-400));
+  --sbi-chart-title: hsl(var(--sbi-color-slate-600));
+  --sbi-chart-bar-primary: hsl(var(--sbi-color-blue-500));
+  --sbi-chart-bar-secondary: hsl(var(--sbi-color-slate-400));
+  --sbi-chart-line-primary: hsl(var(--sbi-color-blue-500));
+  --sbi-chart-target-line: hsl(var(--sbi-color-red-600));
+  --sbi-chart-gauge-track: hsl(var(--sbi-color-slate-100));
+  --sbi-chart-gauge-danger: hsl(var(--sbi-color-red-600));
+  --sbi-chart-gauge-success: hsl(var(--sbi-color-green-brand));
+  --sbi-chart-area-fill: hsl(var(--sbi-alpha-blue-10));
+
+  /* KPI status semantics */
+  --sbi-kpi-on-track: hsl(var(--sbi-color-green-500));
+  --sbi-kpi-at-risk: hsl(var(--sbi-color-amber-500));
+  --sbi-kpi-off-track: hsl(var(--sbi-color-red-600));
+  --sbi-kpi-neutral: hsl(var(--sbi-color-slate-400));
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 2 — SEMANTIC: LEGACY BI (problem state — dense, cold, technical)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --sbi-legacy-chrome-dark: hsl(var(--sbi-color-slate-900));
+  --sbi-legacy-chrome-mid: hsl(var(--sbi-color-slate-700));
+  --sbi-legacy-dimension: hsl(199 89% 48%);   /* #0284C7 */
+  --sbi-legacy-measure: hsl(var(--sbi-color-green-400));
+  --sbi-legacy-error: hsl(var(--sbi-color-red-600));
+  --sbi-legacy-error-bg: hsl(var(--sbi-color-red-100));
+  --sbi-legacy-progress: hsl(var(--sbi-color-cyan-400));
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     LAYER 3 — COMPONENT TOKENS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  /* ── Navigation ─────────────────────────────────────────────────────────── */
+  --sbi-nav-bg: var(--sbi-surface-nav);
+  --sbi-nav-blur: var(--sbi-blur-nav);
+  --sbi-nav-border: var(--sbi-border-default);
+  --sbi-nav-link-size: var(--sbi-font-size-sm);
+  --sbi-nav-link-color: var(--sbi-action-ghost-text);
+  --sbi-nav-link-color-active: var(--sbi-text-primary);
+  --sbi-nav-link-underline: var(--sbi-text-primary);
+  --sbi-nav-dropdown-highlight: hsl(222 98% 66% / 1); /* legacy nav blue hover */
+
+  /* ── Hero ───────────────────────────────────────────────────────────────── */
+  --sbi-hero-tag-bg: hsl(200 3% 36% / 0.05);
+  --sbi-hero-tag-border: hsl(200 3% 36% / 0.12);
+  --sbi-hero-tag-text: hsl(var(--sbi-color-charcoal-600));
+  --sbi-hero-tag-radius: var(--sbi-radius-full);
+  --sbi-hero-accent: var(--sbi-text-brand);
+  --sbi-hero-cursor: var(--sbi-ai-cursor-color);
+  --sbi-hero-emoji-shadow: var(--sbi-shadow-emoji);
+
+  /* ── Discover / Problem ─────────────────────────────────────────────────── */
+  --sbi-discover-eyebrow-color: var(--sbi-text-brand);
+  --sbi-discover-title-color: var(--sbi-text-primary);
+  --sbi-discover-body-color: var(--sbi-text-secondary);
+
+  /* ── Goal card (dark — serious anchor) ────────────────────────────────────── */
+  --sbi-goal-card-bg: var(--sbi-surface-card-dark);
+  --sbi-goal-card-radius: var(--sbi-radius-2xl);
+  --sbi-goal-card-padding: var(--sbi-space-10);
+  --sbi-goal-card-shadow: var(--sbi-shadow-goal-dark);
+  --sbi-goal-eyebrow-color: var(--sbi-text-on-dark);
+  --sbi-goal-title-color: var(--sbi-text-on-dark);
+  --sbi-goal-body-color: var(--sbi-text-on-dark);
+
+  /* ── AI interactive card (light — playful workspace) ──────────────────────── */
+  --sbi-ai-card-bg: var(--sbi-surface-card);
+  --sbi-ai-card-radius: var(--sbi-radius-2xl);
+  --sbi-ai-card-padding: var(--sbi-space-6);
+  --sbi-ai-card-shadow: var(--sbi-shadow-ai-card);
+  --sbi-ai-card-border: var(--sbi-border-card);
+  --sbi-ai-viewport-bg: var(--sbi-surface-canvas);
+  --sbi-ai-viewport-border: var(--sbi-border-dashed);
+  --sbi-ai-viewport-radius: var(--sbi-radius-xl);
+  --sbi-ai-viewport-height: 250px;
+  --sbi-ai-input-radius: var(--sbi-radius-full);
+  --sbi-ai-input-padding-x: var(--sbi-space-4);
+  --sbi-ai-input-padding-y: var(--sbi-space-1-5);
+  --sbi-ai-send-size: 2.25rem;
+
+  /* ── Goal section wrapper ───────────────────────────────────────────────── */
+  --sbi-goal-section-bg: var(--sbi-surface-section-alt);
+  --sbi-goal-section-radius: var(--sbi-radius-3xl);
+  --sbi-goal-section-padding-y: clamp(2.5rem, 6vw, 4.5rem);
+
+  /* ── Buttons ────────────────────────────────────────────────────────────── */
+  --sbi-button-radius: var(--sbi-radius-lg); /* 8px ClickUp Standard */
+  --sbi-button-radius-pill: var(--sbi-radius-full);
+  --sbi-button-padding-x: var(--sbi-space-6);
+  --sbi-button-padding-y: var(--sbi-space-3);
+  --sbi-button-font-size: var(--sbi-font-size-md);
+  --sbi-button-font-weight: var(--sbi-font-weight-semibold);
+  --sbi-button-line-height: var(--sbi-line-height-snug);
+  --sbi-button-transition: var(--sbi-motion-duration-fast) var(--sbi-motion-easing-smooth);
+
+  /* Button Sizes */
+  --sbi-button-sm-padding-x: var(--sbi-space-4);
+  --sbi-button-sm-padding-y: var(--sbi-space-2);
+  --sbi-button-sm-font-size: var(--sbi-font-size-sm);
+  --sbi-button-sm-radius: var(--sbi-radius-md); /* 6px */
+
+  --sbi-button-lg-padding-x: var(--sbi-space-8);
+  --sbi-button-lg-padding-y: var(--sbi-space-4);
+  --sbi-button-lg-font-size: var(--sbi-font-size-lg);
+  --sbi-button-lg-radius: var(--sbi-radius-xl); /* 12px */
+
+  /* Button Type: Primary */
+  --sbi-btn-primary-bg: var(--sbi-action-primary-bg);
+  --sbi-btn-primary-bg-hover: var(--sbi-action-primary-bg-hover);
+  --sbi-btn-primary-bg-active: var(--sbi-action-primary-bg-active);
+  --sbi-btn-primary-text: var(--sbi-action-primary-text);
+  --sbi-btn-primary-shadow: var(--sbi-action-primary-shadow);
+  --sbi-btn-primary-shadow-hover: var(--sbi-shadow-lg);
+
+  /* Button Type: Secondary */
+  --sbi-btn-secondary-bg: var(--sbi-action-secondary-bg);
+  --sbi-btn-secondary-bg-hover: var(--sbi-action-secondary-bg-hover);
+  --sbi-btn-secondary-bg-active: var(--sbi-action-secondary-bg-active);
+  --sbi-btn-secondary-text: var(--sbi-action-secondary-text);
+  --sbi-btn-secondary-border: var(--sbi-action-secondary-border);
+  --sbi-btn-secondary-border-hover: var(--sbi-action-secondary-border-hover);
+
+  /* Button Type: Send */
+  --sbi-btn-send-bg: var(--sbi-action-send-bg);
+  --sbi-btn-send-bg-hover: var(--sbi-action-send-bg-hover);
+  --sbi-btn-send-bg-active: var(--sbi-action-send-bg-active);
+  --sbi-btn-send-text: var(--sbi-action-send-text);
+
+  /* Button Type: Ghost */
+  --sbi-btn-ghost-bg: transparent;
+  --sbi-btn-ghost-bg-hover: var(--sbi-action-ghost-bg-hover);
+  --sbi-btn-ghost-bg-active: var(--sbi-action-ghost-bg-active);
+  --sbi-btn-ghost-text: var(--sbi-action-ghost-text);
+  --sbi-btn-ghost-text-hover: var(--sbi-action-ghost-text-hover);
+  --sbi-btn-ghost-text-active: var(--sbi-action-ghost-text-active);
+
+  /* Button State: Focus & Disabled */
+  --sbi-btn-focus-ring-color: var(--sbi-focus-ring-color);
+  --sbi-btn-focus-ring-width: var(--sbi-focus-ring-width);
+  --sbi-btn-focus-ring-offset: var(--sbi-focus-ring-offset);
+  --sbi-btn-disabled-bg: var(--sbi-action-disabled-bg);
+  --sbi-btn-disabled-text: var(--sbi-action-disabled-text);
+  --sbi-btn-disabled-border: var(--sbi-action-disabled-border);
+
+  /* ── Process section ────────────────────────────────────────────────────── */
+  --sbi-process-border: var(--sbi-border-subtle);
+  --sbi-process-statement-size: var(--sbi-font-size-xl);
+  --sbi-process-label-color: var(--sbi-text-tertiary);
+
+  /* ── Footer ─────────────────────────────────────────────────────────────── */
+  --sbi-footer-text: var(--sbi-text-muted);
+  --sbi-footer-divider: var(--sbi-border-subtle);
+
+  /* ── Chat bubble geometry ───────────────────────────────────────────────── */
+  --sbi-bubble-radius: var(--sbi-radius-xl);
+  --sbi-bubble-radius-tail-user: var(--sbi-radius-sm);
+  --sbi-bubble-radius-tail-system: var(--sbi-radius-sm);
+  --sbi-bubble-padding-x: var(--sbi-space-3);
+  --sbi-bubble-padding-y: var(--sbi-space-2);
+  --sbi-bubble-font-size: var(--sbi-font-size-sm);
+  --sbi-bubble-max-width: 85%;
+
+  /* ── Legacy BI mockup ───────────────────────────────────────────────────── */
+  --sbi-mockup-radius: var(--sbi-radius-lg);
+  --sbi-mockup-shadow: var(--sbi-shadow-mockup);
+  --sbi-mockup-font-size: var(--sbi-font-size-sm);
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     BACKWARD-COMPAT ALIASES (map existing hard-coded usage → tokens)
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  --font-family: var(--sbi-font-family-sans);
+  --color-smartbi-blue: hsl(var(--sbi-color-blue-500));
+  --color-smartbi-navy: hsl(var(--sbi-color-navy-800));
+  --color-smartbi-orange: hsl(var(--sbi-color-orange-500));
+  --color-smartbi-charcoal: hsl(var(--sbi-color-charcoal-900));
+  --color-smartbi-green: hsl(var(--sbi-color-green-brand));
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   RESPONSIVE TOKEN OVERRIDES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  :root {
+    --sbi-goal-card-padding: var(--sbi-space-7);
+    --sbi-goal-section-radius: var(--sbi-radius-2xl);
+    --sbi-text-display-size: var(--sbi-font-size-5xl);
+    --sbi-ai-viewport-height: 220px;
+  }
+}
+
+@media (max-width: 580px) {
+  :root {
+    --sbi-goal-section-radius: var(--sbi-radius-2xl);
+    --sbi-ai-viewport-height: 200px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   UTILITY: Apply semantic text roles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.sbi-text-eyebrow {
+  font-size: var(--sbi-text-eyebrow-size);
+  font-weight: var(--sbi-text-eyebrow-weight);
+  letter-spacing: var(--sbi-text-eyebrow-spacing);
+  text-transform: var(--sbi-text-eyebrow-transform);
+}
+
+.sbi-text-display {
+  font-family: var(--sbi-font-family-display);
+  font-size: var(--sbi-text-display-size);
+  font-weight: var(--sbi-text-display-weight);
+  line-height: var(--sbi-text-display-height);
+  letter-spacing: var(--sbi-text-display-spacing);
+  color: var(--sbi-text-primary);
+}
+
+.sbi-text-heading {
+  font-size: var(--sbi-text-heading-size);
+  font-weight: var(--sbi-text-heading-weight);
+  line-height: var(--sbi-text-heading-height);
+  letter-spacing: var(--sbi-letter-spacing-tighter);
+  color: var(--sbi-text-primary);
+}
+
+.sbi-text-body {
+  font-size: var(--sbi-text-body-size);
+  font-weight: var(--sbi-text-body-weight);
+  line-height: var(--sbi-text-body-height);
+  letter-spacing: var(--sbi-letter-spacing-tight);
+  color: var(--sbi-text-secondary);
+}
+
+.sbi-surface-mesh {
+  background-color: var(--sbi-surface-section-mesh);
+  background-image: var(--sbi-gradient-mesh-playful);
+}

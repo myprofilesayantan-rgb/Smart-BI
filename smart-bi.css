@@ -1,0 +1,59 @@
+@import "./tokens.css";
+
+/* ─── Base Styles & Page Wrapper ─────────────────────────────────────────────
+   Global resets, html/body defaults, and page wrapper layout.
+   Component-specific styles live in components/<name>/<name>.css
+   ─────────────────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--sbi-surface-page);
+  color: var(--sbi-text-primary);
+  font-family: var(--sbi-font-family-sans);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+.page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* ─── Layout Grid & Gaps ─────────────────────────────────────────────────────
+   Shared section wrapper used across all content sections.
+   ─────────────────────────────────────────────────────────────────────────── */
+.smartbi-section {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-top: var(--gap-section);
+  padding-bottom: var(--gap-section);
+}
+
+.smartbi-content-wrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: var(--side-padding-fluid);
+  padding-right: var(--side-padding-fluid);
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Sections carry their own padding-top/bottom — no extra gap needed */
+}
+
+@media (max-width: 768px) {
+  .smartbi-section {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}

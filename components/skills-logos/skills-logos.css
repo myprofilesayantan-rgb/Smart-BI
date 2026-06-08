@@ -1,0 +1,91 @@
+/* ── Skills / Tools Logos Section ───────────────────────────────────────── */
+
+.component-skills {
+  width: 100%;
+}
+
+.skills-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-element);
+}
+
+/* Section eyebrow label */
+.skills-label {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(var(--grid-base-color), 0.45); /* dynamic theme color */
+  transition: color 0.5s ease;
+}
+
+/* Logo strip — single horizontal row that wraps gracefully */
+.skills-logo-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--gap-micro);
+  width: 100%;
+}
+
+/* Individual logo item */
+.skill-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(20px);
+  cursor: default;
+}
+
+/* State when animated in via GSAP */
+.skill-logo-item.animated {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Parent handles slide-up and scale on hover to keep it decoupled from child's bounce */
+.skill-logo-item.animated:hover {
+  opacity: 1;
+  transform: translateY(-6px) scale(1.08);
+}
+
+/* Logo image — 2x assets, halved for display.
+   No filter applied so every logo (light, dark, colored)
+   renders at its natural appearance against the dark background. */
+.skill-logo-img {
+  width: auto;
+  height: clamp(32px, 4vw, 52px);
+  max-width: clamp(32px, 4vw, 52px);
+  object-fit: contain;
+  display: block;
+  transition: transform 0.3s ease;
+  
+  /* Apply continuous smooth keyframe bounce */
+  animation-name: skillBounce;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-duration: var(--bounce-duration, 4s);
+  animation-delay: var(--bounce-delay, 0s);
+}
+
+/* Smooth keyframe bounce animation */
+@keyframes skillBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px); /* Smooth 8px floating bounce */
+  }
+}
+
+/* Divider line removed per design decision */
+.skills-divider {
+  display: none;
+}
+
+

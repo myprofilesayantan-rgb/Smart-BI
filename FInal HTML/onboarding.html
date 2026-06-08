@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>SMarBI – Workspace Setup</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <link href="global.css" rel="stylesheet">
+  <link href="onboarding/onboarding.css" rel="stylesheet">
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode:"class",
+      theme:{ extend:{ colors:{
+        primary:'#7c3bed','primary-container':'#f3e8ff','on-primary':'#ffffff',
+        background:'#f8f9ff',surface:'#ffffff','surface-variant':'#f1f5f9',
+        'on-surface':'#0f172a','on-surface-variant':'#64748b',
+        outline:'#e2e8f0','outline-variant':'#f1f5f9',
+        error:'#ef4444',success:'#10b981','success-container':'#d1fae5','danger-container':'#fee2e2',
+      }, fontFamily:{ display:['Outfit','sans-serif'], body:['Inter','sans-serif'] } } }
+    }
+  </script>
+</head>
+<body class="bg-[#fafbfc] text-on-surface antialiased min-h-screen">
+
+<!-- ╔══ WELCOME SPLASH OVERLAY ══╗ -->
+<div id="welcome-overlay" class="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center p-6 select-none overflow-hidden">
+  <!-- Soft background blur circles specifically for the welcome screen -->
+  <div class="absolute w-[500px] h-[500px] rounded-full bg-primary/10 blur-[100px] -top-40 -left-40 animate-pulse" style="animation-duration: 6s"></div>
+  <div class="absolute w-[400px] h-[400px] rounded-full bg-purple-400/10 blur-[90px] -bottom-20 -right-20 animate-pulse" style="animation-duration: 8s"></div>
+
+  <div class="relative flex flex-col items-center text-center max-w-md w-full">
+    <!-- Visual Orb Animation -->
+    <div class="w-24 h-24 mb-8 relative flex items-center justify-center">
+      <!-- Outer spinning border gradient ring -->
+      <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary via-purple-400 to-blue-500 animate-spin opacity-85 blur-[2px]" style="animation-duration: 4s"></div>
+      <!-- Core background -->
+      <div class="absolute inset-[3px] bg-white rounded-[21px] flex items-center justify-center shadow-inner">
+        <span class="material-symbols-outlined text-[38px] text-primary" style="font-variation-settings:'FILL' 1">smart_toy</span>
+      </div>
+      <!-- Small pulsing signal ring -->
+      <div class="absolute -inset-2 rounded-3xl border border-primary/30 animate-ping" style="animation-duration: 2s"></div>
+    </div>
+
+    <!-- Welcoming text -->
+    <h1 id="welcome-title" class="font-display text-2xl font-bold tracking-tight text-on-surface mb-2 opacity-0">Welcome to SMarBI</h1>
+    <p id="welcome-sub" class="font-body text-xs text-on-surface-variant leading-relaxed max-w-sm mb-8 opacity-0">
+      Let's set up your custom business intelligence workspace. I'll guide you through connecting data, roles, and metric configurations in 5 quick steps.
+    </p>
+
+    <!-- Progress loading state -->
+    <div id="welcome-progress-wrap" class="w-48 bg-outline/50 rounded-full h-1 overflow-hidden opacity-0">
+      <div id="welcome-progress" class="bg-primary h-full w-0 rounded-full transition-all duration-300"></div>
+    </div>
+    
+    <!-- Status text indicator -->
+    <p id="welcome-status" class="font-body text-[9px] text-on-surface-variant/60 font-bold uppercase tracking-wider mt-3 opacity-0">Initializing BI Brain...</p>
+  </div>
+</div>
+
+<!-- SideNavBar -->
+<aside id="sidebar" class="sidebar-container flex flex-col py-4 px-3 h-screen w-56 fixed left-0 top-0 border-r border-outline-variant z-50 bg-white sidebar-shadow min-h-screen">
+  <div class="px-2.5 mb-6 flex items-center gap-2 logo-container">
+    <div class="w-7 h-7 flex items-center justify-center">
+      <img src="images/favicon.svg" alt="SMarBI Logo" class="w-full h-full object-contain">
+    </div>
+    <span class="font-display text-base font-bold tracking-tight text-on-surface logo-text">SMarBI</span>
+  </div>
+  
+  <nav class="space-y-1 flex-1">
+    <!-- Active Tab: Onboarding -->
+    <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg bg-primary-container text-primary font-medium text-xs transition-colors" href="onboarding.html">
+      <span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+      <span class="nav-text font-body">Onboarding</span>
+    </a>
+    <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+      <span class="material-symbols-outlined text-[16px]">card_membership</span>
+      <span class="nav-text font-body">Subscription</span>
+    </a>
+    <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+      <span class="material-symbols-outlined text-[16px]">menu_book</span>
+      <span class="nav-text font-body">Guide Manuals</span>
+    </a>
+    <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+      <span class="material-symbols-outlined text-[16px]">support_agent</span>
+      <span class="nav-text font-body">Contact Support Team</span>
+    </a>
+    <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+      <span class="material-symbols-outlined text-[16px]">download</span>
+      <span class="nav-text font-body">Downloads</span>
+    </a>
+    <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+      <span class="material-symbols-outlined text-[16px]">settings</span>
+      <span class="nav-text font-body">Settings</span>
+    </a>
+  </nav>
+  
+  <div class="mt-auto pt-3 border-t border-outline-variant flex flex-col gap-3">
+    <div class="space-y-1">
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 text-on-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">help</span>
+        <span class="help-logout-text font-body font-medium">Help Center</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 text-on-surface-variant hover:text-error text-xs transition-colors" href="login.html?logout=true">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+        <span class="help-logout-text font-body font-medium">Logout</span>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- ╔══ TOP BAR (Focus Mode) ══╗ -->
+<header id="main-header" class="main-content-shifted fixed top-0 right-0 left-56 h-13 flex items-center justify-between px-8 bg-white/70 backdrop-blur-md z-40 border-b border-outline-variant/80">
+  <div class="flex items-center gap-3">
+    <button id="sidebar-toggle" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-md transition-colors mr-1">
+      <span class="material-symbols-outlined text-[20px]">menu</span>
+    </button>
+    <div class="w-6 h-6"><img src="images/favicon.svg" alt="SMarBI" class="w-full h-full object-contain"></div>
+    <span class="font-display text-sm font-bold tracking-tight text-on-surface">SMarBI</span>
+    <span class="h-4 w-px bg-outline mx-1"></span>
+    <span id="phase-label" class="font-display font-semibold text-on-surface-variant text-[11px]">Workspace Setup</span>
+  </div>
+  <div class="flex items-center gap-4">
+    <div class="hidden sm:flex items-center gap-1.5">
+      <div class="phase-dot w-1.5 h-1.5 rounded-full bg-primary transition-all" data-ph="1"></div>
+      <div class="phase-dot w-1.5 h-1.5 rounded-full bg-outline transition-all" data-ph="2"></div>
+      <div class="phase-dot w-1.5 h-1.5 rounded-full bg-outline transition-all" data-ph="3"></div>
+      <div class="phase-dot w-1.5 h-1.5 rounded-full bg-outline transition-all" data-ph="4"></div>
+      <div class="phase-dot w-1.5 h-1.5 rounded-full bg-outline transition-all" data-ph="5"></div>
+    </div>
+    <div class="h-4 w-px bg-outline"></div>
+    <a href="dashboard.html" class="text-[11px] font-bold text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1">
+      <span>Save &amp; Exit</span><span class="material-symbols-outlined text-[15px]">logout</span>
+    </a>
+    <div class="h-4 w-px bg-outline"></div>
+    <div class="w-7 h-7 rounded-md overflow-hidden border border-outline">
+      <img alt="User" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrV2uuXVfrfG8zmwRQLReo3dmLsCwzQirSxa1dvyB1mCOceZVJEBtWGd3HNJ_zvKiqT2iHBjEjJjv4Y_42JYRkJme-aByzDa2iuDD1fhzLNSoNerZg64hR-9rmeR_w8zaxBuEFYZqe3gJY9ChJhcRULMfFKZ2mVOS7ZELOYQ1ikzCLE5hIz3IcZ4oGswTzljbafhwDSJjJaIUm2kRCe8cJY-tm0QZS0j4sFuUfXU0f9tYs586ImtR0pP2OLSK2d9aN4SNc_UWT8hvR" class="w-full h-full object-cover">
+    </div>
+  </div>
+</header>
+
+<main class="main-content-shifted ml-56 pt-13 min-h-screen relative overflow-x-hidden bg-[#fafbfc]">
+  <div class="ambient-blur-circle ambient-blur-1"></div>
+  <div class="ambient-blur-circle ambient-blur-2"></div>
+
+  <!-- ╔══ STANDARD WRAPPER — Phases 1, 2, 3 ══╗ -->
+  <div id="phase-wrapper" class="w-full max-w-5xl mx-auto px-4 md:px-6 grid grid-cols-12 gap-6 relative z-10 py-10 items-start">
+
+    <!-- Left Column: Active Phase Content -->
+    <section id="content-col" class="col-span-12 lg:col-span-8 flex flex-col gap-4">
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- PHASE 1 · Business Identity           -->
+      <!-- ══════════════════════════════════════ -->
+      <div id="phase-1" class="flex flex-col h-[580px] bg-white rounded-2xl border border-outline shadow-sm overflow-hidden">
+        
+        <!-- Answered summary strip -->
+        <div id="q-summary" class="hidden flex-wrap items-center gap-2 bg-slate-50 px-6 py-3 border-b border-outline/50 shadow-sm text-[9.5px]">
+          <span class="font-bold text-on-surface-variant uppercase tracking-wider mr-1">Setup so far</span>
+        </div>
+
+        <!-- Conversational Chat Feed -->
+        <div id="onboarding-chat-feed" class="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50/20">
+          <!-- Chat bubbles will be dynamically appended here -->
+        </div>
+
+        <!-- Persistent Bottom Input Rail -->
+        <div class="p-4 bg-white border-t border-outline/60">
+          <div id="onboarding-ai-input-deck" class="p-[1.5px] rounded-xl bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 shadow-sm transition-all duration-300">
+            <div class="bg-white rounded-[10px]">
+              <div class="px-3 py-2">
+                <textarea id="onboarding-textarea" class="w-full bg-transparent border-none focus:ring-0 text-xs placeholder:text-on-surface-variant/40 resize-none h-10 p-0 leading-normal text-on-surface" placeholder="Ask anything about your business..."></textarea>
+              </div>
+              <div class="flex items-center justify-between px-3 py-1.5 border-t border-outline-variant/30 rounded-b-[10px]">
+                <div class="flex gap-1.5">
+                  <button id="onboarding-add-btn" type="button" class="w-5 h-5 rounded-full border border-primary/40 flex items-center justify-center text-primary hover:bg-primary-container/30 transition-colors pointer-events-auto cursor-pointer" title="Attach file">
+                    <span class="material-symbols-outlined text-[11px] font-bold">add</span>
+                  </button>
+                  <input type="file" id="onboarding-rail-file-input" class="hidden" accept=".csv,.xlsx,.xls,.pdf,.docx,.pptx">
+                  <button type="button" class="w-5 h-5 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant/40 hover:bg-surface-variant/50 transition-colors">
+                    <span class="material-symbols-outlined text-[11px]">history</span>
+                  </button>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button type="button" class="w-5 h-5 flex items-center justify-center text-on-surface-variant/40 hover:bg-surface-variant/50 transition-colors rounded-full">
+                    <span class="material-symbols-outlined text-[12px]">mic</span>
+                  </button>
+                  <button id="onboarding-send-btn" type="button" class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-on-primary hover:opacity-90 active:scale-95 transition-all disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                    <span class="material-symbols-outlined text-[11px]">arrow_upward</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- PHASE 2 · Connect Data Source         -->
+      <!-- ══════════════════════════════════════ -->
+      <div id="phase-2" class="hidden flex flex-col gap-4">
+        <div class="flex gap-3 ai-bubble-card">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center shrink-0 text-white shadow-sm shadow-primary/20">
+            <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">smart_toy</span>
+          </div>
+          <div class="bg-white rounded-xl rounded-tl-sm p-4 border border-outline shadow-sm flex-1">
+            <p id="p2-ai-text" class="font-body text-sm text-on-surface leading-relaxed">Now let's connect your data. Choose how you want to bring your business data into SMarBI.</p>
+          </div>
+        </div>
+
+        <!-- Source Card (default) -->
+        <div id="p2-source-card" class="bg-white rounded-2xl p-7 border border-outline shadow-sm">
+          <h3 class="font-display text-sm font-semibold text-on-surface mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-primary">hub</span>
+            Connect Data Source
+          </h3>
+          <div class="flex gap-1.5 p-1 bg-surface-variant/40 rounded-xl mb-6 border border-outline/40">
+            <button id="p2-tab-db" class="p2-tab flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-white shadow-sm border border-outline text-xs font-bold text-on-surface transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px] text-primary">database</span>Database
+            </button>
+            <button id="p2-tab-file" class="p2-tab flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-xs font-semibold text-on-surface-variant transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">upload_file</span>File Upload
+            </button>
+            <button id="p2-tab-skip" class="p2-tab flex-1 flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg text-xs font-semibold text-on-surface-variant transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">skip_next</span>Skip for Now
+            </button>
+          </div>
+
+          <!-- DB Panel -->
+          <div id="p2-db-panel">
+            <p class="text-[10px] text-on-surface-variant mb-4 font-body">Enter your PostgreSQL credentials. SMarBI connects securely using encrypted credentials.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label for="db-host" class="text-[10px] font-bold text-on-surface-variant ml-1">Host / Server</label>
+                <div class="flex items-center bg-white px-3 h-10 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+                  <input id="db-host" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="e.g. db.example.com" type="text">
+                </div>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="db-name" class="text-[10px] font-bold text-on-surface-variant ml-1">Database Name</label>
+                <div class="flex items-center bg-white px-3 h-10 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+                  <input id="db-name" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="e.g. production_db" type="text">
+                </div>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="db-user" class="text-[10px] font-bold text-on-surface-variant ml-1">Username</label>
+                <div class="flex items-center bg-white px-3 h-10 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+                  <input id="db-user" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="db_username" type="text">
+                </div>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label for="db-pass" class="text-[10px] font-bold text-on-surface-variant ml-1">Password</label>
+                <div class="flex items-center bg-white px-3 h-10 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+                  <input id="db-pass" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="••••••••" type="password">
+                  <button id="db-toggle-pass" type="button" class="text-on-surface-variant/50 hover:text-on-surface p-0.5 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[18px]">visibility</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- File Panel -->
+          <div id="p2-file-panel" class="hidden">
+            <p class="text-[10px] text-on-surface-variant mb-4 font-body">Upload a CSV, Excel, or JSON file. SMarBI will auto-detect columns and build your metrics index.</p>
+            <div id="p2-dropzone" class="relative flex flex-col items-center justify-center gap-3 border-2 border-dashed border-outline rounded-xl p-10 text-center bg-surface-variant/20 hover:bg-primary-container/10 hover:border-primary/40 transition-all cursor-pointer group">
+              <input id="p2-file-input" type="file" accept=".csv,.xlsx,.xls,.json" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+              <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/15 transition-colors">
+                <span class="material-symbols-outlined text-[24px]">cloud_upload</span>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-on-surface">Drop your file here</p>
+                <p class="text-[10px] text-on-surface-variant mt-0.5">or <span class="text-primary font-semibold underline underline-offset-2">browse files</span></p>
+              </div>
+              <div class="flex items-center gap-2 mt-1">
+                <span class="px-2 py-0.5 bg-white border border-outline rounded-full text-[9px] font-bold text-on-surface-variant">.CSV</span>
+                <span class="px-2 py-0.5 bg-white border border-outline rounded-full text-[9px] font-bold text-on-surface-variant">.XLSX</span>
+                <span class="px-2 py-0.5 bg-white border border-outline rounded-full text-[9px] font-bold text-on-surface-variant">.JSON</span>
+                <span class="text-[9px] text-on-surface-variant/50">· max 50 MB</span>
+              </div>
+            </div>
+            <div id="p2-file-preview" class="hidden mt-3 flex items-center gap-3 bg-primary-container/20 border border-primary/20 rounded-xl px-4 py-3">
+              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0"><span class="material-symbols-outlined text-[16px]">description</span></div>
+              <div class="flex-1 min-w-0">
+                <p id="p2-file-name" class="text-xs font-bold text-on-surface truncate">file.csv</p>
+                <p id="p2-file-meta" class="text-[10px] text-on-surface-variant">Ready to upload</p>
+              </div>
+              <button id="p2-file-clear" type="button" class="text-on-surface-variant/50 hover:text-error transition-colors">
+                <span class="material-symbols-outlined text-[18px]">close</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Skip Panel -->
+          <div id="p2-skip-panel" class="hidden text-center py-6">
+            <div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center mx-auto mb-3">
+              <span class="material-symbols-outlined text-[22px] text-on-surface-variant">skip_next</span>
+            </div>
+            <p class="text-xs font-bold text-on-surface mb-1">Continue with demo data</p>
+            <p class="text-[10px] text-on-surface-variant max-w-xs mx-auto leading-relaxed">SMarBI will use sample data so you can explore the platform. Connect your real data source at any time from Settings.</p>
+          </div>
+
+          <!-- Actions -->
+          <div class="flex justify-between items-center mt-6 pt-4 border-t border-outline/40">
+            <button id="p2-back" type="button" class="px-4 py-2 border border-outline text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">arrow_back</span>Back
+            </button>
+            <div class="flex items-center gap-3">
+              <div id="p2-spinner" class="hidden items-center gap-2 text-primary animate-pulse">
+                <svg class="animate-spin h-3.5 w-3.5" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <span id="p2-spinner-label" class="text-[10px] font-bold font-body">Connecting...</span>
+              </div>
+              <button id="p2-connect-btn" class="bg-primary text-on-primary font-body text-xs font-bold py-2.5 px-5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-sm flex items-center gap-1.5 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed" disabled>
+                <span id="p2-btn-icon" class="material-symbols-outlined text-[15px]">flash_on</span>
+                <span id="p2-btn-label">Test &amp; Connect</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Success Card -->
+        <div id="p2-success-card" class="hidden bg-white rounded-2xl p-7 border border-success/30 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-success/15 flex items-center justify-center text-success shrink-0">
+              <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 1">check_circle</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-display text-sm font-bold text-on-surface">Data Source Connected!</h4>
+              <p id="p2-success-desc" class="font-body text-[11px] text-on-surface-variant mt-1">Analysing your data structure...</p>
+              <div class="grid grid-cols-4 gap-2 mt-4">
+                <div class="bg-surface-variant/40 rounded-xl p-3 text-center border border-outline/40">
+                  <p class="text-base font-bold font-display text-primary">42</p><p class="text-[9px] text-on-surface-variant">Tables</p>
+                </div>
+                <div class="bg-surface-variant/40 rounded-xl p-3 text-center border border-outline/40">
+                  <p class="text-base font-bold font-display text-primary">1.2M</p><p class="text-[9px] text-on-surface-variant">Rows</p>
+                </div>
+                <div class="bg-surface-variant/40 rounded-xl p-3 text-center border border-outline/40">
+                  <p class="text-base font-bold font-display text-primary">6</p><p class="text-[9px] text-on-surface-variant">Data Types</p>
+                </div>
+                <div class="bg-surface-variant/40 rounded-xl p-3 text-center border border-outline/40">
+                  <p class="text-base font-bold font-display text-success">Yes</p><p class="text-[9px] text-on-surface-variant">Team Data</p>
+                </div>
+              </div>
+              <!-- VIEW DISCOVERED KPIS ACTION BUTTON -->
+              <div class="mt-4 flex justify-between items-center bg-slate-50 border border-outline rounded-xl p-3">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1">insights</span>
+                  <div class="text-left">
+                    <p class="text-[10px] font-bold text-on-surface">Background KPI Building</p>
+                    <p class="text-[9px] text-on-surface-variant">847 custom KPIs successfully identified</p>
+                  </div>
+                </div>
+                <button id="p2-view-discovered-btn" type="button" class="text-[10px] font-bold text-primary border border-primary/30 px-3 py-1.5 rounded-lg hover:bg-primary-container/20 transition-all cursor-pointer flex items-center gap-1">
+                  Preview KPIs <span class="material-symbols-outlined text-[12px]">open_in_new</span>
+                </button>
+              </div>
+
+              <div class="mt-4 p-3 bg-primary-container/30 rounded-xl border border-primary/10 flex items-start gap-2.5">
+                <span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5">groups</span>
+                <div class="flex-1">
+                  <p class="text-[10px] font-bold text-on-surface">Team data detected in your database</p>
+                  <p class="text-[9.5px] text-on-surface-variant mt-0.5">I found employee and department records. Should I use this for team setup?</p>
+                </div>
+                <div class="flex gap-2 shrink-0 items-start pt-0.5">
+                  <button id="p2-use-team-data" class="text-[10px] font-bold text-primary hover:underline cursor-pointer">Yes, use it</button>
+                  <button id="p2-skip-team-data" class="text-[10px] text-on-surface-variant hover:text-on-surface cursor-pointer">No thanks</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-end mt-5 pt-4 border-t border-outline/40">
+            <button id="p2-next-btn" class="bg-primary text-on-primary font-body text-xs font-bold py-2.5 px-5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+              Continue to Team Setup <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Error Card -->
+        <div id="p2-error-card" class="hidden bg-white rounded-2xl p-7 border border-error/30 shadow-sm">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-full bg-danger-container flex items-center justify-center text-error shrink-0">
+              <span class="material-symbols-outlined text-[20px]">error</span>
+            </div>
+            <div class="flex-1">
+              <h4 class="font-display text-sm font-bold text-on-surface">Connection Failed</h4>
+              <p id="p2-error-msg" class="font-body text-[11px] text-on-surface-variant mt-1">Authentication failed — invalid username or password.</p>
+              <div class="flex gap-3 mt-4">
+                <button id="p2-retry-btn" class="bg-primary text-on-primary font-body text-xs font-bold py-2 px-4 rounded-lg flex items-center gap-1.5 cursor-pointer hover:opacity-90">
+                  <span class="material-symbols-outlined text-[14px]">refresh</span>Try Again
+                </button>
+                <button id="p2-change-source" class="border border-outline text-on-surface-variant text-xs font-semibold py-2 px-4 rounded-lg hover:bg-surface-variant/50 cursor-pointer transition-all">Change Source</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════════════ -->
+      <!-- PHASE 3 · Team & Organization        -->
+      <!-- ══════════════════════════════════════ -->
+      <div id="phase-3" class="hidden flex flex-col gap-4">
+        <div class="flex gap-3 ai-bubble-card">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center shrink-0 text-white shadow-sm shadow-primary/20">
+            <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">smart_toy</span>
+          </div>
+          <div class="bg-white rounded-xl rounded-tl-sm p-4 border border-outline shadow-sm flex-1">
+            <p id="p3-ai-text" class="font-body text-sm text-on-surface leading-relaxed">Let's set up your team. I'll guide you through roles, structure, and invitations.</p>
+          </div>
+        </div>
+
+        <!-- Sub-step progress -->
+        <div class="flex items-center gap-2 px-1">
+          <div class="flex items-center gap-2" id="p3-sub-dot-roles-wrap">
+            <div id="p3-sub-dot-roles" class="w-6 h-6 rounded-full bg-primary text-white text-[10px] font-bold flex items-center justify-center shrink-0 transition-all">1</div>
+            <span class="text-[10px] font-bold text-on-surface">Roles</span>
+          </div>
+          <div class="flex-1 h-px bg-outline" id="p3-line-1"></div>
+          <div class="flex items-center gap-2" id="p3-sub-dot-teams-wrap">
+            <div id="p3-sub-dot-teams" class="w-6 h-6 rounded-full border border-outline bg-surface-variant text-on-surface-variant text-[10px] font-bold flex items-center justify-center shrink-0 transition-all">2</div>
+            <span class="text-[10px] font-semibold text-on-surface-variant" id="p3-teams-label">Teams</span>
+          </div>
+          <div class="flex-1 h-px bg-outline" id="p3-line-2"></div>
+          <div class="flex items-center gap-2" id="p3-sub-dot-invite-wrap">
+            <div id="p3-sub-dot-invite" class="w-6 h-6 rounded-full border border-outline bg-surface-variant text-on-surface-variant text-[10px] font-bold flex items-center justify-center shrink-0 transition-all">3</div>
+            <span class="text-[10px] font-semibold text-on-surface-variant" id="p3-invite-label">Invite</span>
+          </div>
+        </div>
+
+        <!-- Sub A: Roles -->
+        <div id="p3-roles-card" class="bg-white rounded-2xl p-7 border border-outline shadow-sm">
+          <h3 class="font-display text-sm font-semibold text-on-surface mb-1 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-primary">badge</span>Define Access Roles
+          </h3>
+          <p class="text-[10px] text-on-surface-variant mb-5 font-body">Select roles that exist in your organisation. Multiple selections allowed.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-5">
+            <div class="role-card border border-outline rounded-xl p-4 flex items-start gap-3 cursor-pointer hover:border-primary/30 transition-all" data-role="Executive">
+              <div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center text-amber-600 shrink-0"><span class="material-symbols-outlined text-[16px]">star</span></div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between"><h4 class="text-xs font-bold text-on-surface">Executive / C-Suite</h4><div class="role-radio w-4 h-4 rounded-full border border-outline-variant flex items-center justify-center"><div class="hidden w-2 h-2 bg-primary rounded-full"></div></div></div>
+                <p class="text-[10px] text-on-surface-variant mt-0.5 leading-tight">Full access — strategic KPIs and board-level reports</p>
+              </div>
+            </div>
+            <div class="role-card border border-primary bg-primary-container/20 rounded-xl p-4 flex items-start gap-3 cursor-pointer transition-all selected" data-role="Analyst">
+              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0"><span class="material-symbols-outlined text-[16px]">analytics</span></div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between"><h4 class="text-xs font-bold text-on-surface">Data Analyst</h4><div class="role-radio w-4 h-4 rounded-full border border-primary flex items-center justify-center"><div class="w-2 h-2 bg-primary rounded-full"></div></div></div>
+                <p class="text-[10px] text-on-surface-variant mt-0.5 leading-tight">Query databases, build dashboards, run analysis</p>
+              </div>
+            </div>
+            <div class="role-card border border-outline rounded-xl p-4 flex items-start gap-3 cursor-pointer hover:border-primary/30 transition-all" data-role="Manager">
+              <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 shrink-0"><span class="material-symbols-outlined text-[16px]">manage_accounts</span></div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between"><h4 class="text-xs font-bold text-on-surface">Department Manager</h4><div class="role-radio w-4 h-4 rounded-full border border-outline-variant flex items-center justify-center"><div class="hidden w-2 h-2 bg-primary rounded-full"></div></div></div>
+                <p class="text-[10px] text-on-surface-variant mt-0.5 leading-tight">View team KPIs, receive reports, annotate boards</p>
+              </div>
+            </div>
+            <div class="role-card border border-outline rounded-xl p-4 flex items-start gap-3 cursor-pointer hover:border-primary/30 transition-all" data-role="Viewer">
+              <div class="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500 shrink-0"><span class="material-symbols-outlined text-[16px]">visibility</span></div>
+              <div class="flex-1">
+                <div class="flex items-center justify-between"><h4 class="text-xs font-bold text-on-surface">Viewer</h4><div class="role-radio w-4 h-4 rounded-full border border-outline-variant flex items-center justify-center"><div class="hidden w-2 h-2 bg-primary rounded-full"></div></div></div>
+                <p class="text-[10px] text-on-surface-variant mt-0.5 leading-tight">Read-only — view published dashboards and exports</p>
+              </div>
+            </div>
+          </div>
+          <div class="border border-outline/60 rounded-xl p-4 bg-surface-variant/20">
+            <label class="text-[10px] font-bold text-on-surface-variant block mb-2">+ Add Custom Roles (type and press <kbd class="px-1 py-0.5 bg-white border border-outline rounded text-[9px] font-mono">.</kbd> or Enter)</label>
+            <div class="flex items-center gap-2">
+              <input id="custom-role-input" type="text" class="flex-1 bg-white px-3 py-2 rounded-lg border border-outline focus:ring-2 focus:ring-primary/20 focus:border-primary text-xs font-body text-on-surface placeholder:text-on-surface-variant/40 transition-all" placeholder="e.g. BI Developer, Finance Lead...">
+              <button id="add-role-btn" type="button" class="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center hover:bg-primary/15 transition-colors cursor-pointer"><span class="material-symbols-outlined text-[16px]">add</span></button>
+            </div>
+            <div id="custom-roles-list" class="flex flex-wrap gap-2 mt-3"></div>
+          </div>
+          <div class="flex justify-between mt-6 pt-4 border-t border-outline/40">
+            <button id="p3-roles-back" type="button" class="px-4 py-2 border border-outline text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">arrow_back</span>Back
+            </button>
+            <button id="p3-roles-next" class="bg-primary text-on-primary font-body text-xs font-bold py-2.5 px-5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+              Save Roles &amp; Continue <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Sub B: Teams -->
+        <div id="p3-teams-card" class="hidden bg-white rounded-2xl p-7 border border-outline shadow-sm">
+          <h3 class="font-display text-sm font-semibold text-on-surface mb-1 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-primary">account_tree</span>Upload Team Structure
+          </h3>
+          <p class="text-[10px] text-on-surface-variant mb-4 font-body">Upload your team or division list. SMarBI will confirm detected teams before proceeding.</p>
+          <div class="flex items-center justify-between bg-surface-variant/30 rounded-xl px-4 py-3 border border-outline/40 mb-4">
+            <div class="flex items-center gap-2.5">
+              <span class="material-symbols-outlined text-primary text-[18px]">download</span>
+              <div>
+                <p class="text-[10px] font-bold text-on-surface">Download Template</p>
+                <p class="text-[9px] text-on-surface-variant">team_structure.csv — Team Name, Division, Parent Team, Head Count</p>
+              </div>
+            </div>
+            <button class="text-[10px] font-bold text-primary hover:underline cursor-pointer">Download</button>
+          </div>
+          <div id="p3-team-dropzone" class="relative flex flex-col items-center justify-center gap-3 border-2 border-dashed border-outline rounded-xl p-8 text-center bg-surface-variant/20 hover:bg-primary-container/10 hover:border-primary/40 transition-all cursor-pointer group">
+            <input id="p3-team-input" type="file" accept=".csv,.xlsx,.xls" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/15 transition-colors"><span class="material-symbols-outlined text-[22px]">group_add</span></div>
+            <div>
+              <p class="text-xs font-bold text-on-surface">Drop your team list</p>
+              <p class="text-[10px] text-on-surface-variant mt-0.5">or <span class="text-primary font-semibold underline underline-offset-2">browse files</span></p>
+            </div>
+            <div class="flex gap-2"><span class="px-2 py-0.5 bg-white border border-outline rounded-full text-[9px] font-bold text-on-surface-variant">.CSV</span><span class="px-2 py-0.5 bg-white border border-outline rounded-full text-[9px] font-bold text-on-surface-variant">.XLSX</span></div>
+          </div>
+          <div id="p3-team-table-wrap" class="hidden mt-4">
+            <div class="flex items-center justify-between mb-2">
+              <p class="text-[10px] font-bold text-on-surface">Detected Teams — Confirm Names</p>
+              <span id="p3-team-badge" class="text-[9px] font-bold text-primary bg-primary-container/30 px-2 py-0.5 rounded-full">0 teams</span>
+            </div>
+            <div class="border border-outline rounded-xl overflow-hidden">
+              <table class="w-full text-[10px] font-body">
+                <thead class="bg-surface-variant/50"><tr>
+                  <th class="text-left px-3 py-2 text-on-surface-variant font-bold">Team Name</th>
+                  <th class="text-left px-3 py-2 text-on-surface-variant font-bold">Division</th>
+                  <th class="text-right px-3 py-2 text-on-surface-variant font-bold">Status</th>
+                </tr></thead>
+                <tbody id="p3-teams-body" class="divide-y divide-outline/40"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="flex justify-between mt-6 pt-4 border-t border-outline/40">
+            <button id="p3-teams-back" type="button" class="px-4 py-2 border border-outline text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">arrow_back</span>Back
+            </button>
+            <div class="flex items-center gap-3">
+              <button id="p3-teams-skip" type="button" class="text-[11px] text-on-surface-variant hover:text-on-surface font-semibold transition-colors cursor-pointer">Skip for now</button>
+              <button id="p3-teams-next" class="bg-primary text-on-primary font-body text-xs font-bold py-2.5 px-5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-sm flex items-center gap-1.5 cursor-pointer disabled:opacity-40" disabled>
+                Confirm Teams <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub C: Invite -->
+        <div id="p3-invite-card" class="hidden bg-white rounded-2xl p-7 border border-outline shadow-sm">
+          <h3 class="font-display text-sm font-semibold text-on-surface mb-1 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-primary">person_add</span>Invite Employees
+          </h3>
+          <p class="text-[10px] text-on-surface-variant mb-4 font-body">How would you like to onboard your team members?</p>
+          <div class="flex gap-1.5 p-1 bg-surface-variant/40 rounded-xl mb-5 border border-outline/40">
+            <button id="invite-tab-small" class="invite-tab flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-white shadow-sm border border-outline text-xs font-bold text-on-surface transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px] text-primary">person</span>Small Team (&lt;50)
+            </button>
+            <button id="invite-tab-large" class="invite-tab flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-semibold text-on-surface-variant transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">corporate_fare</span>Large Organisation
+            </button>
+          </div>
+          <!-- Small Panel -->
+          <div id="invite-small-panel">
+            <div class="flex items-center justify-between bg-surface-variant/30 rounded-xl px-4 py-3 border border-outline/40 mb-4">
+              <div class="flex items-center gap-2.5"><span class="material-symbols-outlined text-primary text-[18px]">download</span><div><p class="text-[10px] font-bold text-on-surface">Download Employee Template</p><p class="text-[9px] text-on-surface-variant">employees.csv — Name, Email, Team, Role</p></div></div>
+              <button class="text-[10px] font-bold text-primary hover:underline cursor-pointer">Download</button>
+            </div>
+            <div id="invite-small-dropzone" class="relative flex flex-col items-center justify-center gap-3 border-2 border-dashed border-outline rounded-xl p-8 text-center bg-surface-variant/20 hover:bg-primary-container/10 hover:border-primary/40 transition-all cursor-pointer group">
+              <input id="invite-small-file" type="file" accept=".csv,.xlsx" class="absolute inset-0 opacity-0 cursor-pointer w-full h-full">
+              <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary/15 transition-colors"><span class="material-symbols-outlined text-[22px]">upload_file</span></div>
+              <div><p class="text-xs font-bold text-on-surface">Upload employee list</p><p class="text-[10px] text-on-surface-variant mt-0.5">or <span class="text-primary font-semibold underline underline-offset-2">browse files</span></p></div>
+            </div>
+            <div class="mt-4 pt-4 border-t border-outline/40">
+              <label class="text-[10px] font-bold text-on-surface-variant block mb-2">Or invite by email (press Enter to add)</label>
+              <div class="flex items-center gap-2 bg-white px-3 py-2.5 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+                <input id="invite-email-input" type="text" class="flex-1 bg-transparent border-none focus:ring-0 text-xs text-on-surface placeholder:text-on-surface-variant/40 p-0" placeholder="colleague@company.com">
+              </div>
+              <div id="invite-email-chips" class="flex flex-wrap gap-2 mt-3"></div>
+            </div>
+          </div>
+          <!-- Large Panel -->
+          <div id="invite-large-panel" class="hidden">
+            <div class="bg-primary-container/20 border border-primary/15 rounded-xl p-5 text-center">
+              <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto mb-3"><span class="material-symbols-outlined text-[20px]">link</span></div>
+              <p class="text-xs font-bold text-on-surface mb-1">Invitation Link Generated</p>
+              <p class="text-[10px] text-on-surface-variant max-w-xs mx-auto mb-4">Share this with your team. Employees sign up with their company email and are auto-assigned to their team.</p>
+              <div class="flex items-center gap-2 bg-white border border-outline rounded-lg px-3 py-2.5 text-left mb-4">
+                <span class="text-[10px] font-mono text-on-surface-variant flex-1 truncate">https://app.smarbi.io/invite/workspace-7xk2p</span>
+                <button class="text-primary hover:opacity-70 shrink-0"><span class="material-symbols-outlined text-[16px]">content_copy</span></button>
+              </div>
+              <div class="flex gap-3 justify-center">
+                <button class="text-[10px] font-bold text-primary border border-primary/30 px-4 py-2 rounded-lg hover:bg-primary-container/20 transition-all cursor-pointer flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">email</span>Send by Email</button>
+                <button class="text-[10px] font-bold text-on-surface-variant border border-outline px-4 py-2 rounded-lg hover:bg-surface-variant/50 transition-all cursor-pointer flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">share</span>Share Link</button>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-between mt-6 pt-4 border-t border-outline/40">
+            <button id="p3-invite-back" type="button" class="px-4 py-2 border border-outline text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer">
+              <span class="material-symbols-outlined text-[14px]">arrow_back</span>Back
+            </button>
+            <div class="flex items-center gap-3">
+              <button id="p3-invite-skip" type="button" class="text-[11px] text-on-surface-variant hover:text-on-surface font-semibold transition-colors cursor-pointer">Skip for now</button>
+              <button id="p3-invite-next" class="bg-primary text-on-primary font-body text-xs font-bold py-2.5 px-5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+                Continue to KPI Review <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Right: 5-Step Stepper -->
+    <aside id="stepper-col" class="col-span-12 lg:col-span-4">
+      <div class="bg-white rounded-2xl p-6 border border-outline shadow-sm sticky top-20">
+        <h3 class="font-display text-sm font-semibold text-on-surface mb-5">Setup Progress</h3>
+        <div class="space-y-0 relative">
+          <div class="flex gap-4 pb-7 relative step-item cursor-pointer" data-step="1"><div class="absolute left-[15px] top-8 bottom-0 w-[2px] bg-outline-variant step-line" id="sl-1"></div><div id="sc-1" class="step-circle relative z-10 w-8 h-8 rounded-full border-2 border-primary bg-white flex items-center justify-center text-primary shrink-0"><div class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse"></div></div><div class="flex-1 pt-1" id="sd-1"><h4 class="font-body text-xs font-bold text-on-surface">1. Business Identity</h4><p class="text-[10px] text-on-surface-variant opacity-70 mt-0.5">Tell us about your business</p></div></div>
+          <div class="flex gap-4 pb-7 relative step-item cursor-pointer" data-step="2"><div class="absolute left-[15px] top-8 bottom-0 w-[2px] bg-outline-variant step-line" id="sl-2"></div><div id="sc-2" class="step-circle relative z-10 w-8 h-8 rounded-full border border-outline bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0"><span class="font-body text-[10px] font-bold">2</span></div><div class="flex-1 pt-1" id="sd-2"><h4 class="font-body text-xs font-bold text-on-surface-variant">2. Data Source</h4><p class="text-[10px] text-on-surface-variant opacity-40 mt-0.5">Connect your business data</p></div></div>
+          <div class="flex gap-4 pb-7 relative step-item cursor-pointer" data-step="3"><div class="absolute left-[15px] top-8 bottom-0 w-[2px] bg-outline-variant step-line" id="sl-3"></div><div id="sc-3" class="step-circle relative z-10 w-8 h-8 rounded-full border border-outline bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0"><span class="font-body text-[10px] font-bold">3</span></div><div class="flex-1 pt-1" id="sd-3"><h4 class="font-body text-xs font-bold text-on-surface-variant">3. Team Setup</h4><p class="text-[10px] text-on-surface-variant opacity-40 mt-0.5">Roles, teams &amp; invitations</p></div></div>
+          <div class="flex gap-4 pb-7 relative step-item cursor-pointer" data-step="4"><div class="absolute left-[15px] top-8 bottom-0 w-[2px] bg-outline-variant step-line" id="sl-4"></div><div id="sc-4" class="step-circle relative z-10 w-8 h-8 rounded-full border border-outline bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0"><span class="font-body text-[10px] font-bold">4</span></div><div class="flex-1 pt-1" id="sd-4"><h4 class="font-body text-xs font-bold text-on-surface-variant">4. KPI Review</h4><p class="text-[10px] text-on-surface-variant opacity-40 mt-0.5">Confirm your metric library</p></div></div>
+          <div class="flex gap-4 relative step-item cursor-pointer" data-step="5"><div id="sc-5" class="step-circle relative z-10 w-8 h-8 rounded-full border border-outline bg-surface-variant text-on-surface-variant flex items-center justify-center shrink-0"><span class="font-body text-[10px] font-bold">5</span></div><div class="flex-1 pt-1" id="sd-5"><h4 class="font-body text-xs font-bold text-on-surface-variant">5. Preview &amp; Launch</h4><p class="text-[10px] text-on-surface-variant opacity-40 mt-0.5">Review and go live</p></div></div>
+        </div>
+        <!-- Confidence Note Box -->
+        <div class="mt-6 p-4 bg-primary-container/20 border border-primary/10 rounded-xl flex items-start gap-2.5 shadow-sm">
+          <span class="material-symbols-outlined text-primary text-[16px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">info</span>
+          <div>
+            <p class="text-[9.5px] font-bold text-on-surface uppercase tracking-wider">Note</p>
+            <p class="text-[10px] text-on-surface-variant leading-relaxed mt-0.5">You can edit or re-configure any of your connected data, team roles, and metric libraries at any time from Settings after launching your workspace.</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- ╔══ PHASE 4 · KPI Discovery (Full Width) ══╗ -->
+  <div id="phase-4" class="hidden relative z-10 py-10 px-4 md:px-8 w-full max-w-6xl mx-auto">
+    <div class="flex gap-3 ai-bubble-card mb-5 max-w-3xl">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center shrink-0 text-white shadow-sm shadow-primary/20"><span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">smart_toy</span></div>
+      <div class="bg-white rounded-xl rounded-tl-sm p-4 border border-outline shadow-sm">
+        <p class="font-body text-sm text-on-surface leading-relaxed">I analysed your data and found <strong class="text-primary" id="kpi-total">847</strong> potential metrics across <strong class="text-primary" id="kpi-cat-count">6</strong> categories. All are approved by default — reject any you don't need.</p>
+      </div>
+    </div>
+    <div class="bg-white rounded-2xl border border-outline shadow-sm overflow-hidden">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-outline/60 bg-surface-variant/20">
+        <div>
+          <h3 class="font-display text-sm font-bold text-on-surface">KPI Discovery</h3>
+          <p class="text-[10px] text-on-surface-variant mt-0.5"><span id="kpi-approved-n">847</span> of <span id="kpi-total-n">847</span> metrics approved</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="relative">
+            <span class="absolute inset-y-0 left-3 flex items-center"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">search</span></span>
+            <input id="kpi-search" type="text" class="pl-9 pr-4 py-2 bg-surface-variant/50 border border-outline rounded-lg text-xs font-body focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all w-48" placeholder="Search KPIs...">
+          </div>
+          <button id="kpi-approve-all" class="text-[10px] font-bold text-success border border-success/30 bg-success-container/40 hover:bg-success-container px-3 py-1.5 rounded-lg transition-all cursor-pointer">✓ Approve All</button>
+          <button id="kpi-reject-all" class="text-[10px] font-bold text-on-surface-variant border border-outline hover:bg-surface-variant/50 px-3 py-1.5 rounded-lg transition-all cursor-pointer">Reject All</button>
+        </div>
+      </div>
+      <div class="p-6">
+        <div id="kpi-categories-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-4"></div>
+        <div id="kpi-expanded-panel" class="hidden">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <button id="kpi-collapse" class="w-7 h-7 rounded-full border border-outline flex items-center justify-center text-on-surface-variant hover:bg-surface-variant cursor-pointer"><span class="material-symbols-outlined text-[14px]">arrow_back</span></button>
+              <h4 id="kpi-exp-title" class="text-sm font-display font-bold text-on-surface"></h4>
+              <span id="kpi-exp-badge" class="text-[9px] font-bold text-primary bg-primary-container/30 px-2 py-0.5 rounded-full"></span>
+            </div>
+            <div class="flex gap-2">
+              <button id="kpi-exp-approve-all" class="text-[10px] font-bold text-success border border-success/30 bg-success-container/40 hover:bg-success-container px-3 py-1.5 rounded-lg cursor-pointer transition-all">Approve All</button>
+              <button id="kpi-exp-reject-all" class="text-[10px] font-bold text-on-surface-variant border border-outline hover:bg-surface-variant/50 px-3 py-1.5 rounded-lg cursor-pointer transition-all">Reject All</button>
+            </div>
+          </div>
+          <div id="kpi-items-list" class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-80 overflow-y-auto pr-1"></div>
+        </div>
+      </div>
+      <div class="flex items-center justify-between px-6 py-4 border-t border-outline/60 bg-surface-variant/10">
+        <button id="p4-back" type="button" class="px-4 py-2 border border-outline text-on-surface-variant hover:text-on-surface hover:bg-surface-variant/50 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer">
+          <span class="material-symbols-outlined text-[14px]">arrow_back</span>Back to Team Setup
+        </button>
+        <div class="flex items-center gap-3">
+          <button id="p4-skip" type="button" class="text-[11px] text-on-surface-variant hover:text-on-surface font-semibold transition-colors cursor-pointer">Skip for now</button>
+          <button id="p4-confirm" class="bg-primary text-on-primary font-body text-xs font-bold py-2.5 px-5 rounded-lg hover:opacity-90 active:scale-[0.98] transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+            <span id="p4-confirm-label">Confirm Selected KPIs</span> <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══ PHASE 5 · Workspace Preview ══╗ -->
+  <div id="phase-5" class="hidden relative z-10 py-10 px-4 md:px-8 w-full max-w-6xl mx-auto">
+    <div class="grid grid-cols-12 gap-6">
+      <!-- Left: Preview -->
+      <div class="col-span-12 lg:col-span-7 flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="font-display text-lg font-bold text-on-surface">Workspace Preview</h2>
+            <p class="text-[10px] text-on-surface-variant mt-0.5">Review your setup before launching.</p>
+          </div>
+          <span class="text-[9px] font-bold text-success bg-success-container px-3 py-1 rounded-full flex items-center gap-1"><span class="material-symbols-outlined text-[12px]" style="font-variation-settings:'FILL' 1">check_circle</span>Ready to Launch</span>
+        </div>
+        <div class="grid grid-cols-3 gap-3">
+          <div class="bg-white rounded-xl p-4 border border-outline shadow-sm"><div class="flex items-center justify-between mb-2"><span class="material-symbols-outlined text-[16px] text-success">trending_up</span><span class="text-[9px] font-bold text-success bg-success-container px-1.5 py-0.5 rounded-full">+12.5%</span></div><p class="text-base font-bold font-display text-on-surface">$1.24M</p><p class="text-[9px] text-on-surface-variant mt-0.5">Monthly Revenue</p></div>
+          <div class="bg-white rounded-xl p-4 border border-outline shadow-sm"><div class="flex items-center justify-between mb-2"><span class="material-symbols-outlined text-[16px] text-primary">groups</span><span id="p5-team-chip" class="text-[9px] font-bold text-primary bg-primary-container px-1.5 py-0.5 rounded-full">3 Teams</span></div><p class="text-base font-bold font-display text-on-surface" id="p5-employee-n">142</p><p class="text-[9px] text-on-surface-variant mt-0.5">Total Employees</p></div>
+          <div class="bg-white rounded-xl p-4 border border-outline shadow-sm"><div class="flex items-center justify-between mb-2"><span class="material-symbols-outlined text-[16px] text-amber-500">insights</span><span id="p5-kpi-chip" class="text-[9px] font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded-full">847</span></div><p class="text-base font-bold font-display text-on-surface">KPIs</p><p class="text-[9px] text-on-surface-variant mt-0.5">Active Metrics</p></div>
+        </div>
+        <div class="bg-white rounded-xl p-5 border border-outline shadow-sm">
+          <div class="flex items-center justify-between mb-4"><div><p class="text-xs font-bold text-on-surface">Revenue Trend</p><p class="text-[9px] text-on-surface-variant">Last 6 months</p></div><span class="text-[9px] font-bold text-success bg-success-container px-2 py-0.5 rounded-full">Live Data</span></div>
+          <svg viewBox="0 0 400 80" class="w-full h-16" preserveAspectRatio="none"><defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#7c3bed" stop-opacity="0.2"/><stop offset="100%" stop-color="#7c3bed" stop-opacity="0"/></linearGradient></defs><path d="M0,70 L65,55 L130,45 L195,38 L260,25 L325,18 L400,8" stroke="#7c3bed" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M0,70 L65,55 L130,45 L195,38 L260,25 L325,18 L400,8 L400,80 L0,80 Z" fill="url(#cg)"/><circle cx="400" cy="8" r="3" fill="#7c3bed"/></svg>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <button class="p5-edit bg-white rounded-xl p-4 border border-outline hover:border-primary/30 hover:bg-primary-container/5 text-left transition-all cursor-pointer group" data-goto="1"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary transition-colors">business</span><span class="text-xs font-bold text-on-surface">Business Profile</span></div><span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-primary transition-colors">open_in_new</span></div><p id="p5-biz-label" class="text-[10px] text-on-surface-variant mt-1 truncate">–</p></button>
+          <button class="p5-edit bg-white rounded-xl p-4 border border-outline hover:border-primary/30 hover:bg-primary-container/5 text-left transition-all cursor-pointer group" data-goto="2"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary transition-colors">database</span><span class="text-xs font-bold text-on-surface">Data Source</span></div><span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-primary transition-colors">open_in_new</span></div><p class="text-[10px] text-on-surface-variant mt-1">1.24M rows indexed</p></button>
+          <button class="p5-edit bg-white rounded-xl p-4 border border-outline hover:border-primary/30 hover:bg-primary-container/5 text-left transition-all cursor-pointer group" data-goto="3"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary transition-colors">groups</span><span class="text-xs font-bold text-on-surface">Teams &amp; Roles</span></div><span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-primary transition-colors">open_in_new</span></div><p class="text-[10px] text-on-surface-variant mt-1">3 teams · 4 roles</p></button>
+          <button class="p5-edit bg-white rounded-xl p-4 border border-outline hover:border-primary/30 hover:bg-primary-container/5 text-left transition-all cursor-pointer group" data-goto="4"><div class="flex items-center justify-between"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-on-surface-variant group-hover:text-primary transition-colors">insights</span><span class="text-xs font-bold text-on-surface">KPI Library</span></div><span class="material-symbols-outlined text-[14px] text-on-surface-variant group-hover:text-primary transition-colors">open_in_new</span></div><p id="p5-kpi-label" class="text-[10px] text-on-surface-variant mt-1">847 KPIs confirmed</p></button>
+        </div>
+        <button id="p5-launch" class="w-full py-4 bg-gradient-to-r from-primary to-purple-500 text-on-primary rounded-xl font-display text-sm font-bold hover:opacity-90 active:scale-[0.99] transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2 cursor-pointer">
+          <span class="material-symbols-outlined text-[18px]" style="font-variation-settings:'FILL' 1">rocket_launch</span>Launch SMarBI Workspace
+        </button>
+      </div>
+      <!-- Right: AI Summary -->
+      <div class="col-span-12 lg:col-span-5">
+        <div class="bg-white rounded-2xl p-6 border border-outline shadow-sm sticky top-20">
+          <div class="flex items-center gap-3 mb-5">
+            <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-primary to-purple-500 flex items-center justify-center text-white shadow-sm shadow-primary/20"><span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1">smart_toy</span></div>
+            <div><p class="text-xs font-bold text-on-surface">SMarBI AI</p><p class="text-[9.5px] text-on-surface-variant">Setup complete</p></div>
+          </div>
+          <div class="space-y-3 mb-5">
+            <div class="flex items-start gap-2.5"><span class="material-symbols-outlined text-success text-[15px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span><div><p class="text-[10px] font-bold text-on-surface">Business profile configured</p><p id="p5-ai-biz" class="text-[9.5px] text-on-surface-variant">–</p></div></div>
+            <div class="flex items-start gap-2.5"><span class="material-symbols-outlined text-success text-[15px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span><div><p class="text-[10px] font-bold text-on-surface">Data source connected</p><p class="text-[9.5px] text-on-surface-variant">1,241,832 rows across 6 data types</p></div></div>
+            <div class="flex items-start gap-2.5"><span class="material-symbols-outlined text-success text-[15px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span><div><p class="text-[10px] font-bold text-on-surface">Team structure set</p><p class="text-[9.5px] text-on-surface-variant">3 teams, 4 access roles defined</p></div></div>
+            <div class="flex items-start gap-2.5"><span class="material-symbols-outlined text-success text-[15px] shrink-0 mt-0.5" style="font-variation-settings:'FILL' 1">check_circle</span><div><p class="text-[10px] font-bold text-on-surface" id="p5-ai-kpi-label">KPI library confirmed</p><p id="p5-ai-kpi-detail" class="text-[9.5px] text-on-surface-variant">847 metrics approved across 6 categories</p></div></div>
+          </div>
+          <div class="bg-primary-container/20 border border-primary/10 rounded-xl p-4 mb-5">
+            <p class="text-[10px] font-bold text-primary mb-1">💡 AI Recommendation</p>
+            <p id="p5-ai-rec" class="text-[10px] text-on-surface leading-relaxed">Based on your business goals, I recommend starting with Revenue and HR dashboards. Your data shows strong signals in those areas.</p>
+          </div>
+          <div class="p-[1.5px] rounded-xl bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 shadow-sm">
+            <div class="bg-white rounded-[10px]">
+              <div class="px-3 py-2.5"><textarea id="p5-ai-input" class="w-full bg-transparent border-none focus:ring-0 text-[12px] placeholder:text-on-surface-variant/40 resize-none h-10 p-0 leading-normal" placeholder="Ask anything about your workspace setup..."></textarea></div>
+              <div class="flex items-center justify-between px-3 py-1.5 border-t border-outline-variant/30 rounded-b-[10px]">
+                <div class="flex gap-1.5"><button class="w-5 h-5 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant cursor-pointer"><span class="material-symbols-outlined text-[11px]">add</span></button></div>
+                <button class="w-5 h-5 rounded-full bg-primary text-on-primary flex items-center justify-center hover:opacity-90 cursor-pointer"><span class="material-symbols-outlined text-[11px]">arrow_upward</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ╔══ BACKGROUND KPI PREVIEW OVERLAY MODAL ══╗ -->
+  <div id="kpi-preview-overlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[999] flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl border border-outline shadow-xl max-w-2xl w-full flex flex-col max-h-[80vh] overflow-hidden">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-6 py-4 border-b border-outline bg-slate-50/50">
+        <div>
+          <h3 class="font-display text-sm font-bold text-on-surface flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-[18px]" style="font-variation-settings:'FILL' 1">insights</span>
+            Background Discovered KPIs
+          </h3>
+          <p class="text-[9.5px] text-on-surface-variant mt-0.5">Custom metrics built automatically from your connected tables.</p>
+        </div>
+        <button id="close-kpi-preview-modal" type="button" class="w-8 h-8 rounded-full border border-outline flex items-center justify-center text-on-surface-variant hover:bg-slate-100 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[16px]">close</span>
+        </button>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="p-4 border-b border-outline bg-slate-50/20 flex gap-3">
+        <div class="relative flex-1">
+          <span class="absolute inset-y-0 left-3 flex items-center"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">search</span></span>
+          <input id="modal-kpi-search" type="text" class="pl-9 pr-4 py-2 w-full bg-white border border-outline rounded-lg text-xs font-body focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none transition-all" placeholder="Search built KPIs...">
+        </div>
+      </div>
+
+      <!-- Scrollable KPI list -->
+      <div class="flex-1 overflow-y-auto p-6 bg-slate-50/10">
+        <div id="modal-kpi-list" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <!-- Populated dynamically by JS -->
+        </div>
+        <div id="modal-kpi-empty" class="hidden text-center py-10">
+          <span class="material-symbols-outlined text-[32px] text-on-surface-variant/40 mb-2">search_off</span>
+          <p class="text-xs font-semibold text-on-surface">No metrics match your search</p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-4 border-t border-outline bg-slate-50/30 flex justify-end">
+        <button id="close-kpi-preview-modal-footer" type="button" class="bg-primary text-on-primary text-xs font-bold py-2.5 px-5 rounded-lg hover:opacity-90 active:scale-95 transition-all cursor-pointer">
+          Done Previewing
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="max-w-5xl mx-auto mt-12 py-6 border-t border-outline-variant/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-on-surface-variant/60">
+    <p>© 2026 SMarBI Technologies. All rights reserved.</p>
+    <div class="flex items-center gap-4">
+      <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+      <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+      <a href="#" class="hover:text-primary transition-colors">System Status</a>
+      <a href="#" class="hover:text-primary transition-colors font-semibold">Contact Support</a>
+    </div>
+  </footer>
+
+  <!-- ╔══ DYNAMIC WORKSPACE LAUNCH PORTAL ══╗ -->
+  <div id="launch-portal" class="hidden fixed inset-0 bg-slate-900/90 backdrop-blur-md z-[9999] flex flex-col items-center justify-center p-6 select-none overflow-hidden text-white animate-fade-in">
+    <!-- Glowing background orbits -->
+    <div class="absolute w-[600px] h-[600px] rounded-full bg-primary/20 blur-[120px] -top-20 -left-20 animate-pulse" style="animation-duration: 5s"></div>
+    <div class="absolute w-[500px] h-[500px] rounded-full bg-purple-500/20 blur-[120px] -bottom-20 -right-20 animate-pulse" style="animation-duration: 7s"></div>
+
+    <div class="relative flex flex-col items-center text-center max-w-md w-full">
+      <!-- Animated Launch Ring -->
+      <div class="w-28 h-28 mb-10 relative flex items-center justify-center">
+        <!-- Spinning gradient rings -->
+        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-primary via-purple-400 to-blue-500 animate-spin" style="animation-duration: 3s"></div>
+        <div class="absolute inset-[3px] rounded-full bg-slate-950 flex items-center justify-center shadow-inner z-10">
+          <span class="material-symbols-outlined text-[42px] text-primary animate-pulse" style="font-variation-settings:'FILL' 1">rocket_launch</span>
+        </div>
+        <!-- Outer pulsing wave -->
+        <div class="absolute -inset-4 rounded-full border border-primary/20 animate-ping" style="animation-duration: 2.5s"></div>
+      </div>
+
+      <!-- Heading -->
+      <h2 class="font-display text-2xl font-bold tracking-tight mb-2">Deploying Your Workspace</h2>
+      <p class="font-body text-xs text-slate-300 leading-relaxed max-w-sm mb-10">
+        Please wait while SMarBI structures your databases, builds your KPI pipelines, and spins up your analytical engine.
+      </p>
+
+      <!-- Status indicator list -->
+      <div class="w-full max-w-xs space-y-3.5 mb-10 text-left bg-slate-950/40 border border-white/5 rounded-2xl p-5 backdrop-blur-sm shadow-xl">
+        <div id="lp-status-1" class="flex items-center gap-3 opacity-30 transition-all duration-300">
+          <span class="material-symbols-outlined text-[16px] text-primary shrink-0" style="font-variation-settings:'FILL' 1">database</span>
+          <span class="text-[10px] font-bold tracking-wide flex-1">Structuring databases &amp; tables</span>
+          <span class="lp-step-icon material-symbols-outlined text-[14px] text-slate-500">pending</span>
+        </div>
+        <div id="lp-status-2" class="flex items-center gap-3 opacity-30 transition-all duration-300">
+          <span class="material-symbols-outlined text-[16px] text-primary shrink-0" style="font-variation-settings:'FILL' 1">insights</span>
+          <span class="text-[10px] font-bold tracking-wide flex-1">Building analytical KPI pipelines</span>
+          <span class="lp-step-icon material-symbols-outlined text-[14px] text-slate-500">pending</span>
+        </div>
+        <div id="lp-status-3" class="flex items-center gap-3 opacity-30 transition-all duration-300">
+          <span class="material-symbols-outlined text-[16px] text-primary shrink-0" style="font-variation-settings:'FILL' 1">groups</span>
+          <span class="text-[10px] font-bold tracking-wide flex-1">Syncing teams &amp; access controls</span>
+          <span class="lp-step-icon material-symbols-outlined text-[14px] text-slate-500">pending</span>
+        </div>
+        <div id="lp-status-4" class="flex items-center gap-3 opacity-30 transition-all duration-300">
+          <span class="material-symbols-outlined text-[16px] text-primary shrink-0" style="font-variation-settings:'FILL' 1">smart_toy</span>
+          <span class="text-[10px] font-bold tracking-wide flex-1">Initializing SMarBI AI Agent</span>
+          <span class="lp-step-icon material-symbols-outlined text-[14px] text-slate-500">pending</span>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="w-64 bg-white/10 rounded-full h-1 overflow-hidden">
+        <div id="launch-progress" class="bg-gradient-to-r from-primary to-purple-400 h-full w-0 rounded-full transition-all duration-200"></div>
+      </div>
+      <p id="launch-pct" class="text-[10px] font-bold text-slate-400 mt-2.5 uppercase tracking-widest font-mono">0% Completed</p>
+    </div>
+  </div>
+
+  <div id="toast-container" class="fixed top-6 right-6 flex flex-col gap-2.5 z-[9999] pointer-events-none"></div>
+</main>
+<script src="onboarding/onboarding.js"></script>
+</body>
+</html>

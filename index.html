@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  
+  <!-- Theme Restoration (Smart BI is baseline light mode, but honors global structure) -->
+  <script type="text/javascript">
+    (function() {
+      // For Smart BI, we stay in white mode as designed, but we can store state if needed
+    })();
+  </script>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Primary SEO Metadata -->
+  <title>Smart BI Product Design Case Study | Sayantan Ghosh UX Portfolio</title>
+  <meta name="description" content="A detailed product design case study on Smart BI by Sayantan Ghosh. Building intelligent business analytics by solving high cognitive load." />
+  <meta name="author" content="Sayantan Ghosh" />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts: Inter, Outfit & supporting fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!-- Global Base Stylesheet -->
+  <link rel="stylesheet" href="smart-bi.css?v=2.0" />
+  <!-- Component Stylesheets -->
+  <link rel="stylesheet" href="components/nav/nav.css?v=2.0" />
+  <link rel="stylesheet" href="components/hero/hero.css?v=2.0" />
+  <link rel="stylesheet" href="components/discover/discover.css?v=2.0" />
+  <link rel="stylesheet" href="components/goal/goal.css?v=2.0" />
+  <link rel="stylesheet" href="components/skills-logos/skills-logos.css?v=1.3" />
+  <link rel="stylesheet" href="components/process/process.css?v=2.0" />
+  <link rel="stylesheet" href="components/footer/footer.css?v=2.0" />
+
+
+  <!-- GSAP (latest CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Microsoft Clarity Tracking Code -->
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wft5af44a0");
+  </script>
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- ─── SECTION 1: NAVIGATION HEADER ───────────────────────────────── -->
+    <header class="smartbi-nav">
+      <div class="nav-container">
+        <!-- Logo Group (Brand + Pipe + Sub-brand) to keep logo items inline on all viewports -->
+        <div class="nav-logo-group">
+          <a href="https://uxsayantan.com" target="_blank" rel="noopener noreferrer" class="nav-author-link">
+            <span class="nav-author-name">Sayantan Ghosh</span>
+          </a>
+          <img class="nav-project-logo-img" src="images/Smart-BI.png" alt="Smart BI Logo" />
+        </div>
+        
+        <!-- Navigation Links -->
+        <nav class="nav-links-nav">
+          <ul class="nav-links-list">
+            <li class="nav-link-item active"><a href="index.html">Home</a></li>
+            <li class="nav-link-item"><a href="mindmap.html">Mind Map</a></li>
+            <li class="nav-link-item"><a href="wireframe.html">Low Fidelity Wireframe</a></li>
+            <li class="nav-link-item"><a href="FInal HTML/design_system.html">Design System</a></li>
+            <li class="nav-link-item nav-cta"><a href="FInal HTML/login.html">AI Driven Prototype</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Gray Separator Line -->
+      <div class="nav-divider"></div>
+    </header>
+
+    <!-- ─── SECTION 2: HERO ────────────────────────────────────────────── -->
+    <section id="section-hero" class="smartbi-hero-section">
+      <div class="hero-eyebrow">UX case study · Conversational BI</div>
+      
+      <!-- Crying Emoji Image (cryemoji.png) -->
+      <div class="hero-emoji-container">
+        <img class="hero-emoji" src="images/cryemoji.png" alt="Crying Emoji" />
+      </div>
+
+      <h1 class="hero-heading">
+        What happens when <span class="hero-accent-blue">your data tool expects more from</span> you than you expect from it?
+      </h1>
+    </section>
+
+    <!-- ─── SECTION 3 & 4 WRAPPER ──────────────────────────────────────── -->
+    <div class="smartbi-content-wrapper">
+
+      <!-- ─── SECTION 3: DISCOVER (THE PROBLEM) ────────────────────────── -->
+      <section id="section-discover" class="discover-section">
+        <!-- Left Column: Copy -->
+        <div class="discover-left-col">
+          <div class="discover-eyebrow">The Problem</div>
+          <h2 class="discover-title">Traditional BI expects you to be a data engineer.</h2>
+          <p class="discover-desc">
+            Standard business intelligence platforms force operators to navigate complex database schemas, write custom SQL joins, and write fragile calculations. When a formula fails or a query times out, decision-making grinds to a halt.
+          </p>
+          <p class="discover-desc" style="margin-top: 16px;">
+            Instead of getting instant answers, operators spend their days resolving calculation error squiggles, debugging ambiguous table columns, and waiting on database response cycles.
+          </p>
+        </div>
+        
+        <!-- Right Column: Cluttered Dashboard Mockup (Centered/Large Layout) -->
+        <div class="discover-right-col">
+          <div class="legacy-bi-mockup">
+            <!-- macOS Window Header Controls -->
+            <div class="tb-window-header">
+              <div class="tb-window-dots">
+                <span class="tb-dot tb-dot-close"></span>
+                <span class="tb-dot tb-dot-minimize"></span>
+                <span class="tb-dot tb-dot-expand"></span>
+              </div>
+              <div class="tb-window-title">Home - Traditional BI | Edit | Traditional BI</div>
+            </div>
+            
+            <!-- Legacy BI Application Menu -->
+            <div class="tb-app-menu">
+              <div class="tb-menu-left">
+                <span class="tb-brand"><span class="material-icons">bar_chart</span>Traditional BI</span>
+                <span class="tb-menu-item"><span class="material-icons">folder</span>File</span>
+                <span class="tb-menu-item"><span class="material-icons">storage</span>Data</span>
+                <span class="tb-menu-item"><span class="material-icons">grid_on</span>Worksheet</span>
+                <span class="tb-menu-item"><span class="material-icons">dashboard</span>Dashboard</span>
+                <span class="tb-menu-item"><span class="material-icons">query_stats</span>Analysis</span>
+                <span class="tb-menu-item"><span class="material-icons">map</span>Map</span>
+                <span class="tb-menu-item"><span class="material-icons">brush</span>Format</span>
+                <span class="tb-menu-item"><span class="material-icons">help_outline</span>Help</span>
+              </div>
+            </div>
+            
+            <!-- Legacy BI Control Toolbar -->
+            <div class="tb-toolbar">
+              <div class="tb-toolbar-group">
+                <button class="tb-tb-btn" title="Undo"><span class="material-icons">undo</span></button>
+                <button class="tb-tb-btn" title="Redo"><span class="material-icons">redo</span></button>
+                <button class="tb-tb-btn" title="Save"><span class="material-icons">save</span></button>
+                <span class="tb-tb-sep"></span>
+                <button class="tb-tb-btn" title="Refresh"><span class="material-icons">refresh</span></button>
+                <button class="tb-tb-btn" title="Clear Sheet"><span class="material-icons">clear</span></button>
+              </div>
+              <button class="tb-show-me">Show Me</button>
+            </div>
+            
+            <!-- Legacy BI Workspace Body -->
+            <div class="tb-body">
+              <!-- Left Data Pane -->
+              <div class="tb-data-pane">
+                <div class="tb-pane-tabs">
+                  <span class="tb-pane-tab active">Data</span>
+                  <span class="tb-pane-tab">Analytics</span>
+                </div>
+                <div class="tb-data-source">
+                  <span class="tb-ds-name">Sales_Data_2026 (Production)</span>
+                </div>
+                <div class="tb-search-box">
+                  <span class="material-icons tb-search-icon">search</span>
+                  <input type="text" placeholder="Search" disabled />
+                </div>
+                <div class="tb-tables-list">
+                  <div class="tb-list-section">Tables</div>
+                  <!-- Dimensions -->
+                  <div class="tb-list-item dim active"><span class="tb-item-type">Abc</span> Country/Territory</div>
+                  <div class="tb-list-item dim"><span class="tb-item-type">Abc</span> Segment</div>
+                  <div class="tb-list-item dim"><span class="tb-item-type">Abc</span> Category</div>
+                  <div class="tb-list-item dim"><span class="tb-item-type">Abc</span> Sub-Category</div>
+                  <div class="tb-list-item dim"><span class="tb-item-type">📅</span> Order Date</div>
+                  <div class="tb-list-item dim"><span class="tb-item-type">Abc</span> Customer ID</div>
+                  <!-- Measures (KPI / Logic fields) -->
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Sales</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Profit</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Quantity</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Discount</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Margin %</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> LTV</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> CAC</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> MRR</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Churn Rate</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Average Order Value (AOV)</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Server Uptime Index</div>
+                  <div class="tb-list-item meas"><span class="tb-item-type">#</span> Region</div>
+                </div>
+              </div>
+              
+              <!-- Middle Shelves Pane -->
+              <div class="tb-shelves-pane">
+                <div class="tb-shelf">
+                  <div class="tb-shelf-title">Pages</div>
+                  <div class="tb-shelf-empty"></div>
+                </div>
+                <div class="tb-shelf">
+                  <div class="tb-shelf-title">Filters</div>
+                  <div class="tb-shelf-empty"></div>
+                </div>
+                <div class="tb-shelf marks-card">
+                  <div class="tb-shelf-title">Marks</div>
+                  <div class="tb-marks-select">Automatic</div>
+                  <div class="tb-marks-grid">
+                    <div class="tb-mark-btn">Color</div>
+                    <div class="tb-mark-btn">Size</div>
+                    <div class="tb-mark-btn">Label</div>
+                    <div class="tb-mark-btn">Detail</div>
+                    <div class="tb-mark-btn">Tooltip</div>
+                  </div>
+                  <div class="tb-active-mark-pill"></div>
+                </div>
+              </div>
+              
+              <!-- Right Panel: Rows/Columns Shelves + Sheet Canvas -->
+              <div class="tb-main-workspace">
+                <!-- Columns / Rows shelves -->
+                <div class="tb-shelves-row">
+                  <div class="tb-axis-shelf">
+                    <span class="tb-shelf-label">Columns</span>
+                    <span class="tb-pill green-pill">SUM(Sales)</span>
+                  </div>
+                  <div class="tb-axis-shelf">
+                    <span class="tb-shelf-label">Rows</span>
+                    <span class="tb-pill blue-pill">Country/Territory</span>
+                  </div>
+                </div>
+                
+                <!-- Sheet Viewport -->
+                <div class="tb-sheet-canvas">
+                  <div class="tb-sheet-title">Sheet 1</div>
+                  
+                  <!-- Chart Area -->
+                  <div class="tb-chart-area">
+                    <div class="tb-chart-y-axis">
+                      <span>Abkhazia</span>
+                      <span>Afghanistan</span>
+                      <span>Albania</span>
+                      <span>Algeria</span>
+                      <span>Andorra</span>
+                      <span>Angola</span>
+                      <span>Antigua and Barbuda</span>
+                      <span>Argentina</span>
+                      <span>Armenia</span>
+                      <span>Australia</span>
+                      <span>Austria</span>
+                      <span>Azerbaijan</span>
+                      <span>Bahamas</span>
+                      <span>Bahrain</span>
+                      <span>Bangladesh</span>
+                      <span>Barbados</span>
+                      <span>Belarus</span>
+                      <span>Belgium</span>
+                      <span>Belize</span>
+                      <span>Benin</span>
+                      <span>Bhutan</span>
+                      <span>Bolivia</span>
+                    </div>
+                    
+                    <div class="tb-chart-bars-container">
+                      <div class="tb-chart-bars-wrapper">
+                        <!-- Background Grid Lines -->
+                        <div class="tb-chart-grid-lines">
+                          <div class="tb-grid-line" style="left: 0%;"></div>
+                          <div class="tb-grid-line" style="left: 33.3%;"></div>
+                          <div class="tb-grid-line" style="left: 66.6%;"></div>
+                          <div class="tb-grid-line" style="left: 100%;"></div>
+                        </div>
+                        
+                        <!-- Chart Bars -->
+                        <div class="tb-chart-bars">
+                          <div class="tb-bar-row"><div class="tb-bar bar-red" style="width: 63%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-orange" style="width: 83%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-teal" style="width: 47%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-green" style="width: 92%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-teal" style="width: 15%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-yellow" style="width: 92%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-blue" style="width: 30%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-blue" style="width: 30%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-red" style="width: 73%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-orange" style="width: 15%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-teal" style="width: 15%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-red" style="width: 100%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-blue" style="width: 15%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-green" style="width: 100%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-orange" style="width: 63%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-blue" style="width: 15%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-red" style="width: 100%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-teal" style="width: 15%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-blue" style="width: 17%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-yellow" style="width: 37%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-orange" style="width: 47%;"></div></div>
+                          <div class="tb-bar-row"><div class="tb-bar bar-blue" style="width: 47%;"></div></div>
+                        </div>
+                      </div>
+                      
+                      <!-- X-Axis scale labels -->
+                      <div class="tb-chart-x-axis">
+                        <span>0</span>
+                        <span>20</span>
+                        <span>40</span>
+                        <span>60</span>
+                      </div>
+                      <div class="tb-chart-x-axis-title">Sales (Millions)</div>
+                    </div>
+                    
+                    <!-- Region Legend -->
+                    <div class="tb-legend">
+                      <div class="tb-legend-title">Region</div>
+                      <div class="tb-legend-item"><span class="tb-legend-color color-blue"></span>Americas</div>
+                      <div class="tb-legend-item"><span class="tb-legend-color color-orange"></span>Asia</div>
+                      <div class="tb-legend-item"><span class="tb-legend-color color-red"></span>Eurasia</div>
+                      <div class="tb-legend-item"><span class="tb-legend-color color-teal"></span>Europe</div>
+                      <div class="tb-legend-item"><span class="tb-legend-color color-green"></span>MENA</div>
+                      <div class="tb-legend-item"><span class="tb-legend-color color-yellow"></span>SSA</div>
+                    </div>
+                  </div>
+                  
+                  <!-- Floating Calculated Field Editor (Calculated Logic Complexity) -->
+                  <div class="tb-formula-editor">
+                    <div class="tb-fe-header">
+                      <span>Edit Calculated Field [Net Segment Margin %]</span>
+                      <span class="tb-fe-close">×</span>
+                    </div>
+                    <div class="tb-fe-body">
+                      <pre><code><span class="sql-keyword">IF</span> [Segment] = <span class="sql-string">"Enterprise"</span> <span class="sql-keyword">AND</span> [Category] = <span class="sql-string">"Technology"</span> <span class="sql-keyword">THEN</span>
+  (<span class="sql-function">SUM</span>([Sales]) - <span class="sql-function">SUM</span>([CAC])) / <span class="sql-function">SUM</span>([Quantity]) * <span class="sql-function">AVG</span>([Margin %])
+<span class="sql-keyword">ELSEIF</span> [Region] = <span class="sql-string">"Americas"</span> <span class="sql-keyword">AND</span> [Sub-Category] = <span class="sql-string">"Phones"</span> <span class="sql-keyword">THEN</span>
+  <span class="sql-function">SUM</span>([Sales]) * [LTV] / [Churn Rate]
+<span class="sql-keyword">ELSE</span>
+  <span class="sql-function">SUM</span>([Profit]) / <span class="sql-function">SUM</span>([Sales]) * (<span class="sql-number">1</span> - <span class="sql-function">AVG</span>([Discount]))
+<span class="sql-keyword">END</span></code></pre>
+                      <div class="tb-fe-error-squiggly"></div>
+                    </div>
+                    <div class="tb-fe-footer">
+                      <span class="tb-fe-status-text">The calculation contains errors: Cannot mix aggregate and non-aggregate arguments in this function.</span>
+                    </div>
+                  </div>
+                  
+                  <!-- Console Query Log Overlay (Data SQL) -->
+                  <div class="tb-console-error" id="tb-console-error-box">
+                    <div class="tb-console-header">Database Query Logs (SQL)</div>
+                    <pre class="tb-console-sql" id="tb-console-sql-block"><code>SELECT c.country, r.region, SUM(o.sales) AS revenue, 
+(SUM(o.profit) - SUM(o.cac)) / COUNT(DISTINCT o.customer_id) AS net_ltv 
+FROM orders o JOIN customers c ON o.customer_id = c.id 
+GROUP BY c.country, r.region;</code></pre>
+                    <div class="tb-console-status">
+                      <span class="tb-console-text" id="tb-console-text-msg">Syncing database schemas...</span>
+                      <div class="tb-console-progress"><div class="tb-console-fill" id="tb-console-progress-fill"></div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Legacy BI Footer Bar -->
+            <div class="tb-footer-bar">
+              <span>211 marks &nbsp;|&nbsp; 221 rows by 1 column &nbsp;|&nbsp; SUM(Sales): $24,198M &nbsp;|&nbsp; execution time: 124.8s</span>
+            </div>
+            <!-- Context Menu Dropdown -->
+            <div class="tb-context-menu" id="tb-context-menu">
+              <div class="tb-menu-item disabled-item">Dimension</div>
+              <div class="tb-menu-item disabled-item">Attribute</div>
+              <div class="tb-menu-divider"></div>
+              <div class="tb-menu-item active-check" id="tb-menu-sum">Measure (Sum)</div>
+              <div class="tb-menu-item" id="tb-menu-avg">Measure (Average)</div>
+              <div class="tb-menu-item">Measure (Median)</div>
+              <div class="tb-menu-item">Measure (Count)</div>
+            </div>
+            <!-- Simulated cursor pointer -->
+            <div class="tb-sim-cursor" id="tb-sim-cursor"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ─── SECTION 4: GOAL & AI INTERACTIVE ──────────────────────────── -->
+      <section id="section-goal" class="goal-interactive-section">
+        <div class="goal-container">
+          <!-- Left Column: Goal Card -->
+          <div class="goal-card">
+            <div class="goal-eyebrow">Goal</div>
+            <h2 class="goal-title">Solving the high cognitive load for modern BI tools</h2>
+            <p class="goal-desc">
+              Imagine a BI tool that never asks you to understand SQL or wrestle with data schemas, but prompts you to ask the right question. The system's job is to deliver the answer.
+            </p>
+          </div>
+          
+          <!-- Right Column: AI Interactive Card -->
+          <div class="ai-interactive-card">
+            <div class="ai-card-header">
+              <h3 class="ai-card-title">Visitor Insights</h3>
+            </div>
+            
+            <!-- Chart Output Area -->
+            <div class="ai-chart-viewport" id="ai-chart-container">
+              <!-- Loading Indicator -->
+              <div class="ai-loader-container" id="ai-loader" style="display: none;">
+                <div class="ai-loader-spinner"></div>
+                <span class="ai-loader-text">AI is thinking...</span>
+              </div>
+              
+              <!-- Dynamic Chart Slot -->
+              <div class="ai-chart-slot" id="ai-chart-slot">
+                <!-- Welcome state/SVG charts rendered dynamically by smart-bi.js -->
+              </div>
+            </div>
+            
+            <!-- AI Input Bar -->
+            <div class="ai-input-bar">
+              <div class="ai-input-wrapper">
+                <span class="ai-input-cursor">|</span>
+                <input type="text" class="ai-search-input" id="ai-query-input" placeholder="Ask anything about your business..." readonly />
+              </div>
+              <button class="ai-send-btn" id="ai-send-btn" aria-label="Send Query">
+                <svg viewBox="0 0 24 24" class="ai-send-icon">
+                  <line x1="22" y1="2" x2="11" y2="13"></line>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ─── SECTION 5: PROCESS & WORKFLOW ────────────────────────── -->
+    <section id="section-process" class="process-section">
+      <div class="process-container">
+        <p class="process-statement">
+          Research was done by a human, insights were synthesized with AI. Design was crafted in Figma with AI as a thinking partner. The HTML was built using Antigravity and Figma.
+        </p>
+        
+        <div class="skills-logo-strip">
+          <!-- 1. Antigravity -->
+          <div class="skill-logo-item">
+            <img src="images/antygravity.png" alt="Antigravity" class="skill-logo-img" />
+          </div>
+          <!-- 2. Claude -->
+          <div class="skill-logo-item">
+            <img src="images/calude.png" alt="Claude" class="skill-logo-img" />
+          </div>
+          <!-- 3. Gemini -->
+          <div class="skill-logo-item">
+            <img src="images/Gemini.png" alt="Google Gemini" class="skill-logo-img" />
+          </div>
+          <!-- 4. Figma -->
+          <div class="skill-logo-item">
+            <img src="images/figma.png" alt="Figma" class="skill-logo-img" />
+          </div>
+        </div>
+        
+        <div class="process-subtitle">A human orchestra AI UX workflow to hit the customer goal</div>
+      </div>
+    </section>
+
+    <!-- ─── SECTION 6: FOOTER ──────────────────────────────────────────── -->
+    <footer id="section-footer" class="smartbi-footer">
+      <div class="footer-divider"></div>
+      <div class="footer-container">
+        <p class="footer-copyright">© 2026 Sayantan Ghosh. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Component Scripts (loaded before orchestrator) -->
+  <script src="components/nav/nav.js?v=1.1"></script>
+  <script src="components/hero/hero.js?v=1.1"></script>
+  <script src="components/discover/discover.js?v=1.1"></script>
+  <script src="components/goal/goal.js?v=2.0"></script>
+  <script src="components/process/process.js?v=1.1"></script>
+  <!-- Orchestrator -->
+  <script src="smart-bi.js?v=1.1"></script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>SMarBI - Log In or Sign Up</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts & Material Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  
+  <!-- GSAP Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+  <!-- Global CSS -->
+  <link href="global.css" rel="stylesheet">
+  
+  <!-- Page Specific CSS -->
+  <link href="login/login.css" rel="stylesheet">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: '#7c3bed',            /* Vibrant Purple */
+            'primary-container': '#f3e8ff',  /* Light Lavender */
+            'on-primary': '#ffffff',
+            secondary: '#7c3bed',
+            'secondary-container': '#f3e8ff',
+            'on-secondary': '#ffffff',
+            background: '#f8f9ff',
+            surface: '#ffffff',
+            'surface-variant': '#f1f5f9',
+            'on-surface': '#0f172a',
+            'on-surface-variant': '#64748b',
+            outline: '#e2e8f0',
+            'outline-variant': '#f1f5f9',
+            error: '#ef4444',
+            success: '#10b981',
+            'success-container': '#d1fae5',
+            'danger-container': '#fee2e2',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-[#fafbfc] text-on-surface antialiased min-h-screen relative flex items-center justify-center overflow-x-hidden py-12 px-4">
+
+  <!-- Ambient Blurred Auras in the Background -->
+  <div class="ambient-blur-circle ambient-blur-1"></div>
+  <div class="ambient-blur-circle ambient-blur-2"></div>
+  <div class="ambient-blur-circle ambient-blur-3"></div>
+
+  <!-- Main Card Container -->
+  <div id="auth-wrapper" class="state-login relative z-10 w-full max-w-[420px] bg-white border border-outline rounded-2xl shadow-xl p-8 login-card-wrapper">
+    
+    <!-- Back to Case Study link -->
+    <div class="mb-5 flex">
+      <a href="../index.html" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-on-surface-variant hover:text-primary transition-all cursor-pointer">
+        <span class="material-symbols-outlined text-[13px] font-bold">arrow_back</span>
+        <span>Back to Case Study</span>
+      </a>
+    </div>
+    
+    <!-- SMarBI Branding Logo -->
+    <div class="flex flex-col items-center justify-center mb-6">
+      <div class="w-10 h-10 flex items-center justify-center mb-2">
+        <img src="images/favicon.svg" alt="SMarBI Logo" class="w-full h-full object-contain">
+      </div>
+      <div class="flex items-center gap-1.5 justify-center">
+        <span class="font-display text-lg font-bold tracking-tight text-on-surface">SMarBI</span>
+      </div>
+    </div>
+
+    <!-- Header Text -->
+    <div class="text-center mb-6">
+      <h2 id="form-title" class="font-display text-xl font-bold text-on-surface tracking-tight mb-1">Welcome back!</h2>
+      <p id="state-toggle-container" class="text-xs text-on-surface-variant font-medium">
+        Don't have an account? <a href="#" id="state-toggle-link" class="text-primary font-bold hover:underline cursor-pointer">Sign up</a>
+      </p>
+    </div>
+
+    <!-- Google SSO Card (Interactive simulation matching the user's screenshot layout) -->
+    <button id="sso-google-btn" class="w-full sso-card flex items-center justify-between p-3 border border-outline rounded-xl bg-white hover:border-primary/20 transition-all text-left mb-3 cursor-pointer">
+      <div class="flex items-center gap-3">
+        <div class="w-7 h-7 rounded-full overflow-hidden border border-outline flex-shrink-0">
+          <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrV2uuXVfrfG8zmwRQLReo3dmLsCwzQirSxa1dvyB1mCOceZVJEBtWGd3HNJ_zvKiqT2iHBjEjJjv4Y_42JYRkJme-aByzDa2iuDD1fhzLNSoNerZg64hR-9rmeR_w8zaxBuEFYZqe3gJY9ChJhcRULMfFKZ2mVOS7ZELOYQ1ikzCLE5hIz3IcZ4oGswTzljbafhwDSJjJaIUm2kRCe8cJY-tm0QZS0j4sFuUfXU0f9tYs586ImtR0pP2OLSK2d9aN4SNc_UWT8hvR" class="w-full h-full object-cover">
+        </div>
+        <div class="flex flex-col">
+          <span class="text-[10px] font-bold text-on-surface leading-tight">Continue as San</span>
+          <span class="text-[9px] text-on-surface-variant leading-none">sangh8@gmail.com</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-center w-5 h-5">
+        <!-- SVG Google G logo -->
+        <svg width="15" height="15" viewBox="0 0 24 24" class="flex-shrink-0">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22-.19-.63z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+        </svg>
+      </div>
+    </button>
+
+    <!-- General SSO Button -->
+    <button id="sso-default-btn" class="w-full sso-card flex items-center justify-center gap-2 p-2 border border-outline rounded-xl bg-white hover:border-primary/20 hover:bg-surface-variant/20 transition-all mb-4 cursor-pointer text-xs font-semibold text-on-surface">
+      <span class="material-symbols-outlined text-[16px] text-on-surface-variant">cloud</span>
+      <span>Continue with SSO</span>
+    </button>
+
+    <!-- Divider Line -->
+    <div class="relative flex py-2 items-center mb-4">
+      <div class="flex-grow border-t border-outline"></div>
+      <span class="flex-shrink mx-3 text-[10px] text-on-surface-variant/40 font-bold uppercase tracking-widest">or</span>
+      <div class="flex-grow border-t border-outline"></div>
+    </div>
+
+    <!-- Credentials Auth Form -->
+    <form id="auth-form" class="space-y-3">
+      
+      <!-- Full Name Input (Visible in Signup state) -->
+      <div class="auth-input-container signup-only-field">
+        <label for="name-input" class="sr-only">Full Name</label>
+        <div class="flex items-center bg-white px-3 h-10 rounded-xl border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+          <span class="material-symbols-outlined text-on-surface-variant/60 text-[18px]">person</span>
+          <input id="name-input" class="bg-transparent border-none focus:ring-0 text-xs w-full ml-2 placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="Full name" type="text">
+        </div>
+      </div>
+
+      <!-- Email Input -->
+      <div class="auth-input-container">
+        <label for="email-input" class="sr-only">Work Email</label>
+        <div class="flex items-center bg-white px-3 h-10 rounded-xl border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+          <span class="material-symbols-outlined text-on-surface-variant/60 text-[18px]">mail</span>
+          <input id="email-input" class="bg-transparent border-none focus:ring-0 text-xs w-full ml-2 placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="Work email" type="email" required>
+        </div>
+      </div>
+
+      <!-- Password Input -->
+      <div class="auth-input-container">
+        <label for="password-input" class="sr-only">Password</label>
+        <div class="flex items-center bg-white px-3 h-10 rounded-xl border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+          <span class="material-symbols-outlined text-on-surface-variant/60 text-[18px]">lock</span>
+          <input id="password-input" class="bg-transparent border-none focus:ring-0 text-xs w-full ml-2 placeholder:text-on-surface-variant/40 p-0 text-on-surface" placeholder="Password (min. 6 chars)" type="password" required>
+          <button id="password-toggle" type="button" class="password-toggle-btn text-on-surface-variant/50 hover:text-on-surface flex items-center justify-center p-0.5" title="Toggle password visibility">
+            <span class="material-symbols-outlined text-[18px]">visibility</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Log In / Sign Up Submit Button (disabled by default) -->
+      <button id="auth-submit-btn" type="submit" class="auth-submit-btn w-full flex items-center justify-center gap-2 py-2.5 px-4 bg-primary text-on-primary rounded-xl text-xs font-bold hover:bg-primary-hover active:scale-[0.98] transition-all shadow-md shadow-primary/10 cursor-pointer mt-5" disabled>
+        <svg id="submit-spinner" class="hidden animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        <span id="submit-text">Log In</span>
+      </button>
+
+    </form>
+
+    <!-- Footer Links -->
+    <div class="flex flex-col items-center justify-center mt-6 gap-2">
+      <a href="#" class="text-[10px] text-primary font-semibold hover:underline cursor-pointer">Forgot Password?</a>
+      <a href="#" class="text-[10px] text-on-surface-variant/60 hover:text-on-surface transition-colors cursor-pointer mt-4">Need help?</a>
+    </div>
+
+  </div>
+
+  <!-- Copyright Footer -->
+  <footer class="absolute bottom-4 left-0 right-0 text-center text-[9px] text-on-surface-variant/45">
+    <p>© 2026 SMarBI Technologies. All rights reserved.</p>
+  </footer>
+
+  <!-- Toast Container for Notifications -->
+  <div id="toast-container" class="fixed top-6 right-6 flex flex-col gap-2 pointer-events-none z-[9999]"></div>
+
+  <!-- Page Logic Script -->
+  <script src="login/login.js"></script>
+</body>
+</html>

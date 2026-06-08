@@ -1,0 +1,99 @@
+/* ─── Hero Section ──────────────────────────────────────────────────────── */
+
+.smartbi-hero-section {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-top: calc(var(--sbi-layout-nav-height) + clamp(48px, 8vw, 96px)); /* Nav height offset + breathing room */
+  padding-bottom: var(--gap-section);
+  padding-left: var(--side-padding-fluid);
+  padding-right: var(--side-padding-fluid);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-size: var(--sbi-font-size-sm);
+  font-weight: var(--sbi-font-weight-regular);
+  color: var(--sbi-hero-tag-text);
+  background-color: var(--sbi-hero-tag-bg);
+  border: var(--sbi-border-width-hairline) solid var(--sbi-hero-tag-border);
+  padding: 6px 16px;        /* Sleeker padding */
+  border-radius: var(--sbi-hero-tag-radius);
+  margin-bottom: var(--sbi-layout-micro-gap);
+  display: inline-block;
+  user-select: none;
+  letter-spacing: var(--sbi-letter-spacing-tight);
+}
+
+.hero-emoji-container {
+  width: 72px;
+  height: 72px;
+  margin-bottom: var(--sbi-layout-micro-gap);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Layered soft drop-shadow for premium depth */
+  filter: var(--sbi-hero-emoji-shadow);
+}
+
+.hero-emoji {
+  width: 100%;
+  height: 100%;
+  transition: transform var(--sbi-duration-slow) var(--sbi-ease-spring-bounce);
+}
+
+.hero-emoji-container:hover .hero-emoji {
+  transform: scale(1.15) rotate(-5deg);
+}
+
+.hero-heading {
+  font-family: var(--sbi-font-family-display);
+  font-size: var(--sbi-text-display-size);
+  font-weight: var(--sbi-text-display-weight);
+  color: var(--sbi-text-primary);
+  line-height: var(--sbi-text-display-height);
+  max-width: 760px;         /* Tighter block for better readability */
+  margin: 0 auto;
+  letter-spacing: var(--sbi-text-display-spacing);
+}
+
+.hero-accent-blue {
+  color: var(--sbi-hero-accent);
+  font-weight: var(--sbi-font-weight-regular);
+  display: inline;
+}
+
+.typewriter-char {
+  display: inline;
+}
+
+.hero-cursor {
+  display: inline-block;
+  color: var(--sbi-hero-cursor);
+  font-weight: var(--sbi-font-weight-medium);
+  margin-left: 2px;
+  animation: hero-cursor-blink 0.8s infinite steps(2);
+}
+
+@keyframes hero-cursor-blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .smartbi-hero-section {
+    padding-top: calc(var(--sbi-layout-nav-height) + 40px);
+    padding-bottom: var(--gap-section);
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero-heading {
+    font-size: clamp(1.5rem, 6vw, 2.2rem);
+    line-height: 1.3;
+  }
+}

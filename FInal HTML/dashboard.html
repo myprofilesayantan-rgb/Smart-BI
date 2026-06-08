@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>SMarBI - Premium AI Business Intelligence</title>
+  <link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Global CSS -->
+  <link href="global.css" rel="stylesheet">
+  
+  <!-- Page Specific CSS -->
+  <link href="dashboard/dashboard.css" rel="stylesheet">
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: '#7c3bed',            /* Vibrant Purple */
+            'primary-container': '#f3e8ff',  /* Light Lavender */
+            'on-primary': '#ffffff',
+            secondary: '#7c3bed',
+            'secondary-container': '#f3e8ff',
+            'on-secondary': '#ffffff',
+            background: '#f8f9ff',
+            surface: '#ffffff',
+            'surface-variant': '#f1f5f9',
+            'on-surface': '#0f172a',
+            'on-surface-variant': '#64748b',
+            outline: '#e2e8f0',
+            'outline-variant': '#f1f5f9',
+            error: '#ef4444',
+            success: '#10b981',
+            'success-container': '#d1fae5',
+            'danger-container': '#fee2e2',
+          },
+          fontFamily: {
+            display: ['Outfit', 'sans-serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-[#fafbfc] text-on-surface antialiased">
+
+  <!-- SideNavBar -->
+  <aside id="sidebar" class="sidebar-container flex flex-col py-4 px-3 h-screen w-56 fixed left-0 top-0 border-r border-outline-variant z-50 bg-white sidebar-shadow min-h-screen">
+    <div class="px-2.5 mb-6 flex items-center gap-2 logo-container">
+      <div class="w-7 h-7 flex items-center justify-center">
+        <img src="images/favicon.svg" alt="SMarBI Logo" class="w-full h-full object-contain">
+      </div>
+      <span class="font-display text-base font-bold tracking-tight text-on-surface logo-text">SMarBI</span>
+    </div>
+    
+    <nav class="space-y-1 flex-1">
+      <!-- Active Tab: Dashboard -->
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg bg-primary-container text-primary font-medium text-xs transition-colors" href="dashboard.html">
+        <span class="material-symbols-outlined text-[16px]">dashboard</span>
+        <span class="nav-text font-body">Dashboard</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="insights.html">
+        <span class="material-symbols-outlined text-[16px]">lightbulb</span>
+        <span class="nav-text font-body">Insights</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="data_sources.html">
+        <span class="material-symbols-outlined text-[16px]">database</span>
+        <span class="nav-text font-body">Data Sources</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">card_membership</span>
+        <span class="nav-text font-body">Subscription</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">menu_book</span>
+        <span class="nav-text font-body">Guide Manuals</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">support_agent</span>
+        <span class="nav-text font-body">Contact Support Team</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">download</span>
+        <span class="nav-text font-body">Downloads</span>
+      </a>
+      <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 rounded-lg text-on-surface-variant hover:bg-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+        <span class="material-symbols-outlined text-[16px]">settings</span>
+        <span class="nav-text font-body">Settings</span>
+      </a>
+    </nav>
+    
+    <div class="mt-auto pt-3 border-t border-outline-variant flex flex-col gap-3">
+      <!-- SaaS Account Token Status -->
+      <div class="px-2.5 py-2 bg-background rounded-lg border border-outline/30 flex flex-col gap-1 help-logout-text">
+        <div class="flex items-center justify-between text-[9px] font-semibold text-on-surface-variant">
+          <span class="flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
+            <span>AI Queries Used</span>
+          </span>
+          <span class="text-on-surface">25 / 100</span>
+        </div>
+        <div class="w-full bg-outline-variant h-1 rounded-full overflow-hidden">
+          <div class="bg-primary h-full" style="width: 25%"></div>
+        </div>
+        <div class="flex items-center justify-between text-[8px] text-on-surface-variant">
+          <span>Credits remaining</span>
+          <span class="font-bold">1.5k</span>
+        </div>
+      </div>
+
+      <button class="bottom-btn w-full flex items-center justify-center gap-1.5 py-1.5 px-3 bg-primary text-on-primary rounded-lg text-xs font-semibold hover:bg-primary-hover active:scale-[0.98] transition-all soft-shadow">
+        <span class="material-symbols-outlined text-[16px]">add</span>
+        <span class="font-body">New Analysis</span>
+      </button>
+      <button id="add-calculated-metric-btn" class="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 border border-outline hover:border-primary hover:bg-primary-container/20 text-on-surface-variant hover:text-primary rounded-lg text-xs font-semibold active:scale-[0.98] transition-all cursor-pointer">
+        <span class="material-symbols-outlined text-[16px]">calculate</span>
+        <span class="font-body">Calculated Metric</span>
+      </button>
+      
+      <div class="space-y-1">
+        <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 text-on-surface-variant hover:text-on-surface text-xs transition-colors" href="#">
+          <span class="material-symbols-outlined text-[16px]">help</span>
+          <span class="help-logout-text font-body font-medium">Help Center</span>
+        </a>
+        <a class="nav-link flex items-center gap-2.5 py-1.5 px-3 text-on-surface-variant hover:text-error text-xs transition-colors" href="login.html?logout=true">
+          <span class="material-symbols-outlined text-[16px]">logout</span>
+          <span class="help-logout-text font-body font-medium">Logout</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TopAppBar -->
+  <header id="main-header" class="main-content-shifted fixed top-0 right-0 left-56 h-13 flex items-center justify-between px-8 bg-white/70 backdrop-blur-md z-40 border-b border-outline-variant/80">
+    <div class="flex items-center gap-3">
+      <button id="sidebar-toggle" class="p-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-md transition-colors">
+        <span class="material-symbols-outlined text-[20px]">menu</span>
+      </button>
+      
+      <!-- Dashboard selection menu as a dropdown -->
+      <div id="dashboard-select-wrapper" class="relative">
+        <button id="dashboard-select-toggle" class="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-outline-variant/80 rounded-lg text-[10.5px] font-bold text-on-surface hover:border-primary/30 transition-all cursor-pointer shadow-sm">
+          <span id="active-dashboard-icon" class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+          <span id="active-dashboard-label" class="font-body">Main Dashboard</span>
+          <span class="material-symbols-outlined text-[14px] text-on-surface-variant/70 ml-1">keyboard_arrow_down</span>
+        </button>
+        
+        <!-- Dashboard Dropdown Popover -->
+        <div id="dashboard-select-menu" class="hidden opacity-0 absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-outline z-50 py-1.5 text-left transition-all duration-150">
+          <div class="px-3.5 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/60 pb-1.5 mb-1.5">Switch Dashboard</div>
+          <button class="dashboard-option-btn w-full flex items-center gap-2 px-3.5 py-1.5 hover:bg-surface-variant text-[10.5px] text-primary font-bold text-left transition-colors cursor-pointer" data-dashboard="Main Dashboard">
+            <span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span>Main Dashboard</span>
+          </button>
+          <button class="dashboard-option-btn w-full flex items-center gap-2 px-3.5 py-1.5 hover:bg-surface-variant text-[10.5px] text-on-surface-variant hover:text-on-surface font-semibold text-left transition-colors cursor-pointer" data-dashboard="Operations Overview">
+            <span class="material-symbols-outlined text-[14px]">settings_suggest</span>
+            <span>Operations Overview</span>
+          </button>
+          <button class="dashboard-option-btn w-full flex items-center gap-2 px-3.5 py-1.5 hover:bg-surface-variant text-[10.5px] text-on-surface-variant hover:text-on-surface font-semibold text-left transition-colors cursor-pointer" data-dashboard="Financials">
+            <span class="material-symbols-outlined text-[14px]">payments</span>
+            <span>Financials</span>
+          </button>
+          <button class="dashboard-option-btn w-full flex items-center gap-2 px-3.5 py-1.5 hover:bg-surface-variant text-[10.5px] text-on-surface-variant hover:text-on-surface font-semibold text-left transition-colors cursor-pointer" data-dashboard="Team Performance">
+            <span class="material-symbols-outlined text-[14px]">groups</span>
+            <span>Team Performance</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-3">
+      <div class="flex items-center bg-surface-variant/80 px-2.5 py-1 rounded-md w-56 border border-outline/30 focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+        <span class="material-symbols-outlined text-on-surface-variant text-[16px]">search</span>
+        <input class="bg-transparent border-none focus:ring-0 text-[11px] w-full ml-1 placeholder:text-on-surface-variant/60 p-0" placeholder="Search..." type="text">
+      </div>
+      
+      <!-- Notifications Toggler & Menu -->
+      <div class="relative">
+        <button id="notifications-toggle" class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded-md transition-all relative">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-primary rounded-full ring-2 ring-white"></span>
+        </button>
+        
+        <!-- Notifications Popover -->
+        <div id="notifications-menu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-outline z-50 py-2 text-left">
+          <div class="px-3.5 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/60 pb-1.5 mb-1.5">Notifications</div>
+          <div class="px-3.5 py-1.5 hover:bg-surface-variant/40 transition-colors cursor-pointer border-b border-outline-variant/30 pb-2 mb-1.5">
+            <span class="text-[10px] font-bold text-on-surface block">Revenue Milestone</span>
+            <span class="text-[9.5px] text-on-surface-variant block mt-0.5 leading-tight">Revenue passed Q2 forecast target by 8% today.</span>
+          </div>
+          <div class="px-3.5 py-1.5 hover:bg-surface-variant/40 transition-colors cursor-pointer">
+            <span class="text-[10px] font-bold text-on-surface block">Data Sync Complete</span>
+            <span class="text-[9.5px] text-on-surface-variant block mt-0.5 leading-tight">Shopify Store successfully synced 1,420 new orders.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="h-5 w-px bg-outline mx-0.5"></div>
+      
+      <!-- User Profile Toggler & Menu -->
+      <div class="relative">
+        <div id="profile-toggle" class="flex items-center gap-1.5 cursor-pointer group">
+          <div class="w-7 h-7 rounded-md overflow-hidden border border-outline group-hover:border-primary transition-colors">
+            <img alt="User Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrV2uuXVfrfG8zmwRQLReo3dmLsCwzQirSxa1dvyB1mCOceZVJEBtWGd3HNJ_zvKiqT2iHBjEjJjv4Y_42JYRkJme-aByzDa2iuDD1fhzLNSoNerZg64hR-9rmeR_w8zaxBuEFYZqe3gJY9ChJhcRULMfFKZ2mVOS7ZELOYQ1ikzCLE5hIz3IcZ4oGswTzljbafhwDSJjJaIUm2kRCe8cJY-tm0QZS0j4sFuUfXU0f9tYs586ImtR0pP2OLSK2d9aN4SNc_UWT8hvR">
+          </div>
+          <span class="material-symbols-outlined text-on-surface-variant text-[16px] group-hover:text-on-surface transition-colors">keyboard_arrow_down</span>
+        </div>
+        
+        <!-- Profile Popover -->
+        <div id="profile-menu" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-outline z-50 py-1.5 text-left">
+          <div class="px-3.5 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider">Account</div>
+          <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+            <span class="material-symbols-outlined text-[16px]">person</span>
+            <span>My Profile</span>
+          </a>
+          <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+            <span class="material-symbols-outlined text-[16px]">settings</span>
+            <span>Account Settings</span>
+          </a>
+          <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface transition-colors" href="#">
+            <span class="material-symbols-outlined text-[16px]">credit_card</span>
+            <span>Billing & Usage</span>
+          </a>
+          <div class="mt-1.5 pt-1.5 border-t border-outline-variant">
+            <a class="flex items-center gap-2.5 px-3 py-1.5 hover:bg-error/5 text-xs text-on-surface-variant hover:text-error transition-colors" href="login.html?logout=true">
+              <span class="material-symbols-outlined text-[16px]">logout</span>
+              <span>Sign Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Canvas -->
+  <main id="main-content" class="main-content-shifted ml-56 mt-13 p-8 min-h-screen relative overflow-hidden bg-[#fafbfc]">
+    
+    <!-- Premium Aura Gradient Blur at the top of the canvas -->
+    <div class="absolute top-0 left-0 right-0 h-[240px] pointer-events-none z-0 overflow-hidden">
+      <div class="absolute -top-32 left-[10%] w-[80%] h-[260px] bg-gradient-to-r from-orange-200/25 via-pink-200/20 via-purple-100/10 to-blue-200/30 blur-[90px] rounded-full"></div>
+    </div>
+    
+    <!-- Conversational Hero Panel -->
+    <section class="max-w-3xl mx-auto py-6 relative z-20 gsap-fade-in">
+
+      <!-- Initial State -->
+      <div id="ai-hero" class="transition-all duration-300 relative z-10">
+        
+        <!-- Header / Logo Area -->
+        <div class="max-w-xl mx-auto flex items-center justify-center mb-5 relative z-10">
+          <div class="inline-flex items-center gap-2 justify-center">
+            <!-- ClickUp Brain multi-colored styled SVG icon -->
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" class="animate-spin-slow">
+              <circle cx="12" cy="7" r="3.5" fill="#7c3bed" opacity="0.85" />
+              <circle cx="7.5" cy="12" r="3.5" fill="#a855f7" opacity="0.85" />
+              <circle cx="16.5" cy="12" r="3.5" fill="#3b82f6" opacity="0.85" />
+              <circle cx="12" cy="17" r="3.5" fill="#ec4899" opacity="0.85" />
+            </svg>
+            <h1 class="font-display text-xl text-on-surface font-semibold tracking-tight">BI Brain</h1>
+          </div>
+        </div>
+
+        <!-- Input and Floating Popovers Wrapper -->
+        <div class="relative max-w-xl mx-auto z-30">
+          
+          <!-- Premium ClickUp-like Input Box with Animating Gradient Outline -->
+          <div class="p-[1.5px] rounded-xl bg-gradient-to-r from-purple-500 via-pink-400 to-blue-500 ai-input-wrapper shadow-sm transition-all focus-within:shadow-md">
+            <div class="bg-white rounded-[10px] w-full h-full relative ai-input-card transition-all">
+              <!-- Input text area -->
+              <div class="px-3.5 py-2.5">
+                <textarea id="ask-ai-input" class="w-full bg-transparent border-none focus:ring-0 text-[13px] placeholder:text-on-surface-variant/40 resize-none h-14 p-0 text-on-surface leading-normal" placeholder="Type your request: I'll search, answer, or build it for you."></textarea>
+              </div>
+
+              <!-- Input Footer Actions -->
+              <div class="flex items-center justify-between px-3.5 py-1.5 border-t border-outline-variant/30 bg-surface-variant/5 rounded-b-xl">
+                <div class="flex items-center gap-2 relative">
+                  <!-- Context Toggle (+) -->
+                  <button id="chat-context-toggle" class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:text-on-surface" title="Add Context">
+                    <span class="material-symbols-outlined text-[14px]">add</span>
+                  </button>
+                  
+                  <!-- History Toggle (clock) -->
+                  <button id="history-toggle" class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:text-on-surface" title="Chat History">
+                    <span class="material-symbols-outlined text-[14px]">history</span>
+                  </button>
+
+                  <!-- Context Selector Dropdown (Positioned BELOW the plus icon) -->
+                  <div id="chat-context-menu" class="hidden absolute left-0 top-7 w-48 bg-white rounded-xl shadow-xl border border-outline z-50 py-1.5 text-left">
+                    <div class="px-3 py-1 text-[8.5px] font-bold text-on-surface-variant uppercase tracking-wider border-b border-outline-variant/50 pb-1 mb-1">Add Context</div>
+                    <button class="w-full flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface text-left transition-colors">
+                      <span class="material-symbols-outlined text-[16px] text-primary">database</span>
+                      <span>Attach Data Source</span>
+                    </button>
+                    <button class="w-full flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface text-left transition-colors">
+                      <span class="material-symbols-outlined text-[16px] text-success">table_view</span>
+                      <span>Upload CSV / Excel</span>
+                    </button>
+                    <button class="w-full flex items-center gap-2.5 px-3 py-1.5 hover:bg-surface-variant text-xs text-on-surface-variant hover:text-on-surface text-left transition-colors">
+                      <span class="material-symbols-outlined text-[16px] text-purple-500">terminal</span>
+                      <span>Add Instructions</span>
+                    </button>
+                  </div>
+                </div>
+              
+                <div class="flex items-center gap-2">
+                  <!-- Voice Input Button (mic) -->
+                  <button id="voice-input-btn" class="w-6 h-6 rounded-full border border-outline/60 flex items-center justify-center text-on-surface-variant hover:bg-surface-variant transition-colors hover:text-on-surface" title="Voice Input">
+                    <span class="material-symbols-outlined text-[14px]">mic</span>
+                  </button>
+                  
+                  <button id="ask-ai-btn" class="w-6 h-6 rounded-full bg-primary text-on-primary hover:bg-primary-hover transition-colors flex items-center justify-center disabled:opacity-50 active:scale-95">
+                    <span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- History & Favorites Popover (Toggled by history clock icon) -->
+          <div id="history-panel" class="hidden absolute top-full left-0 right-0 w-full bg-white rounded-xl border border-outline shadow-xl mt-2 p-3 text-left transition-all z-40">
+            <div class="flex items-center justify-between border-b border-outline-variant/60 pb-1.5 mb-2">
+              <h4 class="text-[9.5px] font-bold uppercase tracking-wider text-primary">BI Brain History</h4>
+              <div class="flex items-center gap-2">
+                <button id="clear-history" class="text-[9px] font-semibold text-on-surface-variant/70 hover:text-error transition-colors">Clear All</button>
+                <button id="history-close-btn" class="text-on-surface-variant hover:text-on-surface flex items-center justify-center"><span class="material-symbols-outlined text-[13px]">close</span></button>
+              </div>
+            </div>
+            
+            <div class="space-y-2.5 max-h-44 overflow-y-auto pr-1">
+              <!-- Favorites Section -->
+              <div>
+                <span class="text-[8.5px] font-bold uppercase text-on-surface-variant/50 tracking-wider block mb-1 flex items-center gap-0.5">
+                  <span class="material-symbols-outlined text-[9px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span>Favorites</span>
+                </span>
+                <div id="favorites-list" class="space-y-1">
+                  <p class="text-[9.5px] text-on-surface-variant/60 italic px-1">No favorites saved yet.</p>
+                </div>
+              </div>
+              
+              <!-- Recent Queries Section -->
+              <div>
+                <span class="text-[8.5px] font-bold uppercase text-on-surface-variant/50 tracking-wider block mb-1">Recent Queries</span>
+                <div id="recent-queries-list" class="space-y-1">
+                  <p class="text-[9.5px] text-on-surface-variant/60 italic px-1">No recent searches.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Inspiration/Quick Action Cards (2-Column Grid to prevent overflow) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 max-w-xl mx-auto mt-5 relative z-10">
+          <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="How did we do last month?">
+            <div class="w-6 h-6 rounded-md bg-purple-50 flex items-center justify-center text-purple-600 flex-shrink-0">
+              <span class="material-symbols-outlined text-[14px]">query_stats</span>
+            </div>
+            <span class="text-[10px] font-semibold text-on-surface leading-tight">"How did we do last month?"</span>
+          </div>
+          
+          <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="Which product is underperforming?">
+            <div class="w-6 h-6 rounded-md bg-blue-50 flex items-center justify-center text-blue-600 flex-shrink-0">
+              <span class="material-symbols-outlined text-[14px]">trending_down</span>
+            </div>
+            <span class="text-[10px] font-semibold text-on-surface leading-tight">"Which product is underperforming?"</span>
+          </div>
+
+          <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="Predict next quarter's revenue">
+            <div class="w-6 h-6 rounded-md bg-pink-50 flex items-center justify-center text-pink-600 flex-shrink-0">
+              <span class="material-symbols-outlined text-[14px]">online_prediction</span>
+            </div>
+            <span class="text-[10px] font-semibold text-on-surface leading-tight">"Predict next quarter's revenue"</span>
+          </div>
+
+          <div class="suggestion-card cursor-pointer bg-white px-3 py-2.5 rounded-lg border border-outline/70 hover:border-primary/30 hover:bg-primary-container/5 transition-all flex items-center gap-2.5 text-left" data-query="Summarize my active data sources">
+            <div class="w-6 h-6 rounded-md bg-orange-50 flex items-center justify-center text-orange-600 flex-shrink-0">
+              <span class="material-symbols-outlined text-[14px]">database</span>
+            </div>
+            <span class="text-[10px] font-semibold text-on-surface leading-tight">"Summarize my active data sources"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div id="ai-loading" class="hidden py-5 z-10 relative">
+        <div class="flex flex-col items-center justify-center gap-2">
+          <div class="loading-avatar w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-purple-400 flex items-center justify-center shadow-md shadow-primary/10">
+            <span class="material-symbols-outlined text-white text-[18px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+          </div>
+          <p class="text-[11px] font-semibold text-primary animate-pulse tracking-wide">SMarBI is analyzing your business data...</p>
+        </div>
+      </div>
+
+      <div id="ai-results" class="hidden bg-white p-4 rounded-xl border border-outline shadow-sm text-left transition-all duration-300 relative overflow-hidden z-10 max-w-xl mx-auto">
+
+        <div class="flex items-start gap-3">
+          <div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0 text-primary">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+          </div>
+          <div class="space-y-2.5 w-full min-w-0">
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <h4 class="text-[9px] font-bold uppercase tracking-wider text-primary">AI Answer</h4>
+                <div class="flex items-center gap-2">
+                  <button id="favorite-toggle-btn" class="flex items-center gap-0.5 text-[9px] font-semibold text-on-surface-variant/70 hover:text-yellow-600 transition-colors" title="Mark as Favorite">
+                    <span id="favorite-star-icon" class="material-symbols-outlined text-[13px]">star_border</span>
+                    <span id="favorite-star-text">Favorite</span>
+                  </button>
+                  <div class="h-3 w-px bg-outline mx-0.5"></div>
+                  <button onclick="resetAI()" class="text-on-surface-variant hover:text-on-surface hover:bg-surface-variant p-0.5 rounded transition-colors flex items-center justify-center" title="Close Answer">
+                    <span class="material-symbols-outlined text-[14px]">close</span>
+                  </button>
+                </div>
+              </div>
+              <p id="ai-response-text" class="text-xs leading-relaxed text-on-surface"></p>
+            </div>
+            
+            <div class="flex items-center justify-between mt-2 pt-2 border-t border-outline-variant/30 flex-wrap gap-2">
+              <div class="flex flex-wrap gap-1.5 pt-0.5">
+                <span class="ai-chip text-[9.5px] bg-primary-container text-primary px-2.5 py-0.5 rounded-full font-semibold">💡 Campaign Source Analysis</span>
+                <span class="ai-chip text-[9.5px] bg-primary-container text-primary px-2.5 py-0.5 rounded-full font-semibold">📈 Projection Chart</span>
+                <span class="ai-chip text-[9.5px] bg-primary-container text-primary px-2.5 py-0.5 rounded-full font-semibold">⚡ Optimization Insights</span>
+              </div>
+              <span id="ai-quiet-status" class="text-[10px] text-primary font-medium italic"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </section>
+
+    <!-- Key Metrics Section -->
+    <section class="max-w-7xl mx-auto mt-6 gsap-fade-in relative z-10">
+      <div class="flex items-end justify-between mb-4">
+        <div>
+          <h2 class="text-sm font-semibold tracking-tight text-on-surface">Key Metrics</h2>
+          <p class="text-[10px] text-on-surface-variant/80">AI-curated business insights for your role</p>
+        </div>
+        <button class="border border-outline hover:border-primary hover:bg-primary/5 text-on-surface-variant hover:text-primary transition-all text-[11px] font-semibold py-1 px-2.5 rounded-md flex items-center gap-1.5">
+          <span>View all metrics</span>
+          <span class="material-symbols-outlined text-[12px]">chevron_right</span>
+        </button>
+      </div>
+
+      <!-- Filters Row -->
+      <div class="flex flex-wrap items-center gap-2 mb-4 relative z-30">
+        <div class="relative">
+          <button id="add-filter-btn" class="px-2.5 py-1.5 border border-outline hover:border-primary hover:bg-primary-container/20 text-on-surface-variant hover:text-primary rounded-lg text-[10px] font-bold transition-all flex items-center gap-1 cursor-pointer">
+            <span class="material-symbols-outlined text-[13px]">filter_list</span>Add Filter
+          </button>
+          
+          <!-- Filter Selector Dropdown -->
+          <div id="filter-selector-menu" class="hidden opacity-0 absolute left-0 mt-2 bg-white border border-outline rounded-xl shadow-xl z-50 p-2 w-44 text-[10.5px] font-body transition-all duration-150">
+            <p class="text-[8px] font-bold text-on-surface-variant uppercase tracking-wider px-2 py-1 border-b border-outline-variant/60 mb-1 leading-none">Filter by Source</p>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Source" data-filter-val="Social">Source: Social</button>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Source" data-filter-val="Email">Source: Email</button>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Source" data-filter-val="Direct">Source: Direct</button>
+            <p class="text-[8px] font-bold text-on-surface-variant uppercase tracking-wider px-2 py-1 border-b border-outline-variant/60 mt-2 mb-1 leading-none">Filter by Region</p>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Region" data-filter-val="US East">Region: US East</button>
+            <button class="filter-opt-btn w-full text-left px-2 py-1.5 hover:bg-slate-50 text-on-surface font-semibold rounded cursor-pointer transition-colors" data-filter-type="Region" data-filter-val="Europe">Region: Europe</button>
+          </div>
+        </div>
+        
+        <div id="active-filters-container" class="flex flex-wrap gap-1.5">
+          <!-- Active filter chips render here -->
+        </div>
+      </div>
+
+      <!-- Metrics Grid -->
+      <div class="metrics-grid">
+        
+        <!-- Revenue Card -->
+        <div class="dashboard-card bg-white p-4 rounded-xl border border-outline shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-[16px]">payments</span>
+              </div>
+              <span class="flex items-center gap-0.5 bg-success/15 text-success px-1.5 py-0.5 rounded-full text-[9px] font-bold">
+                <span class="material-symbols-outlined text-[10px]">trending_up</span> +12.5%
+              </span>
+            </div>
+            <p class="text-on-surface-variant font-medium text-[9.5px] uppercase tracking-wider mb-0.5">Revenue</p>
+            <h3 class="font-display font-bold text-lg text-on-surface">$124,523</h3>
+          </div>
+          <div class="mt-4 pt-2.5 border-t border-outline/50 flex items-start gap-1">
+            <span class="material-symbols-outlined text-primary text-[12px] mt-0.5">info</span>
+            <p class="text-[10px] text-on-surface-variant/80 leading-tight">On track to beat Q2 target by 8%</p>
+          </div>
+        </div>
+
+        <!-- Active Users Card -->
+        <div class="dashboard-card bg-white p-4 rounded-xl border border-outline shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-[16px]">group</span>
+              </div>
+              <span class="flex items-center gap-0.5 bg-success/15 text-success px-1.5 py-0.5 rounded-full text-[9px] font-bold">
+                <span class="material-symbols-outlined text-[10px]">trending_up</span> +18.2%
+              </span>
+            </div>
+            <p class="text-on-surface-variant font-medium text-[9.5px] uppercase tracking-wider mb-0.5">Active Users</p>
+            <h3 class="font-display font-bold text-lg text-on-surface">8,234</h3>
+          </div>
+          <div class="mt-4 pt-2.5 border-t border-outline/50 flex items-start gap-1">
+            <span class="material-symbols-outlined text-primary text-[12px] mt-0.5">info</span>
+            <p class="text-[10px] text-on-surface-variant/80 leading-tight">Highest user growth in 6 months</p>
+          </div>
+        </div>
+
+        <!-- Conversion Rate Card -->
+        <div class="dashboard-card bg-white p-4 rounded-xl border border-outline shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-[16px]">ads_click</span>
+              </div>
+              <span class="flex items-center gap-0.5 bg-error/15 text-error px-1.5 py-0.5 rounded-full text-[9px] font-bold">
+                <span class="material-symbols-outlined text-[10px]">trending_down</span> -0.4%
+              </span>
+            </div>
+            <p class="text-on-surface-variant font-medium text-[9.5px] uppercase tracking-wider mb-0.5">Conversion Rate</p>
+            <h3 class="font-display font-bold text-lg text-on-surface">3.24%</h3>
+          </div>
+          <div class="mt-4 pt-2.5 border-t border-outline/50 flex items-start gap-1">
+            <span class="material-symbols-outlined text-primary text-[12px] mt-0.5">info</span>
+            <p class="text-[10px] text-on-surface-variant/80 leading-tight">Below optimization target by 0.2%</p>
+          </div>
+        </div>
+
+        <!-- Orders Card -->
+        <div class="dashboard-card bg-white p-4 rounded-xl border border-outline shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <div class="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <span class="material-symbols-outlined text-primary text-[16px]">shopping_cart</span>
+              </div>
+              <span class="flex items-center gap-0.5 bg-success/15 text-success px-1.5 py-0.5 rounded-full text-[9px] font-bold">
+                <span class="material-symbols-outlined text-[10px]">trending_up</span> +23.1%
+              </span>
+            </div>
+            <p class="text-on-surface-variant font-medium text-[9.5px] uppercase tracking-wider mb-0.5">Orders</p>
+            <h3 class="font-display font-bold text-lg text-on-surface">2,847</h3>
+          </div>
+          <div class="mt-4 pt-2.5 border-t border-outline/50 flex items-start gap-1">
+            <span class="material-symbols-outlined text-primary text-[12px] mt-0.5">info</span>
+            <p class="text-[10px] text-on-surface-variant/80 leading-tight">Strong conversion from campaigns</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Dynamic Widgets Section -->
+    <section id="dynamic-widgets-section" class="max-w-7xl mx-auto mt-6 hidden relative z-10">
+      <div class="flex items-end justify-between mb-4">
+        <div>
+          <div class="flex items-center gap-1.5 group/header">
+            <!-- Editable Title Wrapper -->
+            <h2 id="dynamic-widgets-title" class="text-sm font-semibold tracking-tight text-on-surface cursor-pointer hover:bg-surface-variant/40 px-1 rounded transition-colors flex items-center gap-1" title="Click to rename section">Custom Widgets</h2>
+            <button id="edit-widgets-title-btn" class="opacity-0 group-hover/header:opacity-100 transition-opacity p-0.5 text-on-surface-variant hover:text-primary rounded flex items-center justify-center" title="Rename Section">
+              <span class="material-symbols-outlined text-[14px]">edit</span>
+            </button>
+            <input id="dynamic-widgets-title-input" class="hidden text-sm font-semibold tracking-tight text-on-surface bg-white border border-primary px-1 rounded focus:ring-1 focus:ring-primary/20 focus:outline-none w-48 p-0 h-6" type="text" />
+          </div>
+          <p class="text-[10px] text-on-surface-variant/80 mt-0.5">AI-generated visualizations automatically added to this workspace</p>
+        </div>
+      </div>
+      <div id="dynamic-widgets-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Dynamic cards injected here -->
+      </div>
+    </section>
+
+    <!-- Visualizations & Side Insights Grid -->
+    <section class="max-w-7xl mx-auto mt-6 insights-layout gsap-fade-in relative z-10">
+      
+      <!-- Quarterly Revenue Bar Chart (Main) -->
+      <div class="chart-panel bg-white text-on-surface rounded-xl p-4 border border-outline shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[300px]">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/80 mb-1">Quarterly Revenue Trajectory</h3>
+          <p class="text-on-surface-variant text-[11px] max-w-lg leading-normal">Forecasted growth based on seasonal trends and historical campaign performance.</p>
+        </div>
+        
+        <!-- CSS Grid & GSAP Animated Columns -->
+        <div class="h-44 mt-4 flex items-end gap-3 px-2 pb-1 border-b border-outline">
+          <div class="flex-1 bg-primary/25 rounded-t-md chart-bar" style="height: 40%"></div>
+          <div class="flex-1 bg-primary/25 rounded-t-md chart-bar" style="height: 65%"></div>
+          <div class="flex-1 bg-primary/25 rounded-t-md chart-bar" style="height: 55%"></div>
+          <div class="flex-1 bg-primary/25 rounded-t-md chart-bar" style="height: 85%"></div>
+          <div class="flex-1 bg-primary/25 rounded-t-md chart-bar" style="height: 70%"></div>
+          
+          <!-- Highlighted/Active Column -->
+          <div class="flex-1 bg-gradient-to-t from-primary to-purple-400 rounded-t-md chart-bar relative group" style="height: 95%">
+            <!-- Projected Peak Tooltip -->
+            <div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[9px] bg-primary text-white px-2 py-0.5 rounded shadow whitespace-nowrap font-bold opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+              Projected Peak
+            </div>
+          </div>
+        </div>
+        
+        <!-- X-Axis Labels -->
+        <div class="flex justify-between text-[9px] text-on-surface-variant font-bold px-2 pt-2">
+          <span class="flex-1 text-center">Q1</span>
+          <span class="flex-1 text-center">Q2</span>
+          <span class="flex-1 text-center">Q3</span>
+          <span class="flex-1 text-center">Q4</span>
+          <span class="flex-1 text-center">Q1 Proj</span>
+          <span class="flex-1 text-center text-primary">Q2 Peak</span>
+        </div>
+
+        <!-- Decorative background glow -->
+        <div class="absolute -bottom-24 -right-24 w-48 h-48 bg-primary/5 rounded-full blur-[60px] pointer-events-none"></div>
+      </div>
+      
+      <!-- Side Featured Insights Opportunity Panel -->
+      <div class="insight-panel bg-white rounded-xl p-4 flex flex-col justify-between border border-outline shadow-sm relative overflow-hidden min-h-[300px]">
+        <div>
+          <div class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center mb-4 shadow-sm shadow-primary/20">
+            <span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+          </div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/80 mb-1">High Impact Opportunity</h4>
+          <p class="text-on-surface-variant text-[11px] leading-relaxed mt-1">
+            Users from <span class="font-bold text-on-surface">"Social Campaigns"</span> are <span class="text-primary font-bold">3x more likely</span> to convert if they visit the pricing page within 4 minutes of their first session.
+          </p>
+        </div>
+        <button class="mt-4 w-full py-2 border border-outline hover:border-primary hover:bg-primary/5 text-on-surface hover:text-primary font-semibold text-[11px] rounded-lg transition-all active:scale-[0.98]">
+          View Insights
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Operations & Resources Section -->
+    <section class="max-w-7xl mx-auto mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 gsap-fade-in relative z-10">
+      
+      <!-- Active Data Sources Connection Widget -->
+      <div class="dashboard-card bg-white p-4 rounded-xl border border-outline shadow-sm flex flex-col justify-between">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/80 mb-2">Your Data Sources</h3>
+          <div class="space-y-2.5">
+            <div class="flex items-start justify-between gap-1 text-[11px]">
+              <span class="flex items-center gap-1.5 font-medium leading-tight">
+                <span class="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0 animate-pulse"></span> Sales Spreadsheet
+              </span>
+              <span class="text-on-surface-variant/60 flex-shrink-0 text-right text-[10px]">Updated 2 mins ago</span>
+            </div>
+            <div class="flex items-start justify-between gap-1 text-[11px]">
+              <span class="flex items-center gap-1.5 font-medium leading-tight">
+                <span class="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0 animate-pulse"></span> Shopify Store
+              </span>
+              <span class="text-on-surface-variant/60 flex-shrink-0 text-right text-[10px]">Connected & active</span>
+            </div>
+            <div class="flex items-start justify-between gap-1 text-[11px]">
+              <span class="flex items-center gap-1.5 font-medium leading-tight">
+                <span class="w-1.5 h-1.5 rounded-full bg-success flex-shrink-0"></span> Marketing CSV Export
+              </span>
+              <span class="text-on-surface-variant/60 flex-shrink-0 text-right text-[10px]">Uploaded yesterday</span>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-outline/50 flex items-center justify-between">
+          <span class="text-[10px] text-on-surface-variant/80">3 sources active</span>
+          <button class="text-[10px] text-primary font-semibold hover:underline">Add Source</button>
+        </div>
+      </div>
+
+      <!-- What happened while you were away Widget -->
+      <div class="dashboard-card bg-white p-4 rounded-xl border border-outline shadow-sm flex flex-col justify-between">
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant/80 mb-2">What happened while you were away</h3>
+          <div class="space-y-2">
+            <div class="flex items-start gap-1.5 text-[10px]">
+              <span class="material-symbols-outlined text-primary text-[12px] mt-0.5">query_stats</span>
+              <p class="text-on-surface-variant leading-tight">
+                Your <span class="font-semibold text-on-surface">Q3 revenue forecast</span> was updated by Sayantan G.
+              </p>
+            </div>
+            <div class="flex items-start gap-1.5 text-[10px]">
+              <span class="material-symbols-outlined text-success text-[12px] mt-0.5">check_circle</span>
+              <p class="text-on-surface-variant leading-tight">
+                Scheduled report <span class="font-semibold text-on-surface">"Daily Conversion Audit"</span> completed — 3 anomalies found
+              </p>
+            </div>
+            <div class="flex items-start gap-1.5 text-[10px]">
+              <span class="material-symbols-outlined text-purple-500 text-[12px] mt-0.5">lightbulb</span>
+              <p class="text-on-surface-variant leading-tight">
+                AI generated <span class="font-semibold text-on-surface">3 new insights</span> on Social Campaign traffic
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4 pt-2.5 border-t border-outline/50 flex items-center justify-between">
+          <span class="text-[10px] text-on-surface-variant/80">Last update: 2 mins ago</span>
+          <button class="text-[10px] text-primary font-semibold hover:underline">View Insights</button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-12 py-6 border-t border-outline-variant/60 flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-on-surface-variant/60">
+      <p>© 2026 SMarBI Technologies. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a href="#" class="hover:text-primary transition-colors">Privacy Policy</a>
+        <a href="#" class="hover:text-primary transition-colors">Terms of Service</a>
+        <a href="#" class="hover:text-primary transition-colors">System Status</a>
+        <a href="#" class="hover:text-primary transition-colors font-semibold">Contact Support</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- GSAP CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+  <!-- ╔══ CALCULATED FIELD MODAL ══╗ -->
+  <div id="calc-modal-overlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[999] flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl border border-outline shadow-xl max-w-sm w-full flex flex-col overflow-hidden">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-5 py-3.5 border-b border-outline bg-slate-50/50">
+        <div>
+          <h3 class="font-display text-xs font-bold text-on-surface flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-primary text-[16px]" style="font-variation-settings:'FILL' 1">calculate</span>
+            Create Calculated Metric
+          </h3>
+          <p class="text-[9px] text-on-surface-variant mt-0.5 font-body">Combine metrics without writing complex code.</p>
+        </div>
+        <button id="close-calc-modal" type="button" class="w-6 h-6 rounded-full border border-outline flex items-center justify-center text-on-surface-variant hover:bg-slate-100 transition-colors cursor-pointer">
+          <span class="material-symbols-outlined text-[13px]">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <form id="calc-modal-form" class="p-5 space-y-3.5 text-[10.5px]">
+        
+        <!-- Formula Template Dropdown -->
+        <div class="flex flex-col gap-1">
+          <label for="modal-calc-template" class="font-bold text-on-surface-variant/80 font-body">Calculation Pattern</label>
+          <select id="modal-calc-template" class="bg-white px-2.5 h-9 rounded-lg border border-outline focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-xs font-body text-on-surface">
+            <option value="ratio">Divide (A / B) - e.g. Conversion Rates</option>
+            <option value="growth">Growth MoM (A vs B) - e.g. Performance Growth</option>
+            <option value="product">Multiply (A * B) - e.g. Weighted Metrics</option>
+            <option value="sum">Sum (A + B) - e.g. Combined Totals</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <!-- Metric A -->
+          <div class="flex flex-col gap-1">
+            <label for="modal-calc-met-a" class="font-bold text-on-surface-variant/80 font-body">Metric A</label>
+            <select id="modal-calc-met-a" class="bg-white px-2.5 h-9 rounded-lg border border-outline focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-xs font-body text-on-surface">
+              <option value="revenue" selected>Revenue</option>
+              <option value="users">Active Users</option>
+              <option value="orders">Orders</option>
+            </select>
+          </div>
+          <!-- Metric B -->
+          <div class="flex flex-col gap-1">
+            <label for="modal-calc-met-b" class="font-bold text-on-surface-variant/80 font-body">Metric B</label>
+            <select id="modal-calc-met-b" class="bg-white px-2.5 h-9 rounded-lg border border-outline focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-xs font-body text-on-surface">
+              <option value="orders" selected>Orders</option>
+              <option value="users">Active Users</option>
+              <option value="revenue">Revenue</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Metric Custom Name -->
+        <div class="flex flex-col gap-1">
+          <label for="modal-calc-name" class="font-bold text-on-surface-variant/80 font-body">Calculated Metric Name</label>
+          <div class="flex items-center bg-white px-2.5 h-9 rounded-lg border border-outline focus-within:ring-2 focus-within:ring-primary/20 focus-within:border-primary transition-all">
+            <input id="modal-calc-name" class="bg-transparent border-none focus:ring-0 text-xs w-full placeholder:text-on-surface-variant/40 p-0 text-on-surface font-body font-semibold" placeholder="e.g. Average Order Value" type="text" required>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="pt-3 border-t border-outline flex justify-end items-center gap-2">
+          <button id="modal-calc-cancel" type="button" class="px-3 py-1.5 text-on-surface-variant hover:text-on-surface text-xs font-semibold cursor-pointer">Cancel</button>
+          <button id="modal-calc-save-btn" type="submit" class="bg-primary text-on-primary text-xs font-bold py-1.5 px-4 rounded-lg hover:opacity-90 active:scale-95 transition-all cursor-pointer">
+            Create Metric
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="fixed top-6 right-6 flex flex-col gap-2.5 z-[100] pointer-events-none"></div>
+
+  <!-- Page Logic -->
+  <script src="dashboard/dashboard.js"></script>
+
+</body>
+</html>

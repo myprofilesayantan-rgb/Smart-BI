@@ -1,0 +1,186 @@
+/* Dashboard Specific Stylesheet (dashboard/dashboard.css) */
+
+/* Container Query Setup for Cards */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+  gap: 16px;
+}
+
+.dashboard-card {
+  container-type: inline-size;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.3s ease;
+}
+
+/* Fluid spacing and flex wrap layout for main insights */
+.insights-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.chart-panel {
+  flex: 2 1 420px;
+}
+
+.insight-panel {
+  flex: 1 1 280px;
+}
+
+/* Sidebar transition classes */
+.sidebar-container {
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.main-content-shifted {
+  transition: margin-left 0.4s cubic-bezier(0.16, 1, 0.3, 1), padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Sidebar Collapsed State (affects layout components) */
+.sidebar-collapsed {
+  width: 60px !important;
+}
+
+.sidebar-collapsed .logo-text,
+.sidebar-collapsed .nav-text,
+.sidebar-collapsed .help-logout-text {
+  display: none !important;
+}
+
+.sidebar-collapsed .logo-container,
+.sidebar-collapsed .nav-link,
+.sidebar-collapsed .bottom-btn {
+  justify-content: center !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.sidebar-collapsed .bottom-btn span:not(.material-symbols-outlined) {
+  display: none !important;
+}
+
+.sidebar-collapsed .bottom-btn {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 9999px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* CSS-based layout transition when sidebar is collapsed */
+.content-collapsed {
+  margin-left: 60px !important;
+}
+
+.header-collapsed {
+  left: 60px !important;
+}
+
+/* AI Conversational Deck Input Card focus-glow & stroke animation */
+@keyframes gradient-stroke-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.ai-input-wrapper {
+  background-size: 200% auto;
+  animation: gradient-stroke-glow 5s linear infinite;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-input-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -2.5px;
+  left: -2.5px;
+  right: -2.5px;
+  bottom: -2.5px;
+  background: inherit;
+  background-size: inherit;
+  animation: inherit;
+  border-radius: inherit;
+  z-index: -1;
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.3s ease;
+}
+
+.ai-input-wrapper:hover::before {
+  opacity: 0.45;
+}
+
+.ai-input-wrapper:focus-within::before {
+  opacity: 0.8;
+}
+
+.ai-input-wrapper:hover {
+  transform: translateY(-0.5px);
+  box-shadow: 0 6px 20px rgba(124, 58, 237, 0.1), 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+.ai-input-wrapper:focus-within {
+  transform: translateY(-1.5px);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.18), 0 4px 16px rgba(15, 23, 42, 0.04);
+}
+
+.ai-input-card {
+  border: none !important;
+  transition: background-color 0.25s ease;
+}
+
+.ai-input-card:focus-within {
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Suggestion Card hover styling */
+.suggestion-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+.suggestion-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+}
+
+/* Bar Chart styling and interactivity */
+.chart-bar-col {
+  transition: height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  transform-origin: bottom;
+  position: relative;
+}
+
+/* Styling for the Projected Peak bar indicator tooltip */
+.chart-bar-tooltip {
+  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* GSAP Pre-animation state setup */
+.gsap-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+/* Dragging Active state to prevent pointer event flicker on card children */
+body.dragging-active .dashboard-card *,
+body.dragging-active .chart-panel *,
+body.dragging-active .insight-panel * {
+  pointer-events: none !important;
+}
+
+/* Force move cursor globally during sorting operations */
+body.dragging-active,
+body.dragging-active * {
+  cursor: move !important;
+}

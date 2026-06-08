@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!-- LOCKED SECTION — do not edit without explicit user unlock instruction -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart BI Low-Fidelity Wireframes | Sayantan Ghosh UX Portfolio</title>
+  <meta name="description" content="Low-fidelity B&W wireframe sequence mapping out the conversational analytics onboarding and query flows." />
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <!-- Global Base Stylesheet & Nav/Footer styles -->
+  <link rel="stylesheet" href="tokens.css?v=2.0" />
+  <link rel="stylesheet" href="smart-bi.css?v=2.0" />
+  <link rel="stylesheet" href="components/nav/nav.css?v=2.0" />
+  <link rel="stylesheet" href="components/footer/footer.css?v=2.0" />
+  <link rel="stylesheet" href="components/wireframe/wireframe.css?v=2.0" />
+
+</head>
+<body class="token-preview-page">
+
+  <div class="page-wrapper">
+
+    <!-- ─── NAVIGATION HEADER ───────────────────────────────── -->
+    <header class="smartbi-nav">
+      <div class="nav-container">
+        <!-- Logo Group (Brand + Pipe + Sub-brand) to keep logo items inline on all viewports -->
+        <div class="nav-logo-group">
+          <a href="https://uxsayantan.com" target="_blank" rel="noopener noreferrer" class="nav-author-link">
+            <span class="nav-author-name">Sayantan Ghosh</span>
+          </a>
+          <img class="nav-project-logo-img" src="images/Smart-BI.png" alt="Smart BI Logo" />
+        </div>
+        
+        <!-- Navigation Links -->
+        <nav class="nav-links-nav">
+          <ul class="nav-links-list">
+            <li class="nav-link-item"><a href="index.html">Home</a></li>
+            <li class="nav-link-item"><a href="mindmap.html">Mind Map</a></li>
+            <li class="nav-link-item active"><a href="wireframe.html">Low Fidelity Wireframe</a></li>
+            <li class="nav-link-item"><a href="FInal HTML/design_system.html">Design System</a></li>
+            <li class="nav-link-item nav-cta"><a href="FInal HTML/login.html">AI Driven Prototype</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Gray Separator Line -->
+      <div class="nav-divider"></div>
+    </header>
+
+    <!-- ─── SPLIT MENU & PREVIEW WORKSPACE ────────────────────────── -->
+    <div class="token-preview-layout">
+
+      <!-- Sidebar -->
+      <aside class="token-sidebar">
+        <div class="token-sidebar-title">Low-Fi Wireframes</div>
+        <div class="token-sidebar-sub">Smart BI · Blueprint Sequence<br>Click thumbnail to expand wireframe</div>
+        <ul class="token-sidebar-nav">
+          <li><a href="#onboarding" class="active">Onboarding</a></li>
+          <li><a href="#conversational">Conversational Analytics</a></li>
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="token-main">
+
+        <!-- Group 1: Zero-Selection Onboarding -->
+        <section id="onboarding" class="token-section wf-group-section">
+          <div class="wf-group-header">
+            <h2 class="wf-group-title">Zero-Selection Onboarding</h2>
+            <p class="wf-group-desc">Streamlining database schema discovery and credential connection.</p>
+          </div>
+        
+        <div class="wf-grid">
+          <!-- Card 1 -->
+          <div class="wf-card" 
+               data-img="images/onboarding-upload-low.png" 
+               data-step="Step 1" 
+               data-title="Data Injection &amp; Upload" 
+               data-desc="Low-friction onboarding screen where users drop raw files or data dumps to initiate system database ingestion. <br><br><strong style='font-weight: 600;'>Use Case:</strong> Ingesting raw database dumps or CSVs without manual configuration.">
+            <div class="wf-card-image-wrap">
+              <img src="images/onboarding-upload-low.png" alt="Data Injection &amp; Upload" />
+            </div>
+            <div class="wf-card-info">
+              <span class="wf-card-step">Step 1</span>
+              <h3 class="wf-card-title">Data Injection &amp; Upload</h3>
+              <p class="wf-card-desc">Low-friction onboarding screen where users drop raw files or data dumps to initiate system database ingestion. <br><br><strong>Use Case:</strong> Ingesting raw database dumps or CSVs without manual configuration.</p>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="wf-card" 
+               data-img="images/onboarding-verify-low.png" 
+               data-step="Step 2" 
+               data-title="Passive AI Verification" 
+               data-desc="Automated passive analysis phase displaying schema scanning status, auto-detected columns, and model configurations. <br><br><strong style='font-weight: 600;'>Use Case:</strong> Verifying auto-discovered table relationships and column classifications before final connection.">
+            <div class="wf-card-image-wrap">
+              <img src="images/onboarding-verify-low.png" alt="Passive AI Verification" />
+            </div>
+            <div class="wf-card-info">
+              <span class="wf-card-step">Step 2</span>
+              <h3 class="wf-card-title">Passive AI Verification</h3>
+              <p class="wf-card-desc">Automated passive analysis phase displaying schema scanning status, auto-detected columns, and model configurations. <br><br><strong>Use Case:</strong> Verifying auto-discovered table relationships and column classifications before final connection.</p>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="wf-card" 
+               data-img="images/low-fi-wireframe.png" 
+               data-step="Step 3" 
+               data-title="Database Connection Credentials" 
+               data-desc="Database connection form requesting credential config setups once system column inspection is verified. <br><br><strong style='font-weight: 600;'>Use Case:</strong> Securely connecting standard data sources (PostgreSQL, BigQuery) with minimal input fields.">
+            <div class="wf-card-image-wrap">
+              <img src="images/low-fi-wireframe.png" alt="Database Connection Credentials" />
+            </div>
+            <div class="wf-card-info">
+              <span class="wf-card-step">Step 3</span>
+              <h3 class="wf-card-title">Database Connection</h3>
+              <p class="wf-card-desc">Database connection form requesting credential config setups once system column inspection is verified. <br><br><strong>Use Case:</strong> Securely connecting standard data sources (PostgreSQL, BigQuery) with minimal input fields.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Group 2: Conversational Analytics -->
+      <section id="conversational" class="token-section wf-group-section">
+        <div class="wf-group-header">
+          <h2 class="wf-group-title">Conversational Analytics</h2>
+          <p class="wf-group-desc">Intelligent querying mechanisms with automated disambiguation, metric customizers, and charts.</p>
+        </div>
+        
+        <div class="wf-grid">
+          <!-- Card 4 -->
+          <div class="wf-card" 
+               data-img="images/conversational-flow-a-low.png" 
+               data-step="Step 4" 
+               data-title="Flow A: Specific Query (Direct Retrieval)" 
+               data-desc="Standard chatbot retrieve sequence displaying clean system responses and a focused chart comparing actual performance against target boundaries. <br><br><strong style='font-weight: 600;'>Use Case:</strong> Running daily performance queries (e.g. Revenue vs. Target) and immediately getting a visual target-comparison chart.">
+            <div class="wf-card-image-wrap">
+              <img src="images/conversational-flow-a-low.png" alt="Flow A: Specific Query" />
+            </div>
+            <div class="wf-card-info">
+              <span class="wf-card-step">Step 4</span>
+              <h3 class="wf-card-title">Flow A: Specific Query</h3>
+              <p class="wf-card-desc">Standard chatbot retrieve sequence displaying clean system responses and a focused chart comparing actual performance against target boundaries. <br><br><strong>Use Case:</strong> Running daily performance queries (e.g. Revenue vs. Target) and immediately getting a visual target-comparison chart.</p>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="wf-card" 
+               data-img="images/conversational-flow-b-low.png" 
+               data-step="Step 5" 
+               data-title="Flow B: Ambiguous Query (Disambiguation)" 
+               data-desc="Intelligent conversational handler asking the user for parameter clarifications when multiple key metrics or conditions are met. <br><br><strong style='font-weight: 600;'>Use Case:</strong> Resolving vague questions like 'Are we on track?' by choosing between dynamic options (e.g., Margin vs. Revenue Units).">
+            <div class="wf-card-image-wrap">
+              <img src="images/conversational-flow-b-low.png" alt="Flow B: Ambiguous Query" />
+            </div>
+            <div class="wf-card-info">
+              <span class="wf-card-step">Step 5</span>
+              <h3 class="wf-card-title">Flow B: Ambiguous Query</h3>
+              <p class="wf-card-desc">Intelligent conversational handler asking the user for parameter clarifications when multiple key metrics or conditions are met. <br><br><strong>Use Case:</strong> Resolving vague questions like "Are we on track?" by choosing between dynamic options (e.g., Margin vs. Revenue Units).</p>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="wf-card" 
+               data-img="images/make-chart-low-fi.png" 
+               data-step="Step 6" 
+               data-title="KPI Selector &amp; Customizer (Make a Chart)" 
+               data-desc="Visual sidebar builder panel letting users select measures, dimensions, filters, and formats manually to generate custom visual blocks. <br><br><strong style='font-weight: 600;'>Use Case:</strong> Refining chart metrics, dimensions, and filter limits visually without writing code or typing chat prompts.">
+            <div class="wf-card-image-wrap">
+              <img src="images/make-chart-low-fi.png" alt="KPI Selector &amp; Customizer" />
+            </div>
+            <div class="wf-card-info">
+              <span class="wf-card-step">Step 6</span>
+              <h3 class="wf-card-title">KPI Selector &amp; Customizer</h3>
+              <p class="wf-card-desc">Visual sidebar builder panel letting users select measures, dimensions, filters, and formats manually to generate custom visual blocks. <br><br><strong>Use Case:</strong> Refining chart metrics, dimensions, and filter limits visually without writing code or typing chat prompts.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      </main>
+    </div>
+
+  <!-- ─── LIGHTBOX MODAL ─────────────────────────────────────── -->
+  <div id="wireframe-modal" class="wf-modal-overlay">
+    <div class="wf-modal-card">
+      <button class="wf-modal-close-btn" id="modal-close-btn" aria-label="Close modal">
+        <svg viewBox="0 0 24 24">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <div class="wf-modal-img-container">
+        <img id="modal-img" src="" alt="Wireframe Zoom View" />
+      </div>
+      <div class="wf-modal-body">
+        <div class="wf-modal-step" id="modal-step">Step 1</div>
+        <h2 class="wf-modal-title" id="modal-title">Title</h2>
+        <p class="wf-modal-desc" id="modal-desc">Description</p>
+      </div>
+    </div>
+  </div>
+
+    <!-- ─── FOOTER ──────────────────────────────────────────── -->
+    <footer id="section-footer" class="smartbi-footer">
+      <div class="footer-divider"></div>
+      <div class="footer-container">
+        <p class="footer-copyright">© 2026 Sayantan Ghosh. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="components/nav/nav.js?v=1.1"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize nav
+      if (window.SmartBI_Nav) {
+        window.SmartBI_Nav.init();
+      }
+
+
+
+      // Lightroom Modal Selectors
+      const modal = document.getElementById('wireframe-modal');
+      const modalImg = document.getElementById('modal-img');
+      const modalStep = document.getElementById('modal-step');
+      const modalTitle = document.getElementById('modal-title');
+      const modalDesc = document.getElementById('modal-desc');
+      const closeBtn = document.getElementById('modal-close-btn');
+      const cards = document.querySelectorAll('.wf-card');
+
+      // Open Modal
+      cards.forEach(card => {
+        card.addEventListener('click', () => {
+          const imgUrl = card.getAttribute('data-img');
+          const step = card.getAttribute('data-step');
+          const title = card.getAttribute('data-title');
+          const desc = card.getAttribute('data-desc');
+
+          modalImg.src = imgUrl;
+          modalStep.textContent = step;
+          modalTitle.textContent = title;
+          modalDesc.innerHTML = desc;
+
+          modal.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Lock background scrolling
+        });
+      });
+
+      // Close Modal Function
+      const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore background scrolling
+      };
+
+      closeBtn.addEventListener('click', closeModal);
+
+      // Close on backdrop click
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          closeModal();
+        }
+      });
+
+      // Close on Escape keypress
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+
+      // Measure nav header height for sticky sidebar offset
+      const nav = document.querySelector('.smartbi-nav');
+      if (nav) {
+        const updateHeight = () => {
+          const height = nav.offsetHeight;
+          document.documentElement.style.setProperty('--sbi-nav-height', `${height}px`);
+        };
+        window.addEventListener('resize', updateHeight);
+        updateHeight();
+        window.addEventListener('load', updateHeight);
+      }
+
+      // Sidebar Active State / Scroll Spy
+      const navLinks = document.querySelectorAll(".token-sidebar-nav a");
+      const sections = document.querySelectorAll(".token-section");
+
+      // Click handler
+      navLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+          navLinks.forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
+        });
+      });
+
+      // Scroll Spy handler using IntersectionObserver
+      const observerOptions = {
+        root: null,
+        rootMargin: "-20% 0px -60% 0px", // focus on middle portion
+        threshold: 0
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute("id");
+            navLinks.forEach(link => {
+              if (link.getAttribute("href") === `#${id}`) {
+                link.classList.add("active");
+              } else {
+                link.classList.remove("active");
+              }
+            });
+          }
+        });
+      }, observerOptions);
+
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
+</body>
+</html>

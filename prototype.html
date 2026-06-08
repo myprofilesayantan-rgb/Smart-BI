@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smart BI AI Driven Prototype | Sayantan Ghosh UX Portfolio</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+  <link rel="stylesheet" href="tokens.css?v=2.0" />
+  <link rel="stylesheet" href="smart-bi.css?v=2.0" />
+  <link rel="stylesheet" href="components/nav/nav.css?v=2.0" />
+  <link rel="stylesheet" href="components/footer/footer.css?v=2.0" />
+</head>
+<body class="token-preview-page">
+
+  <div class="page-wrapper">
+
+    <!-- ─── NAVIGATION HEADER ───────────────────────────────── -->
+    <header class="smartbi-nav">
+      <div class="nav-container">
+        <!-- Logo Group (Brand + Pipe + Sub-brand) to keep logo items inline on all viewports -->
+        <div class="nav-logo-group">
+          <a href="https://uxsayantan.com" target="_blank" rel="noopener noreferrer" class="nav-author-link">
+            <span class="nav-author-name">Sayantan Ghosh</span>
+          </a>
+          <img class="nav-project-logo-img" src="images/Smart-BI.png" alt="Smart BI Logo" />
+        </div>
+        
+        <!-- Navigation Links -->
+        <nav class="nav-links-nav">
+          <ul class="nav-links-list">
+            <li class="nav-link-item"><a href="index.html">Home</a></li>
+            <li class="nav-link-item"><a href="mindmap.html">Mind Map</a></li>
+            <li class="nav-link-item"><a href="wireframe.html">Low Fidelity Wireframe</a></li>
+            <li class="nav-link-item"><a href="FInal HTML/design_system.html">Design System</a></li>
+            <li class="nav-link-item nav-cta"><a href="FInal HTML/login.html">AI Driven Prototype</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Gray Separator Line -->
+      <div class="nav-divider"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: var(--sbi-space-12) var(--side-padding-fluid);">
+      <div>
+        <h1 style="font-family: var(--sbi-font-family-display); font-size: var(--sbi-font-size-3xl); font-weight: var(--sbi-font-weight-medium); margin-bottom: var(--sbi-space-4); color: var(--sbi-text-primary);">AI Driven Prototype</h1>
+        <p style="font-size: var(--sbi-font-size-base); color: var(--sbi-text-secondary); max-width: 500px; margin: 0 auto;">This section is under construction. We will work on this soon.</p>
+      </div>
+    </main>
+
+    <!-- ─── FOOTER ──────────────────────────────────────────── -->
+    <footer id="section-footer" class="smartbi-footer">
+      <div class="footer-divider"></div>
+      <div class="footer-container">
+        <p class="footer-copyright">© 2026 Sayantan Ghosh. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="components/nav/nav.js?v=2.0"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.SmartBI_Nav) {
+        window.SmartBI_Nav.init();
+      }
+    });
+  </script>
+</body>
+</html>

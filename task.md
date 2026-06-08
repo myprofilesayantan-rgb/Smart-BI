@@ -1,0 +1,55 @@
+# Task Checklist: Scoped Connection Assistant & Zero-Tech Customization
+
+- [x] Refactor Data Sources HTML (`data_sources.html`)
+  - [x] Rename AI Companion panel to "Connection Assistant"
+  - [x] Add scope subtitle: "Syncs, credentials & connectors"
+  - [x] Update header icon to a network/hub icon
+  - [x] Update initial welcome message to scope boundaries
+  - [x] Replace suggested prompt chips with connection-oriented questions
+- [x] Implement Scoped JS Logic (`data_sources.js`)
+  - [x] Update chat clear action to restore the new scoped welcome message
+  - [x] Map click handlers for the new suggested chips
+  - [x] Program response mapping for:
+    - [x] June 7 Auth Timeout sync failure (matching user screenshot)
+    - [x] Salesforce Connector instructions
+    - [x] Auth Timeout explanation
+  - [x] Add polite redirection/pivot for developer-level SQL queries
+  - [x] Integrate interactive actions:
+    - [x] Pre-fill Host URL modal field and open modal on "change host to [X]"
+    - [x] Pre-fill Sync Interval modal field and open modal on "set sync interval to [Y]"
+    - [x] Trigger PostgreSQL manual sync spinner on "run sync" or "retry connection"
+    - [x] Trigger CSV clear warning on "clear file data"
+- [x] Implement Dashboard Filtering System
+  - [x] Add filters row container and absolute dropdown menu in `dashboard.html`
+  - [x] Add visual preset options (Social, Email, Direct, Regions)
+  - [x] Add event listeners in `dashboard.js` to toggle the filter dropdown
+  - [x] Implement chip injection inside `#active-filters-container` on selection
+  - [x] Add metric card value modifications and chart bar scale updates on filter click
+  - [x] Add chip close event listener to reset variables and animate cards back to normal
+- [x] Implement Non-Technical Calculated Metrics Builder
+  - [x] Add "Calculated Metric" button inside sidebar navigation in `dashboard.html`
+  - [x] Add calculated metric modal markup (`#calc-modal-overlay`) to the footer of `dashboard.html`
+  - [x] Map modal controls (Pattern, Metric A, Metric B, Custom name)
+  - [x] Add open/close event listeners in `dashboard.js` with GSAP animations
+  - [x] Implement math handlers on form submit (Divide, Growth, Product, Sum)
+  - [x] Program metric card injection: append card element to `.metrics-grid` with calculated values, customized subtext, and a hover delete action
+  - [x] Trigger toast notifications and grid animations
+- [x] Verify Dashboard Features
+  - [x] Verify filter additions and re-aggregation updates
+  - [x] Verify Calculated Metric creation, division calculations, MoM growth calculations, and card insertions
+  - [x] Update walkthrough.md
+- [x] Improve Data Sources Page Sizing & Spacing (`data_sources.html` & `data_sources.js`)
+  - [x] Scale up tiny connection card titles from 12px to 13.5px
+  - [x] Scale up base log table cells and key-value lists to 11px
+  - [x] Adjust card padding for summaries (p-4.5) and connectors (p-4)
+  - [x] Increase button font size to text-xs with high-contrast text colors
+  - [x] Align status badges using modern HSL backgrounds
+  - [x] Adjust AI Chat feed bubble text sizes to text-xs for premium reading
+- [x] Style Guide Adherence & Visual Consistency Alignments
+  - [x] Standardize non-standard spacing tokens (w-7.5/h-7.5 to w-8/h-8; w-1.2/h-1.2 to w-1.5/h-1.5)
+  - [x] Fix Data Sources summary cards invalid padding (p-4.5 to p-4)
+  - [x] Fix Add Connection button border radius (rounded-xl to rounded-lg)
+  - [x] Align Calculated Field modal border radius to rounded-xl
+  - [x] Resolve JavaScript parsing error in data_sources.js
+  - [x] Align Connection Assistant message bubbles visually with Insights page bubbles
+  - [x] Prevent card text wrapping in summary and connector cards using responsive CSS grids

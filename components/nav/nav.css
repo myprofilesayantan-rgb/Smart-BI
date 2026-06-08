@@ -1,0 +1,297 @@
+/* ─── Navigation Header ─────────────────────────────────────────────────────
+   LOCKED SECTION — do not edit without explicit user unlock instruction
+   ──────────────────────────────────────────────────────────────────────── */
+
+.smartbi-nav {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: var(--sbi-z-nav);
+  background-color: var(--sbi-nav-bg);
+  backdrop-filter: blur(var(--sbi-nav-blur)) saturate(var(--sbi-backdrop-saturate));
+  -webkit-backdrop-filter: blur(var(--sbi-nav-blur)) saturate(var(--sbi-backdrop-saturate));
+  font-family: var(--sbi-font-family-sans);
+  transition: background-color var(--sbi-duration-normal) var(--sbi-ease-out), border-color var(--sbi-duration-normal) var(--sbi-ease-out);
+  line-height: 1.2 !important;
+}
+
+.nav-container {
+  width: 100%;
+  padding: 12px clamp(1rem, 5vw, 60px) 8px clamp(1rem, 5vw, 60px); /* Reduced vertical padding */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(20px, 4vw, 40px);
+  flex-wrap: nowrap;
+}
+
+.nav-logo-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;                /* Spacing between brand name, separator pipe, and project title */
+  flex-shrink: 0;
+}
+
+.nav-author-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.nav-author-name {
+  font-family: var(--sbi-font-family-sans);
+  font-size: var(--sbi-font-size-sm);
+  font-weight: var(--sbi-font-weight-medium);
+  color: var(--sbi-text-secondary);
+  letter-spacing: -0.01em;
+  transition: color var(--sbi-duration-normal) var(--sbi-ease-out);
+  white-space: nowrap;
+  line-height: 1.2 !important;
+}
+
+.nav-author-link:hover .nav-author-name {
+  color: hsl(262 83% 58%);
+}
+
+.nav-back-icon {
+  width: 24px; /* Reduced from 28px */
+  height: 24px; /* Reduced from 28px */
+  border-radius: var(--sbi-radius-md);
+  background-color: hsl(var(--sbi-alpha-black-04)); /* Soft, subtle background */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sbi-text-secondary); /* Muted gray arrow */
+  transition: background-color var(--sbi-duration-fast) var(--sbi-ease-out), color var(--sbi-duration-fast) var(--sbi-ease-out);
+}
+
+.nav-back-btn:hover .nav-back-icon {
+  background-color: hsl(var(--sbi-alpha-blue-10)); /* Subtle blue background on hover */
+  color: var(--sbi-text-brand); /* Arrow turns blue */
+}
+
+.nav-back-btn svg {
+  width: 12px; /* Reduced from 14px */
+  height: 12px; /* Reduced from 14px */
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-brand-pipe {
+  width: 1px;
+  height: 16px;
+  background-color: var(--sbi-border-default); /* Gray separator pipe */
+  flex-shrink: 0;
+}
+
+.nav-project-logo-img {
+  height: 20px;             /* Product icon size */
+  width: auto;
+  display: block;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.nav-links-nav {
+  display: flex;
+  align-items: center;
+  overflow: visible; /* Allow dropdown to be visible */
+}
+
+.nav-links-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: clamp(15px, 2.5vw, 24px);
+  overflow: visible; /* Allow dropdown to be visible on desktop */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.nav-links-list::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-link-item a {
+  display: inline-block;    /* Block layout container for correct padding and positioning */
+  font-size: var(--sbi-nav-link-size);
+  font-weight: var(--sbi-font-weight-regular);
+  color: var(--sbi-nav-link-color);
+  text-decoration: none;
+  white-space: nowrap;
+  position: relative;
+  padding: 4px 0;           /* Reduced from 6px */
+  transition: color var(--sbi-duration-normal) var(--sbi-ease-out);
+  line-height: 1.2 !important;
+}
+
+.nav-link-item a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--sbi-border-width-medium);
+  background-color: var(--sbi-nav-link-underline);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--sbi-duration-moderate) var(--sbi-ease-nav-underline);
+}
+
+.nav-link-item a:hover::after,
+.nav-link-item.active a::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.nav-link-item a:hover,
+.nav-link-item.active a {
+  color: var(--sbi-nav-link-color-active);
+  font-weight: var(--sbi-font-weight-regular);
+}
+
+/* Divider Separator Line */
+.nav-divider {
+  width: 100%;
+  height: var(--sbi-border-width-hairline);
+  background-color: var(--sbi-nav-border);
+}
+
+/* ─── CTA Button (AI Driven Prototype) ──────────────────────────────── */
+.nav-cta a {
+  background-color: hsl(262 83% 58%) !important; /* Solid Brand Purple */
+  background-image: none !important;
+  color: hsl(var(--sbi-color-white)) !important;
+  padding: 6px 16px !important;                 /* py-1.5 px-4 */
+  border-radius: var(--sbi-radius-lg) !important; /* rounded-lg (8px) */
+  font-weight: var(--sbi-font-weight-semibold) !important; /* font-semibold */
+  font-size: var(--sbi-font-size-xs) !important;  /* text-xs (11px) */
+  letter-spacing: -0.01em;
+  box-shadow: 0 2px 8px hsl(262 83% 58% / 0.15) !important;
+  transition: transform var(--sbi-duration-normal) var(--sbi-ease-spring-bounce),
+              box-shadow var(--sbi-duration-normal) var(--sbi-ease-out),
+              background-color var(--sbi-duration-normal) var(--sbi-ease-out) !important;
+  white-space: nowrap;
+  line-height: 1.2 !important;
+}
+
+.nav-cta a:hover {
+  background-color: hsl(262 83% 52%) !important; /* Slightly lighter purple on hover */
+  color: hsl(var(--sbi-color-white)) !important;
+  box-shadow: 0 4px 12px hsl(262 83% 58% / 0.25) !important;
+  transform: translateY(-1px) scale(1.03);
+}
+
+.nav-cta a:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Override underline animation — CTAs don't need it */
+.nav-cta a::after {
+  display: none !important;
+}
+
+/* ─── Dropdown Menu (MacBook Style) ─────────────────────────────────── */
+.nav-dropdown-wrapper {
+  position: relative;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background-color: var(--sbi-surface-dropdown);
+  backdrop-filter: blur(var(--sbi-blur-dropdown)) saturate(var(--sbi-backdrop-saturate-dropdown));
+  -webkit-backdrop-filter: blur(var(--sbi-blur-dropdown)) saturate(var(--sbi-backdrop-saturate-dropdown));
+  border: var(--sbi-border-width-hairline) solid var(--sbi-border-card);
+  border-radius: var(--sbi-radius-md);
+  box-shadow: var(--sbi-shadow-nav);
+  padding: 4px 0;
+  margin: 0;
+  list-style: none;
+  display: none;
+  min-width: 130px;
+  z-index: var(--sbi-z-nav-dropdown);
+}
+
+.nav-dropdown-menu.show,
+.nav-dropdown-wrapper:hover .nav-dropdown-menu {
+  display: block;
+}
+
+/* Invisible bridge to prevent flickering when moving mouse from trigger to menu */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  background: transparent;
+}
+
+/* Keep parent text and underline active when hovering the wrapper or dropdown */
+.nav-dropdown-wrapper:hover > a {
+  color: var(--sbi-nav-link-color-active) !important;
+}
+
+.nav-dropdown-wrapper:hover > a::after {
+  transform: scaleX(1) !important;
+  transform-origin: left !important;
+}
+
+.nav-dropdown-menu li {
+  padding: 0 4px;
+  width: 100%;
+}
+
+.nav-dropdown-menu li a {
+  display: block;
+  width: 100%;
+  padding: 6px 14px;
+  font-size: var(--sbi-font-size-xs);
+  color: var(--sbi-text-primary);
+  text-decoration: none !important;
+  text-align: left;
+  transition: background-color var(--sbi-duration-fast) var(--sbi-ease-out), color var(--sbi-duration-fast) var(--sbi-ease-out);
+  border-radius: var(--sbi-radius-sm);
+  font-weight: var(--sbi-font-weight-regular);
+}
+
+/* Hover state matching MacBook selection highlight (sleek blue selection) */
+.nav-dropdown-menu li a:hover {
+  background-color: var(--sbi-nav-dropdown-highlight) !important; /* Force sleek blue highlight */
+  color: var(--sbi-text-on-accent) !important;
+}
+
+/* Remove active border underline styles for links inside the dropdown */
+.nav-dropdown-menu li a::after {
+  display: none !important;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 16px 20px 12px 20px;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .nav-links-nav {
+    overflow: hidden; /* Restore clipping on mobile */
+  }
+
+  .nav-links-list {
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 4px;
+    overflow-x: auto; /* Restore horizontal scrolling on mobile */
+  }
+}

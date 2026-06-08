@@ -1,0 +1,32 @@
+/* ─── Footer Section ─────────────────────────────────────────────────────── */
+
+.smartbi-footer {
+  width: 100%;
+  background-color: var(--sbi-surface-page);
+  padding-bottom: 40px;
+}
+
+.footer-divider {
+  width: 100%;
+  max-width: var(--sbi-layout-content-max);
+  height: var(--sbi-border-width-hairline);
+  background-color: var(--sbi-footer-divider);
+  margin: 0 auto 30px auto;
+}
+
+.footer-container {
+  width: 100%;
+  max-width: var(--sbi-layout-content-max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.footer-copyright {
+  font-size: var(--sbi-font-size-sm);
+  color: var(--sbi-footer-text);
+  font-weight: var(--sbi-font-weight-regular);
+}
